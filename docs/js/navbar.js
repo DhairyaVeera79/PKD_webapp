@@ -13,15 +13,20 @@ function createNavbar() {
     
     if (isGitHubPages) {
         // For GitHub Pages, we need to handle the repository name in the path
+        // Expected path structure: /PKD_webapp/ or /PKD_webapp/people/ etc.
         const pathParts = currentPath.split('/').filter(part => part !== '');
         
-        if (pathParts.length === 0 || pathParts[pathParts.length - 1].endsWith('.html')) {
-            // We're at root level or a root-level HTML file
-            basePath = './';
-        } else if (pathParts.length >= 2) {
-            // We're in a subdirectory (people/, places/, etc.)
+        // Check if we're in a subdirectory by looking for known subdirectories
+        const inSubdirectory = currentPath.includes('/people/') || 
+                              currentPath.includes('/places/') || 
+                              currentPath.includes('/events/') || 
+                              currentPath.includes('/compositions/');
+        
+        if (inSubdirectory) {
+            // We're in a subdirectory, need to go up one level
             basePath = '../';
         } else {
+            // We're at the root level of the repository
             basePath = './';
         }
     } else {
@@ -447,12 +452,13 @@ function handleSearchSubmit(query) {
         let searchPath = './search.html';
         
         if (isGitHubPages) {
-            // For GitHub Pages, determine path based on URL structure
-            const pathParts = currentPath.split('/').filter(part => part !== '');
+            // For GitHub Pages, check if we're in a subdirectory
+            const inSubdirectory = currentPath.includes('/people/') || 
+                                  currentPath.includes('/places/') || 
+                                  currentPath.includes('/events/') || 
+                                  currentPath.includes('/compositions/');
             
-            if (pathParts.length >= 2 && 
-                (currentPath.includes('/people/') || currentPath.includes('/places/') || 
-                 currentPath.includes('/events/') || currentPath.includes('/compositions/'))) {
+            if (inSubdirectory) {
                 searchPath = '../search.html';
             }
         } else {
@@ -474,12 +480,13 @@ function adjustUrl(url) {
     const isGitHubPages = hostname.includes('github.io');
     
     if (isGitHubPages) {
-        // For GitHub Pages, determine path based on URL structure
-        const pathParts = currentPath.split('/').filter(part => part !== '');
+        // For GitHub Pages, check if we're in a subdirectory
+        const inSubdirectory = currentPath.includes('/people/') || 
+                              currentPath.includes('/places/') || 
+                              currentPath.includes('/events/') || 
+                              currentPath.includes('/compositions/');
         
-        if (pathParts.length >= 2 && 
-            (currentPath.includes('/people/') || currentPath.includes('/places/') || 
-             currentPath.includes('/events/') || currentPath.includes('/compositions/'))) {
+        if (inSubdirectory) {
             return url.replace('./', '../');
         }
         return url;
