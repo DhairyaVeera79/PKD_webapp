@@ -6,8 +6,13 @@ function createNavbar() {
     const currentPath = window.location.pathname;
     const hostname = window.location.hostname;
     
+    // Debug logging for GitHub Pages
+    console.log('Debug - Current Path:', currentPath);
+    console.log('Debug - Hostname:', hostname);
+    
     // Check if we're on GitHub Pages
     const isGitHubPages = hostname.includes('github.io');
+    console.log('Debug - Is GitHub Pages:', isGitHubPages);
     
     let basePath;
     
@@ -15,12 +20,15 @@ function createNavbar() {
         // For GitHub Pages, we need to handle the repository name in the path
         // Expected path structure: /PKD_webapp/ or /PKD_webapp/people/ etc.
         const pathParts = currentPath.split('/').filter(part => part !== '');
+        console.log('Debug - Path Parts:', pathParts);
         
         // Check if we're in a subdirectory by looking for known subdirectories
         const inSubdirectory = currentPath.includes('/people/') || 
                               currentPath.includes('/places/') || 
                               currentPath.includes('/events/') || 
                               currentPath.includes('/compositions/');
+        
+        console.log('Debug - In Subdirectory:', inSubdirectory);
         
         if (inSubdirectory) {
             // We're in a subdirectory, need to go up one level
@@ -37,6 +45,8 @@ function createNavbar() {
         
         basePath = isRootLevel ? './' : '../';
     }
+    
+    console.log('Debug - Final Base Path:', basePath);
     
     return `
     <header class="modern-navbar">
