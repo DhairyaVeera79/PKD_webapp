@@ -22,13 +22,23 @@ function createNavbar() {
         const pathParts = currentPath.split('/').filter(part => part !== '');
         console.log('Debug - Path Parts:', pathParts);
         
-        // Check if we're in a subdirectory by looking for known subdirectories
-        const inSubdirectory = currentPath.includes('/people/') || 
-                              currentPath.includes('/places/') || 
-                              currentPath.includes('/events/') || 
-                              currentPath.includes('/compositions/');
+        // More robust subdirectory detection for GitHub Pages
+        // Check if we're in any subdirectory by counting path segments after the repo name
+        let inSubdirectory = false;
         
-        console.log('Debug - In Subdirectory:', inSubdirectory);
+        // Find the repository name in the path (should be 'PKD_webapp')
+        const repoIndex = pathParts.findIndex(part => part === 'PKD_webapp');
+        if (repoIndex !== -1 && repoIndex < pathParts.length - 1) {
+            // If there are more path segments after the repo name, we're in a subdirectory
+            const segmentsAfterRepo = pathParts.slice(repoIndex + 1);
+            // Check if any of these segments are directories (not HTML files)
+            inSubdirectory = segmentsAfterRepo.some(segment => 
+                !segment.endsWith('.html') && 
+                (segment === 'people' || segment === 'places' || segment === 'events' || segment === 'compositions')
+            );
+        }
+        
+        console.log('Debug - In Subdirectory (new logic):', inSubdirectory);
         
         if (inSubdirectory) {
             // We're in a subdirectory, need to go up one level
