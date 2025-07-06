@@ -1,0 +1,498 @@
+/* Table of Contents Styles */
+.wiki-toc {
+    position: fixed;
+    width: 140px;
+    top: 135px;
+    left: 20px;
+    padding: 10px 0px 0 0; /* Left padding set to 0 */
+    background: white;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.wiki-toc-title {
+    font-weight: bold;
+    color: black;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    text-align: left;
+    padding-left: 0;
+}
+
+.wiki-toc hr {
+    border: 0;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 5px 0 10px 0;
+}
+
+.wiki-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.wiki-toc-item {
+    margin-bottom: 5px;
+}
+
+.wiki-toc-link {
+    color: #3366cc;
+    text-decoration: none;
+    display: block;
+    padding: 3px 0;
+    font-size: 0.85em;
+}
+
+.wiki-toc-link:hover {
+    color: #004182;
+    text-decoration: underline;
+}
+
+.wiki-toc-link.active {
+    font-weight: bold;
+    color: black;
+}
+
+/* Adjust main content to account for TOC */
+.wiki-container {
+    margin-left: 180px; /* Adjusted from 180px due to reduced padding */
+    position: relative;
+}
+
+/* Table of Contents Toggle Styles */
+.wiki-toc-toggle {
+    color: #888;
+    font-size: 0.9em;
+    font-weight: normal;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.wiki-toc-toggle:hover {
+    color: #555;
+}
+
+.toc-collapsed .wiki-toc {
+    display: none;
+}
+
+.toc-collapse-button {
+    position: absolute;
+    left: -20px; /* Changed from -40px to 10px (moved right by 40px) */
+    top: 25px; /* Changed from 5px to 35px (moved down by 30px) */
+    width: 36px; /* Increased from 28px */
+    height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 100;
+}
+
+.toc-collapse-button:hover {
+    opacity: 1;
+}
+
+.toc-collapse-button::before {
+    content: "☰";
+    font-size: 32px; /* Increased from 24px */
+    color: black;
+    display: block;
+    line-height: 1;
+}
+
+.toc-collapse-button:hover::after {
+    content: "Table of Contents";
+    position: absolute;
+    left: 40px;
+    top: 5px;
+    background: white;
+    padding: 5px 10px;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 101;
+    color: #333;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Adjust heading position to account for toggle button */
+.wiki-title {
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    .wiki-toc {
+        position: static;
+        width: auto;
+        float: none;
+        margin: 0 0 20px 0;
+        max-height: none;
+        padding: 10px;
+        top: auto;
+    }
+    
+    .wiki-container {
+        margin-left: 0;
+    }
+}
+
+/* Wikipedia-style layout */
+.wiki-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.wiki-main {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.wiki-title {
+    font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+    font-weight: normal;
+    border-bottom: 1px solid #a2a9b1;
+    padding-bottom: 0.25em;
+    margin-bottom: 0.5em;
+    text-align: left;
+}
+
+.wiki-lead {
+    font-size: 1em;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Info card styling */
+.wiki-info-card {
+    width: 350px;
+    float: right;
+    margin: 0 0 1em 1em;
+    background: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 0.875em;
+    line-height: 1.4;
+}
+
+.info-card-header {
+    background: #e6e6e6;
+    text-align: center !important;
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.info-table tr:nth-child(odd) {
+    background: #f8f9fa;
+}
+
+.info-table tr:nth-child(even) {
+    background: #f1f1f1;
+}
+
+.info-table th, .info-table td {
+    padding: 5px 8px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.info-label {
+    font-weight: bold;
+    width: 40%;
+}
+
+/* Card image with fluid height - UPDATED */
+.card-image {
+    width: 100%;
+    height: auto; /* Let height adjust naturally */
+    max-width: 350px; /* Fixed width as requested */
+    object-fit: contain; /* Show entire image without cropping */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: block;
+    cursor: pointer;
+    background: #f1f1f1;
+}
+
+/* Remove the max-height constraint from card-image-container */
+.card-image-container {
+    width: 100%;
+    margin-bottom: 8px;
+    max-height: none; /* Remove any height restrictions */
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Update image cards in sections */
+.image-card {
+    margin: 15px 0;
+    width: 350px; /* Fixed width for image cards */
+    border: 1px solid #a2a9b1;
+    border-radius: 3px;
+    background: #f8f9fa;
+    padding: 8px;
+}
+
+.image-card-inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-card-inner img {
+    width: 100%;
+    height: 200px; /* Fixed height for section images */
+    object-fit: cover; /* Maintain aspect ratio while filling container */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.image-caption {
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 5px;
+    color: #666;
+    width: 100%;
+}
+
+/* Content styling */
+.wiki-content {
+    line-height: 1.6;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    text-align: left;
+}
+
+/* Link styling */
+.wiki-content a {
+    color: #3366cc;
+    text-decoration: none;
+}
+
+.wiki-content a:hover {
+    color: #004182;
+    text-decoration: underline;
+}
+
+.wiki-content a[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.8em;
+}
+
+/* Collapsible sections */
+.wiki-section {
+    margin-bottom: 1em;
+}
+
+.section-header {
+    font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+    font-weight: normal;
+    font-size: 1.5em;
+    border-bottom: 1px solid #a2a9b1;
+    padding-bottom: 0.25em;
+    margin: 1em 0 0.5em 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+.collapse-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.collapse-icon {
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    color: #72777d;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+    width: 12px;
+    display: inline-block;
+}
+
+.wiki-section.active .collapse-icon {
+    transform: rotate(90deg);
+}
+
+.section-content {
+    padding: 0 10px;
+    display: none;
+}
+
+.wiki-section.active .section-content {
+    display: block;
+}
+
+/* Image cards in sections */
+.image-card {
+    margin: 15px 0;
+    max-width: 400px;
+    border: 1px solid #a2a9b1;
+    border-radius: 3px;
+    background: #f8f9fa;
+    padding: 8px;
+}
+
+.image-card.left-aligned {
+    float: left;
+    margin-right: 20px;
+    margin-left: 0;
+}
+
+.image-card.right-aligned {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+.image-card-inner {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-card img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Update image cards in sections */
+.image-card-inner img {
+    width: 100%;
+    max-width: 350px; /* Consistent with main card */
+    height: auto; /* Fluid height */
+    object-fit: contain; /* Show full image */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.image-card img:hover {
+    opacity: 0.9;
+}
+
+.image-card-caption {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 8px;
+    text-align: left;
+    line-height: 1.4;
+    padding: 0 5px;
+}
+
+/* Fullscreen image styling - UPDATED */
+.fullscreen-image-overlay {
+    position: fixed;
+    top: 80px; /* Start 80px from top to account for header */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 80px); /* Adjust height to account for offset */
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.fullscreen-image-content {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+/* Adjust close button position */
+.close-fullscreen {
+    position: absolute;
+    top: 20px; /* Adjusted position relative to new overlay */
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-fullscreen:hover {
+    color: #ccc;
+}
+
+.image-caption-fullscreen {
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    max-width: 80%;
+}
+
+/* Clear floats */
+.wiki-section:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .wiki-container {
+        flex-direction: column;
+    }
+    
+    .wiki-info-card {
+        width: 100%;
+        float: none;
+        margin: 1em 0;
+    }
+    
+    .image-card {
+        float: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 100%;
+    }
+    
+    .close-fullscreen {
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+    }
+
+    .card-image {
+        max-width: 100%; /* Full width on mobile */
+    }
+    
+    .image-card-inner img {
+        max-width: 100%; /* Full width on mobile */
+    }
+    
+    .fullscreen-image-overlay {
+        top: 60px; /* You may want a smaller offset on mobile */
+        height: calc(100% - 60px);
+    }
+}

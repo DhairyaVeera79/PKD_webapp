@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- In the head section -->
+    <script src="./js/search.js"></script>
+    
+<style>
+    /* Events page specific styling */
+    .events-main-title {
+        font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+        font-weight: normal;
+        border-bottom: 1px solid #a2a9b1; /* Darker HR */
+        padding-bottom: 0.25em;
+        margin-bottom: 0.5em;
+    }
+    
+    .events-intro-hr {
+        border-top: 1px solid #e0e0e0; /* Lighter HR */
+        margin: 1em 0;
+    }
+    
+    /* Collapsible sections styling */
+    .events-section {
+        margin-bottom: 1em;
+    }
+    
+    .section-header {
+        font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+        font-weight: normal;
+        font-size: 1.25em;
+        border-bottom: 1px solid #a2a9b1;
+        padding-bottom: 0.25em;
+        margin: 1em 0 0.5em 0;
+        cursor: pointer;
+        text-align: left;
+        display: flex;
+        align-items: center;
+    }
+    
+    .collapse-icon {
+        font-family: Arial, sans-serif;
+        font-size: 1.2em;
+        color: #72777d;
+        margin-right: 8px;
+        transition: transform 0.2s ease;
+        width: 12px;
+        display: inline-block;
+    }
+    
+    .events-section.active .collapse-icon {
+        transform: rotate(90deg);
+    }
+    
+    .section-content {
+        padding: 0 10px;
+        display: none;
+    }
+    
+    .events-section.active .section-content {
+        display: block;
+    }
+    
+    .section-content ul {
+        padding-left: 20px;
+    }
+    
+    .section-content li {
+        margin-bottom: 5px;
+    }
+</style>
+
+</head>
+<body>
+    <header class="py-3 fixed-top" style="background-color: #EFEDE7;">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <a href="./index.html">
+                    <img src="./images/mission_logo.svg" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./people.html">People</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./places.html">Places</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./compositions.html">Compositions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./maps.html">Interactive Map</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5 pt-5" style="padding-top: 160px;">
+        
+<section class="content-area">
+    <h3>Events in chronological order</h3>
+    <hr class="events-intro-hr">
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1924 V.S. | 1867 AD
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./places/vavaniya.html#birth-section">Birth</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1928 V.S. | 1871 AD | Age 4
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./places/vavaniya.html#name-change-section">Name changed from Laxminandan/Abhaychand to Raichand</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1931 V.S. | 1875 AD | Age 7
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./places/vavaniya.html#jatismaran-jnan-section">Jatismaran Jnan</a></li>
+                <li><a href="./places/vavaniya.html#schooling-section">Started Formal education at school</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1932 V.S. | 1876 AD | Age 8
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./places/vavaniya.html#first-composition-section">First poem written by Him</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1935 V.S. | 1879 AD | Age 11
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./places/vavaniya.html#schooling-section">Left school</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1940 V.S. | 1884 AD | Age 16 
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./places/morbi.html#mokshmala-section">Composition of Mokshmala</a></li>
+                <li><a href="./places/morbi.html#avdhan-start-section">Avdhans Started</a></li>
+                <li><a href="./places/morbi.html#first-chitrapat-section">First Chitrapat</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1941 V.S. | 1885 AD | Age 17
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./events/avdhan.html#other-avdhan-section">Avdhans Continue</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1942 V.S. | 1886 AD | Age 18
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./compositions/bhavnabodh.html">Composition of Bhavnabodh</a></li>
+                <li><a href="./places/mumbai.html#request-section">Request to perform Avdhan</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1943 V.S. | 1887 AD | Age 19
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./places/mumbai.html#shatavdhan-section">Shatavdhan</a></li>
+                <li><a href="./places/mumbai.html#business-search-section">Comes to search for business</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1944 V.S. | 1888 AD | Age 20
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li><a href="./events/avdhan.html#avdhan-stop-section">Avdhan total stop</a></li>
+                <li><a href="./places/ahmedabad.html#juthabhai-printing-section">Went to Ahmedabad for Mokshmala printing</a></li>
+                <li><a href="./people/juthabhai.html#first-meeting-section">Met Juthabhai</a></li>
+                <li><a href="./places/morbi.html#marriage-section">Marriage with Jhabakben</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1945 V.S. | 1889 AD | Age 21
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Revashankar Jagjivan company started</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1946 V.S. | 1890 AD | Age 22
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Birth of Chaganbhai, first son</li>
+                <li>Met Saubhagyabhai</li>
+                <li>Met Ambalalbhai</li>
+                <li>Met Lalluji Muni</li>
+                <li>Juthabhai passed away</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1947 V.S. | 1890 AD | Age 23
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Attained Shudh Samkit</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1947 V.S. | 1891 AD | Age 23
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Gave up astrology</li>
+                <li>Met Gandhiji</li>
+                <li>Spiritual retreat at Ralaj</li>
+                <li>Compositions</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1948 V.S. | 1892 AD | Age 24
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Javalben born</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1949 V.S. | 1893 AD | Age 25
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Atam Bhavna bhavta mantra given</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1950 V.S. | 1894 AD | Age 26
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Composed 6 Pad no Patra</li>
+                <li>Kashiben Born</li>
+                <li>27 questions of Gandiji Answered</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1951 V.S. | 1895 AD | Age 27
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Spiritual retreat</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1952 V.S. | 1896 AD | Age 28
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Composition of Shri Atmasiddhi Shastra</li>
+                <li>Sahjatmaswarrop parma guru mantra</li>
+                <li>Vadva story</li>
+                <li>Moolmarg Story</li>
+                <li>Ratilalbhai birth</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1953 V.S. | 1897 AD | Age 29
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Composed Apoorva Avsar</li>
+                <li>Printing of 4 copies of SAS</li>
+                <li>Saubhagyabhai death</li>
+                <li>Spiritual retreat at Idar with Saubhagyabhai</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1954 V.S. | 1898 AD | Age 30
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Intense spiritual practices</li>
+                <li>Lalluji Muni attains Samyak Darshan</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1955 V.S. | 1899 AD | Age 31
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Solitude in Idar</li>
+                <li>Retired from Business</li>
+                <li>Chennai Business trip</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1956 V.S. | 1900 AD | Age 32
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Severe deterioration of health</li>
+                <li>Visited Dharampur</li>
+                <li>Started Param shrut prabhavak mandal</li>
+                <li>Chitrapats</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="events-section collapsible active">
+        <h4 class="section-header">
+            <span class="collapse-toggle">
+                <span class="collapse-icon">›</span>
+                1957 V.S. | 1901 AD | Age 33
+            </span>
+        </h4>
+        <div class="section-content" style="display: block;">
+            <ul>
+                <li>Ambalalbhai attains Samyak Darshan</li>
+                <li>Dehvilay</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="bg-light py-3">
+        <div class="text-center mt-4">
+            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/scripts.js"></script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Collapsible sections functionality
+        const sections = document.querySelectorAll('.events-section.collapsible');
+        
+        sections.forEach(section => {
+            const header = section.querySelector('.section-header');
+            const content = section.querySelector('.section-content');
+            const icon = section.querySelector('.collapse-icon');
+            
+            header.addEventListener('click', () => {
+                section.classList.toggle('active');
+                
+                if (section.classList.contains('active')) {
+                    content.style.display = 'block';
+                } else {
+                    content.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

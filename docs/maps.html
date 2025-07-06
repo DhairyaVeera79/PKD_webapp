@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- In the head section -->
+    <script src="./js/search.js"></script>
+    
+<style>
+    body {
+        padding-left: 75px;
+        padding-right: 75px;
+    }
+    
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+        max-width: 100%;
+    }
+    
+    main {
+        padding-left: 0;
+        padding-right: 0;
+    }
+</style>
+
+</head>
+<body>
+    <header class="py-3 fixed-top" style="background-color: #EFEDE7;">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <a href="./index.html">
+                    <img src="./images/mission_logo.svg" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./people.html">People</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./places.html">Places</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./compositions.html">Compositions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./maps.html">Interactive Map</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5 pt-5" style="padding-top: 160px;">
+        
+<section>
+    <div>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1gV6Xq6Ll8R33eeSOQpnxN34bC8Mhtl8&ehbc=2E312F&noprof=1" width="100%" height="650"></iframe>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="bg-light py-3">
+        <div class="text-center mt-4">
+            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/scripts.js"></script>
+    
+</body>
+</html>

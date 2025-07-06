@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Shrimad Rajchandra Mission Dharampur</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="py-3 fixed-top" style="background-color: #EFEDE7;">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <a href="./index.html">
+                    <img src="./images/mission_logo.svg" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./people.html">People</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./places.html">Places</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./compositions.html">Compositions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./maps.html">Interactive Map</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form class="form-inline" onsubmit="return handleSearch(event)">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-5 pt-5">
+        <div class="search-page-content" style="padding-top: 80px;">
+            <h1>Search Results</h1>
+            <div id="search-query-display" class="mb-3"></div>
+            
+            <!-- View Toggle -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div id="results-count" class="text-muted"></div>
+                <div class="toggle-switch">
+                    <button class="toggle-option active" data-view="relevance">Most Relevant</button>
+                    <button class="toggle-option" data-view="category">By Category</button>
+                </div>
+            </div>
+            
+            <div id="search-results-container">
+                <div id="loading" class="text-center" style="display: none;">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                
+                <!-- Relevance View -->
+                <div id="relevance-view">
+                    <div id="search-results" class="row"></div>
+                </div>
+                
+                <!-- Category View -->
+                <div id="category-view" style="display: none;">
+                    <div id="people-section" class="search-category">
+                        <h3 class="category-header">People</h3>
+                        <div class="row" id="people-results"></div>
+                    </div>
+                    <div id="places-section" class="search-category">
+                        <h3 class="category-header">Places</h3>
+                        <div class="row" id="places-results"></div>
+                    </div>
+                    <div id="events-section" class="search-category">
+                        <h3 class="category-header">Events</h3>
+                        <div class="row" id="events-results"></div>
+                    </div>
+                    <div id="compositions-section" class="search-category">
+                        <h3 class="category-header">Compositions</h3>
+                        <div class="row" id="compositions-results"></div>
+                    </div>
+                </div>
+                
+                <div id="no-results" class="alert alert-info" style="display: none;">
+                    <h4>No results found</h4>
+                    <p>Try adjusting your search terms or browse our categories:</p>
+                    <ul>
+                        <li><a href="./people.html">People</a> - Learn about important figures</li>
+                        <li><a href="./places.html">Places</a> - Explore significant locations</li>
+                        <li><a href="./events.html">Events</a> - Discover important events</li>
+                        <li><a href="./compositions.html">Compositions</a> - Read spiritual writings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light py-4">
+        <div class="container">
+            <div class="text-center mt-4">
+                <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/search.js"></script>
+    
+    <script>
+        let allResults = [];
+        let currentView = 'relevance';
+        
+        // Initialize search results page
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            const searchInput = document.getElementById('search-input');
+            
+            if (query) {
+                searchInput.value = query;
+                performSearch(query);
+            }
+            
+            // Handle view toggle
+            const toggleButtons = document.querySelectorAll('.toggle-option');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active state
+                    toggleButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Switch view
+                    currentView = this.dataset.view;
+                    displayResults(allResults, query);
+                });
+            });
+        });
+        
+        async function performSearch(query) {
+            const queryDisplay = document.getElementById('search-query-display');
+            const loading = document.getElementById('loading');
+            const noResults = document.getElementById('no-results');
+            
+            queryDisplay.innerHTML = `<p>Search results for: <strong>"${query}"</strong></p>`;
+            loading.style.display = 'block';
+            noResults.style.display = 'none';
+            
+            try {
+                // Get search data from search.js
+                const searchData = window.getSearchData ? window.getSearchData() : [];
+                
+                allResults = searchInData(searchData, query);
+                loading.style.display = 'none';
+                
+                if (allResults.length === 0) {
+                    noResults.style.display = 'block';
+                    return;
+                }
+                
+                displayResults(allResults, query);
+                
+            } catch (error) {
+                loading.style.display = 'none';
+                console.error('Error performing search:', error);
+                const resultsContainer = document.getElementById('search-results');
+                resultsContainer.innerHTML = '<div class="alert alert-danger">Error loading search results. Please try again.</div>';
+            }
+        }
+        
+        function displayResults(results, query) {
+            const resultsCount = document.getElementById('results-count');
+            resultsCount.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
+            
+            if (currentView === 'relevance') {
+                displayRelevanceView(results, query);
+            } else {
+                displayCategoryView(results, query);
+            }
+        }
+        
+        function displayRelevanceView(results, query) {
+            document.getElementById('relevance-view').style.display = 'block';
+            document.getElementById('category-view').style.display = 'none';
+            
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+            
+            results.forEach(result => {
+                const cardHtml = createResultCard(result, query);
+                resultsContainer.appendChild(cardHtml);
+            });
+        }
+        
+        function displayCategoryView(results, query) {
+            document.getElementById('relevance-view').style.display = 'none';
+            document.getElementById('category-view').style.display = 'block';
+            
+            const categories = {
+                'person': 'people-results',
+                'place': 'places-results', 
+                'event': 'events-results',
+                'composition': 'compositions-results'
+            };
+            
+            // Clear all category containers
+            Object.values(categories).forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) container.innerHTML = '';
+            });
+            
+            // Hide all category sections initially
+            ['people-section', 'places-section', 'events-section', 'compositions-section'].forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) section.style.display = 'none';
+            });
+            
+            // Group results by category and display
+            const groupedResults = results.reduce((acc, result) => {
+                if (!acc[result.type]) acc[result.type] = [];
+                acc[result.type].push(result);
+                return acc;
+            }, {});
+            
+            Object.entries(groupedResults).forEach(([type, typeResults]) => {
+                const containerId = categories[type];
+                const sectionId = containerId.replace('-results', '-section');
+                
+                if (containerId && typeResults.length > 0) {
+                    const container = document.getElementById(containerId);
+                    const section = document.getElementById(sectionId);
+                    
+                    if (container && section) {
+                        section.style.display = 'block';
+                        typeResults.forEach(result => {
+                            const cardHtml = createResultCard(result, query);
+                            container.appendChild(cardHtml);
+                        });
+                    }
+                }
+            });
+        }
+        
+        function createResultCard(result, query) {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-3 mb-4';
+            
+            const card = document.createElement('div');
+            card.className = 'card h-100 search-result-card';
+            card.style.cursor = 'pointer';
+            card.style.transition = 'transform 0.2s, box-shadow 0.2s';
+            
+            // Make entire card clickable
+            card.addEventListener('click', function() {
+                window.location.href = result.url;
+            });
+            
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+            });
+            
+            // Fallback image if main image doesn't exist
+            const imageUrl = result.image || './images/placeholder.jpg';
+            
+            card.innerHTML = `
+                <img src="${imageUrl}" class="card-img-top" alt="${result.title}" 
+                     style="height: 300px; object-fit: cover;"
+                     onerror="this.src='./images/mission_logo.svg'; this.style.height='200px'; this.style.padding='20px';">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${highlightMatch(result.title, query)}</h5>
+                    <span class="badge badge-${getTypeBadgeClass(result.type)} mb-2 align-self-start">${result.type}</span>
+                    <p class="card-text text-muted flex-grow-1">
+                        <small>Keywords: ${result.keywords.join(', ')}</small>
+                    </p>
+                </div>
+            `;
+            
+            col.appendChild(card);
+            return col;
+        }
+        
+        function searchInData(data, query) {
+            const lowerQuery = query.toLowerCase();
+            return data.filter(item => {
+                return item.title.toLowerCase().includes(lowerQuery) ||
+                       item.keywords.some(keyword => keyword.toLowerCase().includes(lowerQuery));
+            }).sort((a, b) => {
+                const aTitle = a.title.toLowerCase();
+                const bTitle = b.title.toLowerCase();
+                
+                // Priority 1: Title starts with the query
+                const aStartsWithQuery = aTitle.startsWith(lowerQuery);
+                const bStartsWithQuery = bTitle.startsWith(lowerQuery);
+                if (aStartsWithQuery && !bStartsWithQuery) return -1;
+                if (!aStartsWithQuery && bStartsWithQuery) return 1;
+                
+                // Priority 2: Any word in title starts with the query
+                const aWordsStartWithQuery = aTitle.split(' ').some(word => word.startsWith(lowerQuery));
+                const bWordsStartWithQuery = bTitle.split(' ').some(word => word.startsWith(lowerQuery));
+                if (aWordsStartWithQuery && !bWordsStartWithQuery) return -1;
+                if (!aWordsStartWithQuery && bWordsStartWithQuery) return 1;
+                
+                // Priority 3: Title contains the query
+                const aContainsQuery = aTitle.includes(lowerQuery);
+                const bContainsQuery = bTitle.includes(lowerQuery);
+                if (aContainsQuery && !bContainsQuery) return -1;
+                if (!aContainsQuery && bContainsQuery) return 1;
+                
+                // Priority 4: Keywords match
+                const aKeywordMatch = a.keywords.some(keyword => keyword.toLowerCase().includes(lowerQuery));
+                const bKeywordMatch = b.keywords.some(keyword => keyword.toLowerCase().includes(lowerQuery));
+                if (aKeywordMatch && !bKeywordMatch) return -1;
+                if (!aKeywordMatch && bKeywordMatch) return 1;
+                
+                // Final: Alphabetical order
+                return aTitle.localeCompare(bTitle);
+            });
+        }
+        
+        function highlightMatch(text, query) {
+            const lowerText = text.toLowerCase();
+            const lowerQuery = query.toLowerCase();
+            const start = lowerText.indexOf(lowerQuery);
+            
+            if (start === -1) return text;
+            
+            const end = start + query.length;
+            return (
+                text.substring(0, start) + 
+                `<mark style="background-color: yellow; padding: 0;">${text.substring(start, end)}</mark>` + 
+                text.substring(end)
+            );
+        }
+        
+        function getTypeBadgeClass(type) {
+            const typeColors = {
+                'person': 'primary',
+                'place': 'success',
+                'event': 'warning',
+                'composition': 'info'
+            };
+            return typeColors[type] || 'secondary';
+        }
+    </script>
+</body>
+</html>

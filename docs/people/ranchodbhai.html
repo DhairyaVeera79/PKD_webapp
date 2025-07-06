@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranchodbhai</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- In the head section -->
+    <script src="../js/search.js"></script>
+    
+<link rel="stylesheet" href="../css/pages.css">
+
+</head>
+<body>
+    <header class="py-3 fixed-top" style="background-color: #EFEDE7;">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <a href="../index.html">
+                    <img src="../images/mission_logo.svg" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../people.html">People</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../places.html">Places</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../compositions.html">Compositions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../maps.html">Interactive Map</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5 pt-5" style="padding-top: 160px;">
+        
+<div class="wiki-container">
+    <!-- Full screen image overlay -->
+    <div class="fullscreen-image-overlay" style="display: none;">
+        <span class="close-fullscreen">&times;</span>
+        <img class="fullscreen-image-content">
+        <div class="image-caption-fullscreen"></div>
+    </div>
+
+    <div class="wiki-main">
+        <h1 class="wiki-title">Ranchodbhai</h1>
+        
+        <div class="wiki-info-card">
+            <div class="info-card">
+                <div class="card-image-container">
+                    <img src="../images/people_images/ranchodbhai.jpg" 
+                         alt="Ranchodbhai" 
+                         class="card-image expandable-image">
+                    <div class="image-caption">Ranchodbhai</div>
+                </div>
+                <table class="info-table">
+                    <tr>
+                        <th colspan="2" class="info-card-header">Vavania</th>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Country</td>
+                        <td class="info-value"><a href="/place/india">India</a></td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">State</td>
+                        <td class="info-value"><a href="/place/gujarat">Gujarat</a></td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Population</td>
+                        <td class="info-value">194,947 (2011)</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Known for</td>
+                        <td class="info-value"><a href="/topic/ceramics">Ceramics industry</a>, <a href="https://en.wikipedia.org/wiki/Shrimad_Rajchandra" target="_blank">Shrimad Rajchandra</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="wiki-content">
+            <p class="wiki-lead">First daughter of Param Krupalu Dev and overall the 2nd child born Kartik Sud Pancham (Jnan Pancham) 1948 V.S. (1892 AD)</p>
+            <p class="wiki-lead">Ranchodbhai and her husband <a href="../people/bhagvanbhaiModi.html">Bhagvanbhai Modi</a> (son of Ranchodbhai of Dharampur) bought land in Vavania and constructed a temple over ther in 1946 AD, 45 years after Param Krupalu Dev's dehvilay </p>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="bg-light py-3">
+        <div class="text-center mt-4">
+            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../js/scripts.js"></script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Fullscreen image functionality
+        const expandableImages = document.querySelectorAll('.expandable-image');
+        const fullscreenOverlay = document.querySelector('.fullscreen-image-overlay');
+        const fullscreenImage = document.querySelector('.fullscreen-image-content');
+        const fullscreenCaption = document.querySelector('.image-caption-fullscreen');
+        const closeFullscreen = document.querySelector('.close-fullscreen');
+        
+        expandableImages.forEach(img => {
+            img.addEventListener('click', function() {
+                fullscreenImage.src = this.src;
+                // Find the caption - it's the next sibling element for card images
+                const caption = this.nextElementSibling?.textContent || '';
+                fullscreenCaption.textContent = caption;
+                fullscreenOverlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeFullscreen.addEventListener('click', function() {
+            fullscreenOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+        
+        // Close when clicking outside image
+        fullscreenOverlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                fullscreenOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                fullscreenOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- In the head section -->
+    <script src="./js/search.js"></script>
+    
+<style>
+    /* Override link color for places list */
+    #placesList a {
+        color: black;
+    }
+    
+    #placesList a:hover {
+        color: blue; /* Orange color on hover instead of blue */
+        text-decoration: underline;
+    }
+</style>
+
+</head>
+<body>
+    <header class="py-3 fixed-top" style="background-color: #EFEDE7;">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <a href="./index.html">
+                    <img src="./images/mission_logo.svg" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./events.html">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./people.html">People</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./places.html">Places</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./compositions.html">Compositions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./maps.html">Interactive Map</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5 pt-5" style="padding-top: 160px;">
+        
+<section>
+    <div class="d-flex justify-content-between align-items-center">
+        <h3>Places</h3>
+        <!-- Toggle Switch -->
+        <div class="toggle-switch">
+            <button id="chronologicalBtn" class="toggle-option active">Chronological</button>
+            <button id="alphabeticalBtn" class="toggle-option">Alphabetical</button>
+        </div>
+    </div>
+    <hr>
+    <ul id="placesList">
+        <li><a href="./places/vavaniya.html">Vavaniya</a></li>
+        <li><a href="./places/morbi.html">Morbi</a></li>
+        <li><a href="./places/jamnagar.html">Jamnagar</a></li>
+        <li><a href="./places/wadhwan.html">Wadhwan Camp (present: Surendranagar)</a></li>
+        <li><a href="./places/limbdi.html">Limbdi</a></li>
+        <li><a href="./places/botad.html">Botad</a></li>
+        <li><a href="./places/jetpar.html">Jetpar</a></li>
+        <li><a href="./places/ahmedabad.html">Ahmedabad</a></li>
+        <li><a href="./places/rajkot.html">Rajkot</a></li>
+        <li><a href="./places/mumbai.html">Mumbai</a></li>
+        <li>Surat</li>
+        <li>Bharuch</li>
+        <li>Sayla</li>
+        <li>Khambhat</li>
+        <li>Ralaj</li>
+        <li>Vadodara</li>
+        <li>Hadamtala</li>
+        <li>Ranpur</li>
+        <li>Kavitha</li>
+        <li>Vadva</li>
+        <li>Anand</li>
+        <li>Nadiad</li>
+        <li><a href="./places/idar.html">Idar</a></li>
+        <li>Vaso</li>
+        <li>Uttarsanda</li>
+        <li>Kheda</li>
+        <li>Naroda</li>
+        <li>Chennai</li>
+        <li><a href="./places/dharampur.html">Dharampur</a></li>
+        <li>Tithal</li>
+    </ul>
+</section>
+
+    </main>
+
+    <footer class="bg-light py-3">
+        <div class="text-center mt-4">
+            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/scripts.js"></script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chronologicalBtn = document.getElementById('chronologicalBtn');
+        const alphabeticalBtn = document.getElementById('alphabeticalBtn');
+        const placesList = document.getElementById('placesList');
+
+        // Store the original chronological order
+        const chronologicalOrder = Array.from(placesList.children);
+
+        // Function to sort the list alphabetically
+        const sortAlphabetically = () => {
+            const sorted = Array.from(placesList.children).sort((a, b) => {
+                return a.textContent.trim().localeCompare(b.textContent.trim());
+            });
+            placesList.innerHTML = '';
+            sorted.forEach(item => placesList.appendChild(item));
+        };
+
+        // Function to restore chronological order
+        const restoreChronologicalOrder = () => {
+            placesList.innerHTML = '';
+            chronologicalOrder.forEach(item => placesList.appendChild(item));
+        };
+
+        // Event listeners for toggle buttons
+        chronologicalBtn.addEventListener('click', () => {
+            restoreChronologicalOrder();
+            chronologicalBtn.classList.add('active');
+            alphabeticalBtn.classList.remove('active');
+        });
+
+        alphabeticalBtn.addEventListener('click', () => {
+            sortAlphabetically();
+            alphabeticalBtn.classList.add('active');
+            chronologicalBtn.classList.remove('active');
+        });
+    });
+</script>
+
+</body>
+</html>

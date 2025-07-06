@@ -1,0 +1,810 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Main container padding */
+.container, .container-fluid {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    max-width: 100% !important;
+}
+
+/* Header styling */
+header {
+    background-color: #EFEDE7;
+    border-bottom: 1px solid #ddd;
+    padding: 0.3rem 25px !important; /* Reduced vertical padding to make header thinner */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    height: 80px; /* Fixed height for consistency */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.header-logo {
+    width: 120px;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0 0.8rem; /* Slightly increased for better spacing */
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+main {
+    padding: 160px 25px 0 25px; /* 25px side padding */
+    text-align: center;
+    margin: 0;
+    width: 100%;
+}
+
+/* Section padding */
+section {
+    padding: 0 25px;
+}
+
+footer {
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    padding: 1rem 25px; /* 25px side padding */
+    border-top: 1px solid #ddd;
+    width: 100%;
+    margin: 0;
+}
+
+/* Calendar specific adjustments */
+.year-view {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 0 15px;
+}
+
+.month {
+    padding: 10px;
+}
+
+/* Bootstrap overrides */
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.col, [class*="col-"] {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Ensure headers are left-aligned */
+h3 {
+    text-align: left;
+    margin-bottom: 1rem; /* Add spacing below the header */
+}
+
+/* Ensure unordered lists are left-aligned */
+ul {
+    text-align: left;
+    padding-left: 1.5rem; /* Add padding for list indentation */
+    margin-bottom: 1.5rem; /* Add spacing below the list */
+}
+
+/* Ensure list items are styled properly */
+ul li {
+    margin-bottom: 0.5rem; /* Add spacing between list items */
+}
+
+/* Search bar styling */
+.search-bar input {
+    width: 400px; /* Increased width for better visibility */
+    max-width: 100%; /* Ensure responsiveness */
+    margin-right: 0px; /* Add spacing between the input and button */
+}
+
+.search-bar {
+    min-width: 350px; /* Increased minimum width */
+    margin-left: 15px;
+}
+
+.search-bar .form-inline {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    width: 100%;
+}
+
+.search-bar .form-control {
+    flex-grow: 1;
+    min-width: 250px; /* Minimum width for input */
+    margin-right: 8px !important;
+}
+
+/* Navbar search button styling */
+.search-bar .btn {
+    background-color: #C66A11; /* Set the background color to #C66A11 */
+    border-color: #C66A11; /* Match the border color */
+    color: white; /* Set the text color to white for better contrast */
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the search button */
+.search-bar .btn:hover {
+    background-color: #A55A0E; /* Slightly darker shade for hover effect */
+    border-color: #A55A0E; /* Match the border color on hover */
+    color: white; /* Keep the text color white */
+}
+
+/* Active (pressed) state for the search button */
+.search-bar .btn:active,
+.search-bar .btn:focus {
+    background-color: #A55A0E !important; /* Keep the hover color when pressed */
+    border-color: #A55A0E !important; /* Match the border color */
+    color: white !important; /* Keep the text color white */
+    box-shadow: none !important; /* Remove the default Bootstrap box shadow */
+}
+
+/* Toggle button styling */
+#toggleSort {
+    background-color: #C66A11; /* Set the background color to #C66A11 */
+    border-color: #C66A11; /* Match the border color */
+    color: white; /* Set the text color to white for better contrast */
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the toggle button */
+#toggleSort:hover {
+    background-color: #A55A0E; /* Slightly darker shade for hover effect */
+    border-color: #A55A0E; /* Match the border color on hover */
+    color: white; /* Keep the text color white */
+}
+
+/* Active (pressed) state for the toggle button */
+#toggleSort:active,
+#toggleSort:focus {
+    background-color: #A55A0E !important; /* Keep the hover color when pressed */
+    border-color: #A55A0E !important; /* Match the border color */
+    color: white !important; /* Keep the text color white */
+    box-shadow: none !important; /* Remove the default Bootstrap box shadow */
+}
+
+/* Default link styling */
+a {
+    color: black; /* Default text color */
+    text-decoration: none; /* Remove underline by default */
+    transition: color 0.3s, text-decoration 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for links */
+a:hover {
+    color: blue; /* Change text color to blue on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Exclude navbar links from global link styles */
+.navbar .nav-link {
+    color: inherit !important; /* Use Bootstrap's default color */
+    text-decoration: none !important; /* Remove underline */
+    transition: none !important; /* Disable custom hover effect */
+}
+
+.navbar .nav-link:hover {
+    color: inherit !important; /* Use Bootstrap's default hover color */
+    text-decoration: none !important; /* No underline on hover */
+}
+
+/* Default styling for all dynamic links */
+.dynamic-link {
+    color: black; /* Default text color */
+    text-decoration: none; /* Remove underline by default */
+    transition: color 0.3s, text-decoration 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for dynamic links */
+.dynamic-link:hover {
+    color: blue; /* Change text color to blue on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Default link styling for content links */
+.content-area a {
+    color: black; /* Default text color */
+    text-decoration: none; /* Remove underline by default */
+    transition: color 0.3s, text-decoration 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for content links */
+.content-area a:hover {
+    color: blue; /* Change text color to blue on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Toggle switch container */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align to the right */
+    background-color: transparent; /* Transparent background */
+    border: 2px solid #C66A11; /* Add border around the toggle switch */
+    border-radius: 20px; /* Rounded corners */
+    padding: 3px; /* Reduced padding to make it smaller */
+    margin: 0; /* Remove margin */
+    width: auto; /* Adjust width dynamically */
+}
+
+/* Individual toggle options */
+.toggle-option {
+    flex: 1;
+    text-align: center;
+    padding: 7px 15px; /* Reduced padding to make buttons smaller */
+    border: none;
+    border-radius: 15px; /* Rounded corners for individual options */
+    background-color: white; /* Default background color */
+    color: #C66A11; /* Default text color */
+    font-weight: bold;
+    font-size: 0.85rem; /* Reduced font size */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover and active states */
+    outline: none; /* Remove blue border on click */
+}
+
+/* Active toggle option */
+.toggle-option.active {
+    background-color: #C66A11; /* Active background color */
+    color: white; /* Active text color */
+}
+
+/* Hover effect for toggle options */
+.toggle-option:hover {
+    background-color: #A55A0E; /* Slightly darker shade for hover */
+    color: white; /* Text color on hover */
+}
+
+/* Remove focus outline */
+.toggle-option:focus {
+    outline: none; /* Remove blue border on focus */
+}
+
+/* Search Results Page Styles */
+.search-page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+    display: flex;
+    background-color: #f8f9fa;
+    border-radius: 25px;
+    padding: 4px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.toggle-option {
+    padding: 8px 20px;
+    border: none;
+    background: transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.toggle-option.active {
+    background-color: #C66A11;
+    color: white;
+    box-shadow: 0 2px 4px rgba(198, 106, 17, 0.3);
+}
+
+.toggle-option:hover:not(.active) {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Search Result Cards */
+.search-result-card {
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    border-color: #C66A11;
+}
+
+.search-result-card .card-img-top {
+    transition: transform 0.3s ease;
+    object-position: top center; /* Show the top part of images instead of center */
+}
+
+.search-result-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.search-result-card .card-title {
+    color: #C66A11;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.search-result-card .card-title:hover {
+    color: #A55A0E;
+}
+
+/* Category Headers */
+.category-header {
+    color: #C66A11;
+    border-bottom: 2px solid #C66A11;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.category-header:first-child {
+    margin-top: 0;
+}
+
+/* Badge styles for different types */
+.badge-primary { 
+    background-color: #007bff; 
+}
+.badge-success { 
+    background-color: #28a745; 
+}
+.badge-warning { 
+    background-color: #ffc107; 
+    color: #212529; 
+}
+.badge-info { 
+    background-color: #17a2b8; 
+}
+
+/* Search highlight */
+mark {
+    background-color: yellow;
+    padding: 0;
+    border-radius: 2px;
+}
+
+/* Results count */
+#results-count {
+    font-size: 16px;
+    font-weight: 500;
+    color: #6c757d;
+}
+
+/* Loading spinner */
+.spinner-border {
+    color: #C66A11;
+}
+
+/* No results styling */
+#no-results {
+    background-color: #f8f9fa;
+    border-color: #C66A11;
+    border-radius: 12px;
+}
+
+#no-results h4 {
+    color: #C66A11;
+    margin-bottom: 15px;
+}
+
+#no-results a {
+    color: #C66A11;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#no-results a:hover {
+    color: #A55A0E;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container, .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    header, main, footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    nav ul li {
+        margin: 0 0.5rem;
+    }
+    
+    .toggle-switch {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .toggle-option {
+        margin-bottom: 2px;
+        border-radius: 8px;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    #results-count {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .container, .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    header, main, footer {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .year-view {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 5px;
+    }
+}
+
+/* Search Bar */
+.search-bar {
+    position: relative;
+}
+
+.autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.autocomplete-item {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: #f8f9fa;
+    text-decoration: none;
+    color: #333;
+}
+
+.autocomplete-item.show-all {
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    color: #C66A11;
+}
+
+.autocomplete-item.show-all:hover {
+    background-color: #e0e0e0;
+    color: #A55A0E;
+}
+
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+/* Type badges in autocomplete */
+.autocomplete-item .badge {
+    font-size: 0.7em;
+    margin-left: 8px;
+}
+
+/* Search Results Page Styles */
+.search-page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+    display: flex;
+    background-color: #f8f9fa;
+    border-radius: 25px;
+    padding: 4px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.toggle-option {
+    padding: 8px 20px;
+    border: none;
+    background: transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.toggle-option.active {
+    background-color: #C66A11;
+    color: white;
+    box-shadow: 0 2px 4px rgba(198, 106, 17, 0.3);
+}
+
+.toggle-option:hover:not(.active) {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Search Result Cards */
+.search-result-card {
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.search-result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    border-color: #C66A11;
+}
+
+.search-result-card .card-img-top {
+    transition: transform 0.3s ease;
+    object-position: top center; /* Show the top part of images instead of center */
+}
+
+.search-result-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.search-result-card .card-title {
+    color: #C66A11;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.search-result-card .card-title:hover {
+    color: #A55A0E;
+}
+
+/* Category Headers */
+.category-header {
+    color: #C66A11;
+    border-bottom: 2px solid #C66A11;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.category-header:first-child {
+    margin-top: 0;
+}
+
+/* Badge styles for different types */
+.badge-primary { 
+    background-color: #007bff; 
+}
+.badge-success { 
+    background-color: #28a745; 
+}
+.badge-warning { 
+    background-color: #ffc107; 
+    color: #212529; 
+}
+.badge-info { 
+    background-color: #17a2b8; 
+}
+
+/* Search highlight */
+mark {
+    background-color: yellow;
+    padding: 0;
+    border-radius: 2px;
+}
+
+/* Results count */
+#results-count {
+    font-size: 16px;
+    font-weight: 500;
+    color: #6c757d;
+}
+
+/* Loading spinner */
+.spinner-border {
+    color: #C66A11;
+}
+
+/* No results styling */
+#no-results {
+    background-color: #f8f9fa;
+    border-color: #C66A11;
+    border-radius: 12px;
+}
+
+#no-results h4 {
+    color: #C66A11;
+    margin-bottom: 15px;
+}
+
+#no-results a {
+    color: #C66A11;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#no-results a:hover {
+    color: #A55A0E;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container, .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    header, main, footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    nav ul li {
+        margin: 0 0.5rem;
+    }
+    
+    .toggle-switch {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .toggle-option {
+        margin-bottom: 2px;
+        border-radius: 8px;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    #results-count {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .container, .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    header, main, footer {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .year-view {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 5px;
+    }
+}
+
+/* Search Bar */
+.search-bar {
+    position: relative;
+}
+
+.autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.autocomplete-item {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: #f8f9fa;
+    text-decoration: none;
+    color: #333;
+}
+
+.autocomplete-item.show-all {
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    color: #C66A11;
+}
+
+.autocomplete-item.show-all:hover {
+    background-color: #e0e0e0;
+    color: #A55A0E;
+}
+
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+/* Type badges in autocomplete */
+.autocomplete-item .badge {
+    font-size: 0.7em;
+    margin-left: 8px;
+}
