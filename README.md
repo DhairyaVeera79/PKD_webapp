@@ -1,6 +1,6 @@
 # Shrimad Rajchandra Mission Dharampur - Static Website
 
-This is a static website about Shrimad Rajchandraji, built for hosting on GitHub Pages. The website showcases information about the great spiritual luminary, his works, people associated with him, places of significance, and more.
+This is a static website about Shrimad Rajchandraji (Param Krupalu Dev), built for hosting on GitHub Pages. The website showcases comprehensive information about the great spiritual luminary, his literary works, people associated with him, places of significance, events in his life, and more.
 
 ## Project Structure
 
@@ -8,154 +8,232 @@ This is a static website about Shrimad Rajchandraji, built for hosting on GitHub
 PKD_webapp/
 ├── docs/                           # Static website files for GitHub Pages
 │   ├── index.html                  # Main homepage
-│   ├── events.html                 # Events page
-│   ├── people.html                 # People page
-│   ├── places.html                 # Places page
-│   ├── compositions.html           # Compositions page
-│   ├── calendar.html               # Calendar page
+│   ├── events.html                 # Events timeline page
+│   ├── people.html                 # People directory page
+│   ├── places.html                 # Places directory page
+│   ├── compositions.html           # Compositions directory page
+│   ├── calendar.html               # Interactive calendar with events
 │   ├── maps.html                   # Interactive maps
-│   ├── 404.html                    # Custom 404 page
-│   ├── .nojekyll                   # GitHub Pages config
+│   ├── search.html                 # Search functionality page
+│   ├── glossary.html               # Glossary of terms and definitions
+│   ├── 404.html                    # Custom 404 error page
+│   ├── .nojekyll                   # GitHub Pages Jekyll bypass
 │   ├── css/                        # Stylesheets
-│   │   ├── styles.css
-│   │   └── pages.css
+│   │   ├── styles.css              # Main stylesheet
+│   │   └── pages.css               # Page-specific styles
 │   ├── js/                         # JavaScript files
-│   │   ├── scripts.js
-│   │   └── search.js
-│   ├── images/                     # All image assets
+│   │   ├── scripts.js              # Main JavaScript functionality
+│   │   ├── search.js               # Search functionality and data
+│   │   ├── navbar.js               # Navigation bar functionality
+│   │   └── search-data.json        # Search index data
+│   ├── images/                     # All image assets organized by category
+│   │   ├── index_images/           # Homepage images
+│   │   ├── people_images/          # People photographs
+│   │   ├── places_images/          # Location photographs
+│   │   ├── events_images/          # Event-related images
+│   │   ├── compositions_images/    # Composition-related images
+│   │   └── mission_logo.svg        # SRMD logo
 │   ├── databases/                  # Data files (CSV, Excel)
+│   │   ├── people.xlsx
+│   │   ├── places.xlsx
+│   │   ├── places.csv
+│   │   ├── events.xlsx
+│   │   └── composition.xlsx
 │   ├── events/                     # Individual event pages
-│   ├── people/                     # Individual people pages
-│   ├── places/                     # Individual place pages
+│   │   ├── avdhan.html             # Avdhan performances
+│   │   └── chitrapat.html          # Photography events
+│   ├── people/                     # Individual biography pages (21 people)
+│   │   ├── bhagvanbhaiModi.html
+│   │   ├── brahmachariji.html
+│   │   ├── chanchalben.html
+│   │   ├── chatrabhujbhaiBechar.html
+│   │   ├── devba.html              # Param Krupalu Dev's mother
+│   │   ├── gandhiji.html           # Mahatma Gandhi
+│   │   ├── janbai.html
+│   │   ├── javalben.html
+│   │   ├── jhabakben.html          # Param Krupalu Dev's wife
+│   │   ├── juthabhai.html          # Param Krupalu Dev's father
+│   │   ├── maneklalGhelabhai.html
+│   │   ├── popatbhaiJagjivan.html
+│   │   ├── pranjivandas.html
+│   │   ├── ranchodbhai.html
+│   │   ├── ravjibhai.html          # Param Krupalu Dev's brother
+│   │   ├── revashankarJagjivan.html
+│   │   ├── saubhagyabhai.html      # Param Krupalu Dev's brother
+│   │   ├── shankarlalBhatt.html
+│   │   ├── shivkunvarben.html
+│   │   ├── tribhuvanBhanji.html
+│   │   └── vinaychandrabhaiPopatbhaiDaftary.html
+│   ├── places/                     # Individual location pages (12 places)
+│   │   ├── ahmedabad.html
+│   │   ├── botad.html
+│   │   ├── dharampur.html          # SRMD headquarters
+│   │   ├── idar.html
+│   │   ├── jamnagar.html
+│   │   ├── jetpar.html
+│   │   ├── limbdi.html
+│   │   ├── morbi.html
+│   │   ├── mumbai.html
+│   │   ├── rajkot.html             # Place of dehvilay
+│   │   ├── vavaniya.html           # Birthplace
+│   │   └── wadhwan.html
 │   └── compositions/               # Individual composition pages
-├── convert_to_static.py            # Conversion script (for future updates)
-├── LICENSE
-└── README.md
+│       ├── bhavnabodh.html         # 12 Bhavnas composition
+│       └── mokshmala.html          # 108-chapter masterpiece
+├── add_search_script.py            # Script to add search functionality
+├── comprehensive_path_fix.py       # Path fixing utility
+├── convert_to_static.py            # Flask to static conversion script
+├── fix_paths.py                    # Path correction utility
+├── refactor_navbar.py              # Navigation refactoring script
+├── LICENSE                         # Proprietary license
+└── README.md                       # This documentation
 ```
+
+## Key Features
+
+### Core Content Areas
+- **People**: 21 biographical pages covering family members, devotees, and notable figures
+- **Places**: 12 significant locations in Param Krupalu Dev's life journey
+- **Events**: Chronological timeline of major life events
+- **Compositions**: Literary works including Mokshmala and Bhavnabodh
+- **Glossary**: Comprehensive definitions of spiritual and historical terms
+
+### Interactive Features
+- **Advanced Search**: Full-text search across all content categories
+- **Interactive Calendar**: Events displayed with Vikram Samvat dates
+- **Image Galleries**: Expandable images with detailed captions
+- **Table of Contents**: Dynamic navigation for long-form content
+- **Cross-references**: Interconnected links between related content
+
+### Technical Features
+- **Responsive Design**: Mobile-first approach with Bootstrap 4.5.2
+- **Progressive Enhancement**: Works without JavaScript, enhanced with it
+- **SEO Optimized**: Proper meta tags, semantic HTML, and structured data
+- **Performance Optimized**: Compressed images and minified assets
+- **Accessibility**: ARIA labels, semantic markup, and keyboard navigation
 
 ## Technologies Used
 
-- **HTML5**: Semantic markup for all content
-- **CSS3**: Custom styling with Bootstrap 4.5.2 framework
-- **JavaScript**: Interactive features and search functionality
+- **HTML5**: Semantic markup with proper document structure
+- **CSS3**: Custom styling with CSS Grid and Flexbox
 - **Bootstrap 4.5.2**: Responsive design framework
-- **jQuery**: For enhanced interactivity
+- **JavaScript/jQuery**: Interactive features and search functionality
+- **Git**: Version control and deployment workflow
 
 ## Running Locally
 
-### Option 1: Using Python's Built-in Server (Recommended)
-
-Navigate to the `docs` directory and start a local server:
+### Option 1: Python HTTP Server (Recommended)
 
 ```bash
 cd docs
 python -m http.server 8000
+# For Python 2: python -m SimpleHTTPServer 8000
 ```
 
-Or with Python 2:
-```bash
-cd docs
-python -m SimpleHTTPServer 8000
-```
+Open: `http://localhost:8000`
 
-Then open your browser and go to: `http://localhost:8000`
-
-### Option 2: Using Node.js (if you have it installed)
+### Option 2: Node.js Serve
 
 ```bash
 cd docs
 npx serve .
 ```
 
-### Option 3: Using PHP (if you have it installed)
+### Option 3: PHP Development Server
 
 ```bash
 cd docs
 php -S localhost:8000
 ```
 
-### Option 4: Using VS Code Live Server Extension
+### Option 4: VS Code Live Server
 
-1. Install the "Live Server" extension in VS Code
-2. Right-click on `docs/index.html`
+1. Install "Live Server" extension
+2. Right-click `docs/index.html`
 3. Select "Open with Live Server"
-
-## Features
-
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Interactive Search**: Search through people, places, events, and compositions
-- **Image Galleries**: Visual content with proper optimization
-- **Navigation**: Easy-to-use menu system with breadcrumbs
-- **Accessibility**: Semantic HTML and proper ARIA labels
-- **SEO Optimized**: Proper meta tags and structured content
 
 ## GitHub Pages Deployment
 
-This site is ready for GitHub Pages deployment:
+This site is configured for GitHub Pages deployment:
 
-1. **Commit the docs folder**:
+1. **Deploy to GitHub Pages**:
    ```bash
    git add docs/
-   git commit -m "Deploy static site to GitHub Pages"
+   git commit -m "Update website content"
    git push origin main
    ```
 
-2. **Enable GitHub Pages**:
-   - Go to your repository settings on GitHub
-   - Navigate to "Pages" section
+2. **GitHub Pages Settings**:
+   - Repository Settings → Pages
    - Source: "Deploy from a branch"
    - Branch: "main"
    - Folder: "/docs"
-   - Save
 
-Your site will be live at: `https://yourusername.github.io/repository-name/`
+Site will be available at: `https://username.github.io/repository-name/`
 
-## Development
+## Content Management
 
-### Making Changes
+### Adding New Content
 
-If you need to update the site:
+1. **People**: Create new HTML file in `docs/people/` using existing templates
+2. **Places**: Add to `docs/places/` with location information
+3. **Events**: Update `docs/events.html` timeline and create detail pages
+4. **Images**: Organize in appropriate `docs/images/` subdirectories
 
-1. Edit files directly in the `docs/` folder
-2. Test locally using one of the methods above
-3. Commit and push changes to deploy
+### Search Index
 
-### Converting from Flask (Historical)
+The search functionality uses `docs/js/search.js` which contains:
+- Indexed content from all pages
+- Keyword associations
+- Category classifications
+- Direct links to content
 
-This site was originally built with Flask and converted to static files using the `convert_to_static.py` script. The conversion:
+Update the search data when adding new content.
 
-- Replaced Flask `url_for()` calls with relative paths
-- Generated static HTML from Jinja2 templates
-- Copied all assets (CSS, JS, images) to the static structure
-- Created GitHub Pages compatible file structure
+### Data Files
 
-## Content Areas
+Excel/CSV files in `docs/databases/` contain structured data:
+- `people.xlsx`: Biographical information
+- `places.xlsx`: Location details
+- `events.xlsx`: Historical events
+- `composition.xlsx`: Literary works
 
-- **People**: Biographical information about key figures
-- **Places**: Historical and significant locations
-- **Events**: Important events and celebrations
-- **Compositions**: Literary works and spiritual texts
-- **Interactive Maps**: Geographic visualization of important places
+## Development Utilities
+
+The repository includes several Python scripts for maintenance:
+
+- `convert_to_static.py`: Original Flask-to-static conversion
+- `add_search_script.py`: Search functionality integration
+- `comprehensive_path_fix.py`: Path correction across all files
+- `fix_paths.py`: URL and link correction utility
+- `refactor_navbar.py`: Navigation structure updates
 
 ## Browser Support
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
+- **Modern Browsers**: Chrome, Firefox, Safari, Edge (latest versions)
+- **Mobile Browsers**: iOS Safari, Chrome Mobile, Samsung Internet
+- **Legacy Support**: Graceful degradation for older browsers
+
+## Performance
+
+- **Optimized Images**: Compressed JPEG/PNG files
+- **Lazy Loading**: Images load as needed
+- **Minimal JavaScript**: Progressive enhancement approach
+- **CDN Assets**: Bootstrap and jQuery from CDN
 
 ## Contributing
 
 1. Fork the repository
-2. Make your changes in the `docs/` folder
-3. Test locally
-4. Submit a pull request
+2. Create feature branch: `git checkout -b feature-name`
+3. Make changes in `docs/` folder
+4. Test locally using local server
+5. Commit changes: `git commit -m "Description"`
+6. Push and create pull request
 
 ## License
 
-See LICENSE file for details.
+This project is under a proprietary license. See `LICENSE` file for detailed terms and restrictions. Content is owned by Shrimad Rajchandra Mission Dharampur.
 
 ---
 
-*This website is dedicated to preserving and sharing the legacy of Shrimad Rajchandraji and the Shrimad Rajchandra Mission Dharampur.*
+**About**: This website preserves and shares the legacy of Shrimad Rajchandraji (Param Krupalu Dev) and the spiritual teachings of Shrimad Rajchandra Mission Dharampur. Built with reverence and dedication to the great spiritual luminary.
