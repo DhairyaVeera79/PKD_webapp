@@ -2,13 +2,36 @@
 // This file creates a modern, clean reusable navbar
 
 function createNavbar() {
-    // Determine the base path based on current location
+    // Determine the base path based on current location and deployment environment
     const currentPath = window.location.pathname;
-    const isRootLevel = currentPath.includes('/docs/') && !currentPath.includes('/docs/people/') && 
-                       !currentPath.includes('/docs/places/') && !currentPath.includes('/docs/events/') && 
-                       !currentPath.includes('/docs/compositions/');
+    const hostname = window.location.hostname;
     
-    const basePath = isRootLevel ? './' : '../';
+    // Check if we're on GitHub Pages
+    const isGitHubPages = hostname.includes('github.io');
+    
+    let basePath;
+    
+    if (isGitHubPages) {
+        // For GitHub Pages, we need to handle the repository name in the path
+        const pathParts = currentPath.split('/').filter(part => part !== '');
+        
+        if (pathParts.length === 0 || pathParts[pathParts.length - 1].endsWith('.html')) {
+            // We're at root level or a root-level HTML file
+            basePath = './';
+        } else if (pathParts.length >= 2) {
+            // We're in a subdirectory (people/, places/, etc.)
+            basePath = '../';
+        } else {
+            basePath = './';
+        }
+    } else {
+        // Local development - use existing logic
+        const isRootLevel = currentPath.includes('/docs/') && !currentPath.includes('/docs/people/') && 
+                           !currentPath.includes('/docs/places/') && !currentPath.includes('/docs/events/') && 
+                           !currentPath.includes('/docs/compositions/');
+        
+        basePath = isRootLevel ? './' : '../';
+    }
     
     return `
     <header class="modern-navbar">
@@ -56,6 +79,11 @@ function createNavbar() {
                     <li class="nav-item">
                         <a href="${basePath}maps.html" class="nav-link" data-page="maps.html">
                             <span class="nav-text">Map</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="${basePath}glossary.html" class="nav-link" data-page="glossary.html">
+                            <span class="nav-text">Glossary</span>
                         </a>
                     </li>
                 </ul>
@@ -112,6 +140,7 @@ function createNavbar() {
                     <li><a href="${basePath}compositions.html" class="mobile-nav-link" data-page="compositions.html">Compositions</a></li>
                     <li><a href="${basePath}calendar.html" class="mobile-nav-link" data-page="calendar.html">Calendar</a></li>
                     <li><a href="${basePath}maps.html" class="mobile-nav-link" data-page="maps.html">Map</a></li>
+                    <li><a href="${basePath}glossary.html" class="mobile-nav-link" data-page="glossary.html">Glossary</a></li>
                 </ul>
                 <div class="mobile-search">
                     <form class="mobile-search-form" onsubmit="return handleSearch ? handleSearch(event) : true">
@@ -412,11 +441,26 @@ function hideAutocomplete(container) {
 function handleSearchSubmit(query) {
     if (query) {
         const currentPath = window.location.pathname;
+        const hostname = window.location.hostname;
+        const isGitHubPages = hostname.includes('github.io');
+        
         let searchPath = './search.html';
         
-        if (currentPath.includes('/people/') || currentPath.includes('/places/') || 
-            currentPath.includes('/events/') || currentPath.includes('/compositions/')) {
-            searchPath = '../search.html';
+        if (isGitHubPages) {
+            // For GitHub Pages, determine path based on URL structure
+            const pathParts = currentPath.split('/').filter(part => part !== '');
+            
+            if (pathParts.length >= 2 && 
+                (currentPath.includes('/people/') || currentPath.includes('/places/') || 
+                 currentPath.includes('/events/') || currentPath.includes('/compositions/'))) {
+                searchPath = '../search.html';
+            }
+        } else {
+            // Local development logic
+            if (currentPath.includes('/people/') || currentPath.includes('/places/') || 
+                currentPath.includes('/events/') || currentPath.includes('/compositions/')) {
+                searchPath = '../search.html';
+            }
         }
         
         const targetUrl = `${searchPath}?q=${encodeURIComponent(query)}`;
@@ -426,13 +470,27 @@ function handleSearchSubmit(query) {
 
 function adjustUrl(url) {
     const currentPath = window.location.pathname;
+    const hostname = window.location.hostname;
+    const isGitHubPages = hostname.includes('github.io');
     
-    if (currentPath.includes('/people/') || currentPath.includes('/places/') || 
-        currentPath.includes('/events/') || currentPath.includes('/compositions/')) {
-        return url.replace('./', '../');
+    if (isGitHubPages) {
+        // For GitHub Pages, determine path based on URL structure
+        const pathParts = currentPath.split('/').filter(part => part !== '');
+        
+        if (pathParts.length >= 2 && 
+            (currentPath.includes('/people/') || currentPath.includes('/places/') || 
+             currentPath.includes('/events/') || currentPath.includes('/compositions/'))) {
+            return url.replace('./', '../');
+        }
+        return url;
+    } else {
+        // Local development logic
+        if (currentPath.includes('/people/') || currentPath.includes('/places/') || 
+            currentPath.includes('/events/') || currentPath.includes('/compositions/')) {
+            return url.replace('./', '../');
+        }
+        return url;
     }
-    
-    return url;
 }
 
 function highlightMatch(text, query) {
