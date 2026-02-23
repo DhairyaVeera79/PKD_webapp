@@ -3,55 +3,814 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Map</title>
+    <title>Journey Map &mdash; Life of Param Krupalu Dev</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- In the head section -->
     <script src="./js/search.js"></script>
     <script src="./js/navbar.js"></script>
-    
-<style>
-    body {
-        padding-left: 75px;
-        padding-right: 75px;
-    }
-    
-    .container {
-        padding-left: 0;
-        padding-right: 0;
-        max-width: 100%;
-    }
-    
-    main {
-        padding-left: 0;
-        padding-right: 0;
-    }
-</style>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <style>
+        /* ===== MAP PAGE STYLES ===== */
+        .map-page { max-width: 100%; margin: 0; padding: 80px 0 0; }
+        .map-header { max-width: 1200px; margin: 0 auto; padding: 20px 20px 0; }
+        .map-header h1 { color: #333; font-size: 1.8rem; font-weight: 700; margin-bottom: 4px; }
+        .map-header .subtitle { color: #777; font-size: 0.95rem; margin-bottom: 16px; }
 
+        /* --- Controls bar --- */
+        .controls-bar { max-width: 1200px; margin: 0 auto 12px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .year-slider-wrap { flex: 1; min-width: 260px; display: flex; align-items: center; gap: 10px; }
+        .year-slider-wrap label { font-size: 0.85rem; font-weight: 600; color: #555; white-space: nowrap; }
+        .year-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 6px; background: #ddd; border-radius: 3px; outline: none; }
+        .year-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #C66A11; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+        .year-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #C66A11; cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+        .year-display { font-size: 1.1rem; font-weight: 700; color: #C66A11; min-width: 42px; text-align: center; }
+
+        .view-controls { display: flex; gap: 6px; }
+        .ctrl-btn { background: #EFEDE7; border: 1px solid #d5d0c8; color: #666; padding: 5px 14px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .ctrl-btn.active { background: #C66A11; color: #fff; border-color: #C66A11; }
+        .ctrl-btn:hover:not(.active) { background: #e5e0d8; }
+
+        /* --- Map container --- */
+        .map-wrap { position: relative; }
+        #map { width: 100%; height: calc(100vh - 220px); min-height: 500px; z-index: 1; }
+
+        /* --- Info panel (sidebar) --- */
+        .info-panel { position: absolute; top: 10px; right: 10px; width: 320px; max-height: calc(100% - 20px); background: #fff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease; }
+        .info-panel.collapsed { transform: translateX(340px); }
+        .info-panel-header { padding: 14px 16px 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .info-panel-header h3 { font-size: 1rem; font-weight: 700; color: #333; margin: 0; }
+        .info-panel-close { background: none; border: none; font-size: 1.2rem; color: #999; cursor: pointer; padding: 0 4px; }
+        .info-panel-close:hover { color: #333; }
+        .info-panel-body { padding: 12px 16px; overflow-y: auto; flex: 1; }
+        .info-place-name { font-size: 1.05rem; font-weight: 700; color: #C66A11; margin-bottom: 6px; }
+        .info-place-link { font-size: 0.8rem; margin-bottom: 10px; }
+        .info-place-link a { color: #C66A11; text-decoration: none; }
+        .info-place-link a:hover { text-decoration: underline; }
+        .info-events { list-style: none; padding: 0; margin: 0; }
+        .info-events li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+        .info-events li:last-child { border-bottom: none; }
+        .info-event-date { font-size: 0.75rem; color: #999; font-weight: 600; }
+        .info-event-title { font-size: 0.85rem; font-weight: 600; color: #333; margin-top: 2px; }
+        .info-event-desc { font-size: 0.78rem; color: #666; margin-top: 3px; line-height: 1.35; }
+        .info-event-cat { display: inline-block; font-size: 0.65rem; font-weight: 600; color: #fff; padding: 1px 6px; border-radius: 3px; margin-top: 3px; }
+
+        /* --- Toggle panel button --- */
+        .toggle-panel-btn { position: absolute; top: 10px; right: 10px; z-index: 999; background: #fff; border: none; border-radius: 8px; padding: 8px 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; font-size: 0.8rem; color: #C66A11; font-weight: 600; display: none; }
+        .toggle-panel-btn:hover { background: #f5f0ea; }
+
+        /* --- Legend overlay --- */
+        .map-legend { position: absolute; bottom: 30px; left: 10px; background: rgba(255,255,255,0.95); border-radius: 8px; padding: 10px 14px; z-index: 999; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 0.75rem; }
+        .map-legend h4 { font-size: 0.8rem; font-weight: 700; color: #333; margin: 0 0 6px; }
+        .legend-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; color: #555; }
+        .legend-icon { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .legend-line { width: 20px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+
+        /* --- Route year list in sidebar --- */
+        .route-year-list { list-style: none; padding: 0; margin: 0; }
+        .route-year-list li { padding: 6px 8px; border-radius: 5px; cursor: pointer; font-size: 0.85rem; color: #555; display: flex; justify-content: space-between; align-items: center; transition: background 0.15s; }
+        .route-year-list li:hover { background: #f5f0ea; }
+        .route-year-list li.active { background: #C66A11; color: #fff; font-weight: 600; }
+        .route-year-list li .place-count { font-size: 0.7rem; opacity: 0.7; }
+
+        /* --- Leaflet popup overrides --- */
+        .leaflet-popup-content-wrapper { border-radius: 8px; }
+        .leaflet-popup-content { margin: 10px 14px; font-size: 0.85rem; line-height: 1.4; }
+        .leaflet-popup-content .popup-title { font-weight: 700; color: #C66A11; font-size: 0.95rem; margin-bottom: 4px; }
+        .leaflet-popup-content .popup-events { font-size: 0.78rem; color: #555; }
+        .leaflet-popup-content .popup-link { display: inline-block; margin-top: 6px; color: #C66A11; font-size: 0.78rem; text-decoration: none; font-weight: 600; }
+        .leaflet-popup-content .popup-link:hover { text-decoration: underline; }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .info-panel { width: 280px; }
+            .controls-bar { padding: 0 12px; }
+            #map { height: calc(100vh - 240px); min-height: 400px; }
+        }
+        @media (max-width: 576px) {
+            .info-panel { width: 100%; right: 0; top: auto; bottom: 0; max-height: 50%; border-radius: 10px 10px 0 0; }
+            .info-panel.collapsed { transform: translateY(100%); }
+            .map-legend { bottom: auto; top: 10px; left: 10px; z-index: 999; }
+            .view-controls { flex-wrap: wrap; justify-content: center; }
+            .controls-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+            .year-slider-wrap { min-width: auto; }
+        }
+    </style>
 </head>
 <body>
-    
 
-    <main class="container my-5 pt-5" style="padding-top: 160px;">
-        
-<section>
-    <div>
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1gV6Xq6Ll8R33eeSOQpnxN34bC8Mhtl8&ehbc=2E312F&noprof=1" width="100%" height="650"></iframe>
+<div class="map-page">
+    <div class="map-header">
+        <h1>Journey Map</h1>
+        <p class="subtitle">Tracing the footsteps of Param Krupalu Dev across Gujarat &amp; India (1867&ndash;1901)</p>
     </div>
-</section>
 
-    </main>
-
-    <footer class="bg-light py-3">
-        <div class="text-center mt-4">
-            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+    <div class="controls-bar">
+        <div class="year-slider-wrap">
+            <label for="year-slider">Year:</label>
+            <input type="range" id="year-slider" class="year-slider" min="1867" max="1901" value="1867" step="1">
+            <span class="year-display" id="year-display">1867</span>
         </div>
-    </footer>
+        <div class="view-controls">
+            <button class="ctrl-btn active" data-mode="year">Year View</button>
+            <button class="ctrl-btn" data-mode="all">All Places</button>
+            <button class="ctrl-btn" data-mode="routes">All Routes</button>
+        </div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="./js/scripts.js"></script>
-    
+    <div class="map-wrap">
+        <div id="map"></div>
+
+        <!-- Info Panel -->
+        <div class="info-panel" id="info-panel">
+            <div class="info-panel-header">
+                <h3 id="panel-title">Year 1867</h3>
+                <button class="info-panel-close" id="panel-close">&times;</button>
+            </div>
+            <div class="info-panel-body" id="panel-body">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Toggle panel button (when panel is collapsed) -->
+        <button class="toggle-panel-btn" id="toggle-panel">&#9776; Details</button>
+
+        <!-- Legend -->
+        <div class="map-legend">
+            <h4>Legend</h4>
+            <div class="legend-row"><div class="legend-icon" style="background:#C66A11;"></div> Birthplace</div>
+            <div class="legend-row"><div class="legend-icon" style="background:#1565C0;"></div> Major city</div>
+            <div class="legend-row"><div class="legend-icon" style="background:#2E7D32;"></div> Retreat / spiritual</div>
+            <div class="legend-row"><div class="legend-icon" style="background:#6A1B9A;"></div> Visited place</div>
+            <div class="legend-row"><div class="legend-icon" style="background:#B71C1C;"></div> Place of passing</div>
+            <div class="legend-row"><div class="legend-line" style="background:#C66A11;"></div> Travel route</div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-light py-3">
+    <div class="text-center mt-4">
+        <p>&copy; Copyright 2026. Shrimad Rajchandra Mission Dharampur. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadNavbar();
+
+    // ===================================================================
+    //  PLACE DATABASE — coordinates, categories, links
+    // ===================================================================
+    const PLACES = {
+        'Vavaniya':     { lat: 21.7510, lng: 71.3550, cat: 'birth',     url: './places/vavaniya.html',   desc: 'Birthplace of Param Krupalu Dev. Spent childhood here (1867\u2013~1881).' },
+        'Morbi':        { lat: 22.8173, lng: 70.8370, cat: 'major',     url: './places/morbi.html',      desc: 'Anglo-Vernacular school (1881\u20131884). Marriage in 1888. 3 months in 1898.' },
+        'Jamnagar':     { lat: 22.4707, lng: 70.0577, cat: 'visited',   url: './places/jamnagar.html',   desc: '12 & 16 Avdhans performed here in 1884. Title \u201CHind na Heera.\u201D' },
+        'Wadhwan':      { lat: 22.7120, lng: 71.6750, cat: 'major',     url: './places/wadhwan.html',    desc: 'Wadhwan Camp. 16 Avdhans (1884). Paramshrut Prabhavak Mandal (1900). Photographs taken.' },
+        'Limbdi':       { lat: 22.5670, lng: 71.8100, cat: 'visited',   url: './places/limbdi.html',     desc: 'Town near Wadhwan in Saurashtra. Limbdi State guest house used during Wadhwan stay.' },
+        'Botad':        { lat: 22.1720, lng: 71.6690, cat: 'visited',   url: './places/botad.html',      desc: '52 Avdhans performed here in 1884 in presence of Sheth Shri Harilal Shivlal.' },
+        'Jetpar':       { lat: 21.7400, lng: 70.6200, cat: 'visited',   url: './places/jetpar.html',     desc: 'Home of brother-in-law Chatrabhuj Bechar. Saubhagyabhai\u2019s first meeting (1890).' },
+        'Ahmedabad':    { lat: 23.0225, lng: 72.5714, cat: 'major',     url: './places/ahmedabad.html',  desc: 'Mokshmala published (1888). 52 Avdhans. Ambalalbhai\u2019s self-realisation (1900).' },
+        'Rajkot':       { lat: 22.3039, lng: 70.8022, cat: 'passing',   url: './places/rajkot.html',     desc: 'Final abode. Param Krupalu Dev left His mortal body here on April 9, 1901.' },
+        'Mumbai':       { lat: 19.0760, lng: 72.8777, cat: 'major',     url: './places/mumbai.html',     desc: 'Shatavdhan (1887). Jewellery business (1889\u20131896). Met Gandhiji (1891).' },
+        'Surat':        { lat: 21.1702, lng: 72.8311, cat: 'visited',   url: null,                       desc: 'Lalluji Muni was based here. Correspondence with Param Krupalu Dev.' },
+        'Bharuch':      { lat: 21.7051, lng: 72.9959, cat: 'visited',   url: null,                       desc: 'Studied Bhadrabahusanhita at home of Sheth Anupchand (1889).' },
+        'Sayla':        { lat: 22.3650, lng: 71.4920, cat: 'visited',   url: null,                       desc: 'Pujyashree Saubhagyabhai\u2019s home. He passed away here (June 1897).' },
+        'Khambhat':     { lat: 22.3170, lng: 72.6190, cat: 'spiritual', url: './places/khambhat.html',   desc: 'First meeting with Lalluji Muni (Oct 1890). Ambalalbhai\u2019s base.' },
+        'Ralaj':        { lat: 22.3320, lng: 72.6480, cat: 'spiritual', url: null,                       desc: 'Near Khambhat. Paryushan retreats in 1891 and 1896.' },
+        'Kavitha':      { lat: 22.5530, lng: 72.7820, cat: 'spiritual', url: './places/kavitha.html',    desc: 'Retreats in 1896 and 1898. Meditation by Vagadia lake. Babardeva reformed.' },
+        'Vadva':        { lat: 22.3700, lng: 72.6050, cat: 'spiritual', url: null,                       desc: 'Near Khambhat. 6-day retreat (1896) with Lalluji Muni.' },
+        'Anand':        { lat: 22.5645, lng: 72.9289, cat: 'spiritual', url: null,                       desc: 'Composed \u201CMool Marg Sambhlo Jinno Re\u201D here (Oct 1896).' },
+        'Nadiad':       { lat: 22.6916, lng: 72.8634, cat: 'spiritual', url: null,                       desc: 'Shri Atmasiddhi Shastra composed here in a single sitting (Oct 29, 1896).' },
+        'Idar':         { lat: 23.8300, lng: 73.0020, cat: 'spiritual', url: './places/idar.html',       desc: 'Major retreats (1897, 1899\u20131900). Meditated in caves. Renounced worldly wealth.' },
+        'Vaso':         { lat: 22.6700, lng: 72.7500, cat: 'spiritual', url: null,                       desc: 'Lalluji Muni attained self-realisation here (Sep 1898).' },
+        'Uttarsanda':   { lat: 22.6370, lng: 72.8520, cat: 'spiritual', url: './places/uttarsanda.html', desc: 'Retreat (1898). Extreme austerities. Extraordinary radiance.' },
+        'Kheda':        { lat: 22.7496, lng: 72.6861, cat: 'spiritual', url: null,                       desc: '23-day retreat (1898). Deeply emaciated yet spiritually radiant.' },
+        'Naroda':       { lat: 23.0700, lng: 72.6500, cat: 'visited',   url: null,                       desc: 'Walked barefoot in scorching heat (1899). Blessed monks.' },
+        'Dharampur':    { lat: 20.5356, lng: 73.1809, cat: 'spiritual', url: './places/dharampur.html',  desc: 'Retreat for health recovery (Apr 1900). Treated by Dr. Pranjivandas Mehta.' },
+        'Tithal':       { lat: 20.5960, lng: 72.9150, cat: 'visited',   url: null,                       desc: 'Near Valsad. Health recovery attempt (Jan\u2013Feb 1901).' },
+        'Agas':         { lat: 22.0800, lng: 72.9700, cat: 'spiritual', url: './places/agas.html',       desc: 'Shrimad Rajchandra Ashram established later by followers.' },
+        'Viramgam':     { lat: 23.1200, lng: 72.0300, cat: 'visited',   url: null,                       desc: 'Visited during 1900 travels.' }
+    };
+
+    // ===================================================================
+    //  YEAR-WISE LOCATION SEQUENCES (travel routes)
+    // ===================================================================
+    const YEAR_ROUTES = {
+        1867: { places: ['Vavaniya'], label: 'Birth in Vavaniya' },
+        1868: { places: ['Vavaniya'], label: 'Childhood in Vavaniya' },
+        1869: { places: ['Vavaniya'], label: 'Childhood in Vavaniya' },
+        1870: { places: ['Vavaniya'], label: 'Childhood in Vavaniya' },
+        1871: { places: ['Vavaniya'], label: 'Childhood in Vavaniya' },
+        1872: { places: ['Vavaniya'], label: 'Childhood in Vavaniya' },
+        1873: { places: ['Vavaniya'], label: 'Childhood in Vavaniya' },
+        1874: { places: ['Vavaniya'], label: 'Childhood in Vavaniya' },
+        1875: { places: ['Vavaniya'], label: 'Jatismaranjnan, started school' },
+        1876: { places: ['Vavaniya'], label: 'Written ~5,000 couplets' },
+        1877: { places: ['Vavaniya'], label: 'Studied Ramayana & Mahabharata' },
+        1878: { places: ['Vavaniya'], label: 'Delivering speeches' },
+        1879: { places: ['Vavaniya'], label: 'Articles in Buddhiprakash' },
+        1880: { places: ['Vavaniya'], label: '300 couplets on a clock' },
+        1881: { places: ['Vavaniya', 'Morbi'], label: 'Left for Morbi for studies' },
+        1882: { places: ['Morbi'], label: 'Studies in Morbi' },
+        1883: { places: ['Morbi'], label: 'Studies in Morbi' },
+        1884: { places: ['Morbi', 'Vavaniya', 'Morbi', 'Jamnagar', 'Wadhwan', 'Botad'], label: 'Mokshmala authored. Avdhans across Saurashtra' },
+        1885: { places: ['Vavaniya'], label: 'Based in Vavaniya' },
+        1886: { places: ['Vavaniya', 'Jetpar', 'Mumbai'], label: 'First visit to Mumbai via Jetpar for avdhans' },
+        1887: { places: ['Mumbai', 'Jetpar'], label: 'Shatavdhan in Mumbai. Nashtavidya in Jetpar' },
+        1888: { places: ['Mumbai', 'Vavaniya', 'Morbi', 'Ahmedabad', 'Mumbai'], label: 'Marriage in Morbi. Mokshmala published. Met Juthabhai. Stopped avdhans' },
+        1889: { places: ['Mumbai', 'Ahmedabad', 'Bharuch', 'Mumbai', 'Ahmedabad', 'Mumbai'], label: 'Jewellery business. Bhadrabahusanhita. Visited Juthabhai' },
+        1890: { places: ['Mumbai', 'Ahmedabad', 'Jetpar', 'Khambhat', 'Mumbai'], label: 'R. Jagjivan Co. est. Juthabhai passed. Met Saubhagyabhai & Lalluji Muni' },
+        1891: { places: ['Mumbai', 'Ralaj', 'Mumbai'], label: 'Self-realisation. Met Gandhiji. Paryushan in Ralaj' },
+        1892: { places: ['Mumbai'], label: 'Based in Mumbai. Javalben born' },
+        1893: { places: ['Mumbai'], label: 'Gandhiji left for S. Africa. Lalluji Muni visited 4 months' },
+        1894: { places: ['Mumbai'], label: 'Based in Mumbai. Kashiben born' },
+        1895: { places: ['Mumbai'], label: 'Chha Padno Patra. Preparations to retire' },
+        1896: { places: ['Mumbai', 'Kavitha', 'Ralaj', 'Vadva', 'Khambhat', 'Anand', 'Nadiad', 'Vavaniya'], label: 'Retreats begin. Atmasiddhi Shastra composed in Nadiad' },
+        1897: { places: ['Vavaniya', 'Idar', 'Mumbai'], label: 'Idar visit. Saubhagyabhai passed (Sayla). Returned to Mumbai' },
+        1898: { places: ['Mumbai', 'Morbi', 'Kavitha', 'Vaso', 'Uttarsanda', 'Kheda'], label: 'Morbi 3 mo. Lalluji self-realisation (Vaso). Retreats across Charotar' },
+        1899: { places: ['Kheda', 'Mumbai', 'Naroda', 'Idar'], label: 'Brief Mumbai. Naroda. Idar retreat begins (Dec). Retired from business' },
+        1900: { places: ['Idar', 'Dharampur', 'Ahmedabad', 'Viramgam', 'Vavaniya', 'Morbi', 'Wadhwan', 'Ahmedabad'], label: 'Disease. Dharampur. PPM founded. Photos taken. Ambalalbhai\u2019s self-realisation' },
+        1901: { places: ['Ahmedabad', 'Mumbai', 'Tithal', 'Wadhwan', 'Rajkot'], label: 'Health worsening. Return to Wadhwan. Rajkot. Dehvilay April 9' }
+    };
+
+    // ===================================================================
+    //  CALENDAR EVENTS (same as calendar.html)
+    // ===================================================================
+    const ALL_EVENTS = [
+        { start:'1867-11-10', title:'Birth of Shrimad Rajchandra', cat:'milestone', loc:'Vavaniya' },
+        { start:'1872-06-15', title:'Name changed to Raichand', cat:'personal', loc:'Vavaniya' },
+        { start:'1875-01-15', title:'Jatismaranjnan \u2014 Recollection of Past Lives', cat:'milestone', loc:'Vavaniya' },
+        { start:'1875-03-01', title:'Started formal education', cat:'education', loc:'Vavaniya' },
+        { start:'1876-06-15', title:'Written ~5,000 couplets at age 8', cat:'composition', loc:'Vavaniya' },
+        { start:'1877-06-15', title:'Studied Ramayana & Mahabharata at age 9', cat:'education', loc:'Vavaniya' },
+        { start:'1878-06-15', title:'Delivered speeches on many subjects at age 10', cat:'education', loc:'Vavaniya' },
+        { start:'1879-06-15', title:'Articles published in Buddhiprakash', cat:'education', loc:'Vavaniya' },
+        { start:'1880-06-15', title:'300 couplets on a clock in 3 days', cat:'composition', loc:'Vavaniya' },
+        { start:'1881-01-15', title:'Left for Morbi for English studies', cat:'education', loc:'Morbi' },
+        { start:'1881-05-01', title:'Read all Jain Agams in 15 months', cat:'spiritual', loc:'Morbi' },
+        { start:'1884-04-15', title:'Authored Mokshmala (108 lessons)', cat:'composition', loc:'Vavaniya' },
+        { start:'1884-05-15', title:'First 8 Avdhans in Morbi', cat:'avdhan', loc:'Morbi' },
+        { start:'1884-06-01', title:'12 Avdhans in Morbi', cat:'avdhan', loc:'Morbi' },
+        { start:'1884-07-01', title:'12 & 16 Avdhans in Jamnagar', cat:'avdhan', loc:'Jamnagar' },
+        { start:'1884-08-01', title:'16 Avdhans in Wadhwan', cat:'avdhan', loc:'Wadhwan' },
+        { start:'1884-09-01', title:'52 Avdhans in Botad', cat:'avdhan', loc:'Botad' },
+        { start:'1886-03-15', title:'Authored Bhavnabodh', cat:'composition', loc:'Vavaniya' },
+        { start:'1886-09-01', title:'First visit to Mumbai for avdhans', cat:'avdhan', loc:'Mumbai' },
+        { start:'1886-10-01', title:'Stopped in Jetpar; horoscope made', cat:'personal', loc:'Jetpar' },
+        { start:'1887-01-22', title:'Shatavdhan (100 Avdhans)', cat:'milestone', loc:'Mumbai' },
+        { start:'1887-02-15', title:'Avdhans at Theosophical Society', cat:'avdhan', loc:'Mumbai' },
+        { start:'1887-10-01', title:'Nashtavidya demonstration in Jetpar', cat:'avdhan', loc:'Jetpar' },
+        { start:'1888-01-15', title:'Departed Mumbai for marriage', cat:'personal', loc:'Mumbai' },
+        { start:'1888-02-15', title:'Married Jhabakbai in Morbi', cat:'milestone', loc:'Morbi' },
+        { start:'1888-02-20', title:'Title \u201CYugpradhan\u201D bestowed', cat:'personal', loc:'Morbi' },
+        { start:'1888-03-15', title:'Mokshmala published in Ahmedabad', cat:'composition', loc:'Ahmedabad' },
+        { start:'1888-04-01', title:'First meeting with Pujyashree Juthabhai', cat:'spiritual', loc:'Ahmedabad' },
+        { start:'1888-04-15', title:'52 Avdhans in Ahmedabad', cat:'avdhan', loc:'Ahmedabad' },
+        { start:'1888-06-01', title:'Total stop of public Avdhans', cat:'spiritual', loc:'Mumbai' },
+        { start:'1889-05-01', title:'Ambalalbhai met Juthabhai in Ahmedabad', cat:'spiritual', loc:'Ahmedabad' },
+        { start:'1889-06-15', title:'Studied Bhadrabahusanhita in Bharuch', cat:'education', loc:'Bharuch' },
+        { start:'1889-07-01', title:'Revashankarbhai moved to Mumbai', cat:'personal', loc:'Mumbai' },
+        { start:'1889-09-01', title:'Joined jewellery business in Mumbai', cat:'personal', loc:'Mumbai' },
+        { start:'1889-11-01', title:'Visited Juthabhai in Ahmedabad (15 days)', cat:'spiritual', loc:'Ahmedabad' },
+        { start:'1890-03-01', title:'Revashankar Jagjivan Co. established', cat:'personal', loc:'Mumbai' },
+        { start:'1890-06-01', title:'First son Chaganbhai born', cat:'personal', loc:'Mumbai' },
+        { start:'1890-07-15', title:'Pujyashree Juthabhai passed away', cat:'passing', loc:'Ahmedabad' },
+        { start:'1890-09-01', title:'First meeting with Saubhagyabhai', cat:'milestone', loc:'Jetpar' },
+        { start:'1890-10-28', title:'First meeting with Lalluji Muni', cat:'milestone', loc:'Khambhat' },
+        { start:'1891-01-15', title:'Attained Self-Realisation (Samyagdarshan)', cat:'milestone', loc:'Mumbai' },
+        { start:'1891-06-01', title:'First meeting with Mahatma Gandhi', cat:'milestone', loc:'Mumbai' },
+        { start:'1891-08-15', title:'Paryushan in Ralaj', cat:'spiritual', loc:'Ralaj' },
+        { start:'1891-11-01', title:'\u201CThe knot has been severed\u201D', cat:'spiritual', loc:'Mumbai' },
+        { start:'1892-06-15', title:'Daughter Javalben born', cat:'personal', loc:'Mumbai' },
+        { start:'1893-06-01', title:'Gandhiji left for South Africa', cat:'personal', loc:'Mumbai' },
+        { start:'1893-07-01', title:'Lalluji Muni in Mumbai (4 months)', cat:'spiritual', loc:'Mumbai' },
+        { start:'1894-06-15', title:'Daughter Kashiben born', cat:'personal', loc:'Mumbai' },
+        { start:'1895-07-01', title:'Sent \u201CChha Padno Patra\u201D', cat:'spiritual', loc:'Mumbai' },
+        { start:'1895-10-01', title:'Commenced preparations to retire', cat:'spiritual', loc:'Mumbai' },
+        { start:'1896-01-15', title:'Son Ratilalbhai born', cat:'personal', loc:'Mumbai' },
+        { start:'1896-03-01', title:'Mansukhbhai joined the firm', cat:'personal', loc:'Mumbai' },
+        { start:'1896-06-01', title:'Expressed desire to retire from business', cat:'spiritual', loc:'Mumbai' },
+        { start:'1896-08-01', title:'Left Mumbai \u2014 beginning of retreats', cat:'milestone', loc:'Mumbai' },
+        { start:'1896-08-15', title:'Retreat in Kavitha', cat:'retreat', loc:'Kavitha' },
+        { start:'1896-09-20', title:'Retreat in Ralaj \u2014 Paryushan', cat:'retreat', loc:'Ralaj' },
+        { start:'1896-10-01', title:'Retreat in Vadva (6 days)', cat:'retreat', loc:'Vadva' },
+        { start:'1896-10-10', title:'In Khambhat', cat:'retreat', loc:'Khambhat' },
+        { start:'1896-10-15', title:'Composed \u201CMool Marg Sambhlo Jinno Re\u201D', cat:'composition', loc:'Anand' },
+        { start:'1896-10-29', title:'Composed Shri Atmasiddhi Shastra', cat:'milestone', loc:'Nadiad' },
+        { start:'1896-11-15', title:'Stayed in Nadiad after Diwali', cat:'retreat', loc:'Nadiad' },
+        { start:'1896-12-15', title:'Composed \u201CApurva Avsar\u201D', cat:'composition', loc:'Vavaniya' },
+        { start:'1897-05-01', title:'Travelled to Idar with Saubhagyabhai', cat:'spiritual', loc:'Idar' },
+        { start:'1897-06-15', title:'Saubhagyabhai passed away', cat:'passing', loc:'Sayla' },
+        { start:'1897-07-01', title:'Returned to Mumbai', cat:'personal', loc:'Mumbai' },
+        { start:'1898-02-01', title:'Resided in Morbi (3 months)', cat:'retreat', loc:'Morbi' },
+        { start:'1898-08-01', title:'Second retreat in Kavitha', cat:'retreat', loc:'Kavitha' },
+        { start:'1898-09-01', title:'Retreat in Vaso', cat:'retreat', loc:'Vaso' },
+        { start:'1898-09-30', title:'Lalluji Muni attained self-realisation', cat:'milestone', loc:'Vaso' },
+        { start:'1898-10-01', title:'Retreat in Uttarsanda', cat:'retreat', loc:'Uttarsanda' },
+        { start:'1898-11-20', title:'Retreat in Kheda (23 days)', cat:'retreat', loc:'Kheda' },
+        { start:'1899-01-15', title:'Returned briefly to Mumbai', cat:'personal', loc:'Mumbai' },
+        { start:'1899-04-01', title:'In Naroda \u2014 walked barefoot', cat:'spiritual', loc:'Naroda' },
+        { start:'1899-12-01', title:'Idar Retreat begins', cat:'retreat', loc:'Idar' },
+        { start:'1899-12-20', title:'Proclaimed renunciation of wealth', cat:'spiritual', loc:'Idar' },
+        { start:'1899-12-31', title:'Completely retired from business', cat:'personal', loc:'Idar' },
+        { start:'1900-01-15', title:'Disease struck', cat:'personal', loc:'Idar' },
+        { start:'1900-04-01', title:'Retreat to Dharampur', cat:'retreat', loc:'Dharampur' },
+        { start:'1900-08-15', title:'Wadhwan Camp', cat:'retreat', loc:'Wadhwan' },
+        { start:'1900-09-01', title:'Founded Paramshrut Prabhavak Mandal', cat:'milestone', loc:'Wadhwan' },
+        { start:'1900-10-01', title:'Two photographs taken', cat:'personal', loc:'Wadhwan' },
+        { start:'1900-11-15', title:'Ahmedabad stay (27 days)', cat:'retreat', loc:'Ahmedabad' },
+        { start:'1900-12-01', title:'Ambalalbhai attained self-realisation', cat:'milestone', loc:'Ahmedabad' },
+        { start:'1901-01-01', title:'Arrived in Mumbai', cat:'personal', loc:'Mumbai' },
+        { start:'1901-01-15', title:'Health treatment in Mumbai/Tithal', cat:'personal', loc:'Tithal' },
+        { start:'1901-02-15', title:'Returned to Wadhwan Camp', cat:'personal', loc:'Wadhwan' },
+        { start:'1901-03-15', title:'Departed for Rajkot', cat:'personal', loc:'Rajkot' },
+        { start:'1901-04-01', title:'Composed final poem', cat:'composition', loc:'Rajkot' },
+        { start:'1901-04-08', title:'Last words to devotees', cat:'passing', loc:'Rajkot' },
+        { start:'1901-04-09', title:'Dehvilay \u2014 Passing of Param Krupalu Dev', cat:'milestone', loc:'Rajkot' }
+    ];
+
+    const CAT_COLORS = {
+        milestone: '#C66A11', spiritual: '#8B5E3C', composition: '#2E7D32',
+        avdhan: '#1565C0', personal: '#6A1B9A', retreat: '#00695C',
+        education: '#0277BD', passing: '#B71C1C'
+    };
+
+    const PLACE_COLORS = {
+        birth: '#C66A11', major: '#1565C0', spiritual: '#2E7D32',
+        visited: '#6A1B9A', passing: '#B71C1C'
+    };
+
+    // ===================================================================
+    //  INITIALIZE MAP
+    // ===================================================================
+    var map = L.map('map', {
+        center: [22.2, 72.0],
+        zoom: 7,
+        minZoom: 5,
+        maxZoom: 16,
+        zoomControl: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+    }).addTo(map);
+
+    // ===================================================================
+    //  MARKER & LAYER MANAGEMENT
+    // ===================================================================
+    var markersLayer = L.layerGroup().addTo(map);
+    var routeLayer = L.layerGroup().addTo(map);
+    var allMarkers = {};  // name -> L.marker
+
+    function createMarker(name, place, highlight) {
+        var size = highlight ? 14 : 10;
+        var borderW = highlight ? 3 : 2;
+        var color = PLACE_COLORS[place.cat] || '#6A1B9A';
+
+        var icon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + color + ';border:' + borderW + 'px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3);' + (highlight ? 'animation:pulse 1.5s infinite;' : '') + '"></div>',
+            iconSize: [size + borderW*2, size + borderW*2],
+            iconAnchor: [(size + borderW*2)/2, (size + borderW*2)/2]
+        });
+
+        var marker = L.marker([place.lat, place.lng], { icon: icon });
+
+        // Popup
+        var eventsForPlace = getEventsForPlace(name);
+        var popupHTML = '<div class="popup-title">' + name + '</div>';
+        popupHTML += '<div class="popup-events">' + place.desc + '</div>';
+        if (place.url) {
+            popupHTML += '<a class="popup-link" href="' + place.url + '">View details &rarr;</a>';
+        }
+        marker.bindPopup(popupHTML, { maxWidth: 260 });
+
+        marker.on('click', function() {
+            showPlacePanel(name);
+        });
+
+        return marker;
+    }
+
+    function getEventsForPlace(placeName) {
+        return ALL_EVENTS.filter(function(e) {
+            return e.loc === placeName;
+        });
+    }
+
+    function getEventsForPlaceAndYear(placeName, year) {
+        return ALL_EVENTS.filter(function(e) {
+            var ey = parseInt(e.start.substring(0, 4));
+            return e.loc === placeName && ey === year;
+        });
+    }
+
+    // ===================================================================
+    //  RENDER MODES
+    // ===================================================================
+    var currentYear = 1867;
+    var currentMode = 'year'; // year | all | routes
+
+    function clearLayers() {
+        markersLayer.clearLayers();
+        routeLayer.clearLayers();
+        allMarkers = {};
+    }
+
+    function renderYear(year) {
+        clearLayers();
+        var route = YEAR_ROUTES[year];
+        if (!route) return;
+
+        var placesInYear = route.places;
+        var uniquePlaces = [];
+        var seen = {};
+        placesInYear.forEach(function(p) {
+            if (!seen[p] && PLACES[p]) { uniquePlaces.push(p); seen[p] = true; }
+        });
+
+        // Add markers
+        uniquePlaces.forEach(function(name) {
+            var m = createMarker(name, PLACES[name], true);
+            m.addTo(markersLayer);
+            allMarkers[name] = m;
+        });
+
+        // Add route line
+        if (placesInYear.length > 1) {
+            var coords = [];
+            placesInYear.forEach(function(p) {
+                if (PLACES[p]) coords.push([PLACES[p].lat, PLACES[p].lng]);
+            });
+            if (coords.length > 1) {
+                var polyline = L.polyline(coords, {
+                    color: '#C66A11',
+                    weight: 3,
+                    opacity: 0.7,
+                    dashArray: '8 6',
+                    smoothFactor: 1
+                }).addTo(routeLayer);
+
+                // Arrow decorators (simple: add small markers along the route)
+                addArrows(coords);
+            }
+        }
+
+        // Fit bounds
+        if (uniquePlaces.length === 1) {
+            var p = PLACES[uniquePlaces[0]];
+            map.setView([p.lat, p.lng], 10);
+        } else if (uniquePlaces.length > 1) {
+            var bounds = L.latLngBounds(uniquePlaces.map(function(n) { return [PLACES[n].lat, PLACES[n].lng]; }));
+            map.fitBounds(bounds, { padding: [60, 60], maxZoom: 10 });
+        }
+
+        // Update panel
+        updateYearPanel(year);
+    }
+
+    function renderAllPlaces() {
+        clearLayers();
+        Object.keys(PLACES).forEach(function(name) {
+            var m = createMarker(name, PLACES[name], false);
+            m.addTo(markersLayer);
+            allMarkers[name] = m;
+        });
+
+        var bounds = L.latLngBounds(Object.values(PLACES).map(function(p) { return [p.lat, p.lng]; }));
+        map.fitBounds(bounds, { padding: [40, 40] });
+
+        updateAllPlacesPanel();
+    }
+
+    function renderAllRoutes() {
+        clearLayers();
+
+        // Add all markers (dimmed)
+        Object.keys(PLACES).forEach(function(name) {
+            var m = createMarker(name, PLACES[name], false);
+            m.addTo(markersLayer);
+            allMarkers[name] = m;
+        });
+
+        // Add all routes with year-based colour gradient
+        var routeColors = generateGradient('#1565C0', '#C66A11', '#B71C1C', 35);
+        var yearIdx = 0;
+        for (var y = 1867; y <= 1901; y++) {
+            var route = YEAR_ROUTES[y];
+            if (!route || route.places.length < 2) { yearIdx++; continue; }
+
+            var coords = [];
+            route.places.forEach(function(p) {
+                if (PLACES[p]) coords.push([PLACES[p].lat, PLACES[p].lng]);
+            });
+
+            if (coords.length > 1) {
+                L.polyline(coords, {
+                    color: routeColors[yearIdx],
+                    weight: 2.5,
+                    opacity: 0.6,
+                    dashArray: '6 4',
+                    smoothFactor: 1
+                }).addTo(routeLayer);
+            }
+            yearIdx++;
+        }
+
+        var bounds = L.latLngBounds(Object.values(PLACES).map(function(p) { return [p.lat, p.lng]; }));
+        map.fitBounds(bounds, { padding: [40, 40] });
+
+        updateRoutesPanel();
+    }
+
+    function addArrows(coords) {
+        for (var i = 0; i < coords.length - 1; i++) {
+            var midLat = (coords[i][0] + coords[i+1][0]) / 2;
+            var midLng = (coords[i][1] + coords[i+1][1]) / 2;
+            var angle = Math.atan2(coords[i+1][1] - coords[i][1], coords[i+1][0] - coords[i][0]) * 180 / Math.PI;
+
+            var arrowIcon = L.divIcon({
+                className: 'arrow-marker',
+                html: '<div style="transform:rotate(' + (-angle + 90) + 'deg);color:#C66A11;font-size:14px;font-weight:700;text-shadow:0 0 2px #fff;">&#9660;</div>',
+                iconSize: [14, 14],
+                iconAnchor: [7, 7]
+            });
+            L.marker([midLat, midLng], { icon: arrowIcon, interactive: false }).addTo(routeLayer);
+        }
+    }
+
+    function generateGradient(c1, c2, c3, steps) {
+        var colors = [];
+        var half = Math.floor(steps / 2);
+        for (var i = 0; i < steps; i++) {
+            if (i <= half) {
+                colors.push(interpolateColor(c1, c2, i / half));
+            } else {
+                colors.push(interpolateColor(c2, c3, (i - half) / (steps - half)));
+            }
+        }
+        return colors;
+    }
+
+    function interpolateColor(hex1, hex2, t) {
+        var r1 = parseInt(hex1.substr(1,2),16), g1 = parseInt(hex1.substr(3,2),16), b1 = parseInt(hex1.substr(5,2),16);
+        var r2 = parseInt(hex2.substr(1,2),16), g2 = parseInt(hex2.substr(3,2),16), b2 = parseInt(hex2.substr(5,2),16);
+        var r = Math.round(r1 + (r2-r1)*t), g = Math.round(g1 + (g2-g1)*t), b = Math.round(b1 + (b2-b1)*t);
+        return '#' + ((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1);
+    }
+
+    // ===================================================================
+    //  INFO PANEL
+    // ===================================================================
+    var panel = document.getElementById('info-panel');
+    var panelTitle = document.getElementById('panel-title');
+    var panelBody = document.getElementById('panel-body');
+    var panelClose = document.getElementById('panel-close');
+    var toggleBtn = document.getElementById('toggle-panel');
+
+    panelClose.addEventListener('click', function() {
+        panel.classList.add('collapsed');
+        toggleBtn.style.display = 'block';
+    });
+
+    toggleBtn.addEventListener('click', function() {
+        panel.classList.remove('collapsed');
+        toggleBtn.style.display = 'none';
+    });
+
+    function showPlacePanel(name) {
+        panel.classList.remove('collapsed');
+        toggleBtn.style.display = 'none';
+
+        var place = PLACES[name];
+        if (!place) return;
+
+        panelTitle.textContent = name;
+
+        var html = '<div class="info-place-name">' + name + '</div>';
+        if (place.url) {
+            html += '<div class="info-place-link"><a href="' + place.url + '">View full page &rarr;</a></div>';
+        }
+        html += '<p style="font-size:0.82rem;color:#666;margin-bottom:12px;">' + place.desc + '</p>';
+
+        var events = getEventsForPlace(name);
+        if (events.length > 0) {
+            html += '<h4 style="font-size:0.85rem;font-weight:700;color:#333;margin-bottom:8px;">Events at this location</h4>';
+            html += '<ul class="info-events">';
+            events.sort(function(a,b) { return a.start.localeCompare(b.start); });
+            events.forEach(function(ev) {
+                var d = new Date(ev.start + 'T12:00:00');
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                html += '<li>';
+                html += '<div class="info-event-date">' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + '</div>';
+                html += '<div class="info-event-title">' + ev.title + '</div>';
+                html += '<span class="info-event-cat" style="background:' + (CAT_COLORS[ev.cat] || '#666') + ';">' + ev.cat + '</span>';
+                html += '</li>';
+            });
+            html += '</ul>';
+        }
+
+        panelBody.innerHTML = html;
+    }
+
+    function updateYearPanel(year) {
+        panel.classList.remove('collapsed');
+        toggleBtn.style.display = 'none';
+
+        var route = YEAR_ROUTES[year];
+        panelTitle.textContent = 'Year ' + year;
+
+        var html = '<div class="info-place-name">' + year + '</div>';
+        if (route) {
+            html += '<p style="font-size:0.82rem;color:#666;margin-bottom:14px;">' + route.label + '</p>';
+
+            // Route sequence
+            html += '<h4 style="font-size:0.85rem;font-weight:700;color:#333;margin-bottom:8px;">Places visited</h4>';
+            var displayed = [];
+            route.places.forEach(function(p) {
+                if (displayed.indexOf(p) === -1) displayed.push(p);
+            });
+            html += '<div style="margin-bottom:14px;">';
+            displayed.forEach(function(name, idx) {
+                var place = PLACES[name];
+                var color = place ? PLACE_COLORS[place.cat] : '#666';
+                html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;" onclick="window._focusPlace(\'' + name + '\')">';
+                html += '<div style="width:10px;height:10px;border-radius:50%;background:' + color + ';flex-shrink:0;"></div>';
+                html += '<span style="font-size:0.85rem;color:#333;font-weight:500;">' + name + '</span>';
+                html += '</div>';
+                if (idx < displayed.length - 1) {
+                    html += '<div style="margin-left:4px;border-left:2px dashed #ddd;height:10px;"></div>';
+                }
+            });
+            html += '</div>';
+
+            // Events for this year at these places
+            var yearEvents = ALL_EVENTS.filter(function(e) {
+                return parseInt(e.start.substring(0,4)) === year;
+            });
+            if (yearEvents.length > 0) {
+                html += '<h4 style="font-size:0.85rem;font-weight:700;color:#333;margin-bottom:8px;">Key events</h4>';
+                html += '<ul class="info-events">';
+                yearEvents.sort(function(a,b) { return a.start.localeCompare(b.start); });
+                yearEvents.forEach(function(ev) {
+                    var d = new Date(ev.start + 'T12:00:00');
+                    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                    html += '<li>';
+                    html += '<div class="info-event-date">' + months[d.getMonth()] + ' ' + d.getDate() + ' &middot; ' + (ev.loc || '') + '</div>';
+                    html += '<div class="info-event-title">' + ev.title + '</div>';
+                    html += '<span class="info-event-cat" style="background:' + (CAT_COLORS[ev.cat] || '#666') + ';">' + ev.cat + '</span>';
+                    html += '</li>';
+                });
+                html += '</ul>';
+            }
+        } else {
+            html += '<p style="font-size:0.82rem;color:#999;">No recorded events for this year.</p>';
+        }
+
+        panelBody.innerHTML = html;
+    }
+
+    function updateAllPlacesPanel() {
+        panel.classList.remove('collapsed');
+        toggleBtn.style.display = 'none';
+        panelTitle.textContent = 'All Places';
+
+        var html = '<p style="font-size:0.82rem;color:#666;margin-bottom:12px;">All ' + Object.keys(PLACES).length + ' places significant in Param Krupalu Dev\u2019s life. Click a marker on the map for details.</p>';
+
+        var cats = [
+            { key: 'birth', label: 'Birthplace' },
+            { key: 'major', label: 'Major cities' },
+            { key: 'spiritual', label: 'Spiritual / Retreat' },
+            { key: 'visited', label: 'Visited places' },
+            { key: 'passing', label: 'Place of passing' }
+        ];
+
+        cats.forEach(function(cat) {
+            var places = Object.keys(PLACES).filter(function(n) { return PLACES[n].cat === cat.key; });
+            if (places.length === 0) return;
+
+            html += '<h4 style="font-size:0.82rem;font-weight:700;color:' + PLACE_COLORS[cat.key] + ';margin:10px 0 6px;">' + cat.label + ' (' + places.length + ')</h4>';
+            places.sort();
+            places.forEach(function(name) {
+                html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;cursor:pointer;padding:3px 6px;border-radius:4px;" onmouseover="this.style.background=\'#f5f0ea\'" onmouseout="this.style.background=\'none\'" onclick="window._focusPlace(\'' + name + '\')">';
+                html += '<div style="width:8px;height:8px;border-radius:50%;background:' + PLACE_COLORS[cat.key] + ';flex-shrink:0;"></div>';
+                html += '<span style="font-size:0.82rem;color:#333;">' + name + '</span>';
+                if (PLACES[name].url) html += '<span style="font-size:0.65rem;color:#C66A11;margin-left:auto;">&#8599;</span>';
+                html += '</div>';
+            });
+        });
+
+        panelBody.innerHTML = html;
+    }
+
+    function updateRoutesPanel() {
+        panel.classList.remove('collapsed');
+        toggleBtn.style.display = 'none';
+        panelTitle.textContent = 'All Routes';
+
+        var html = '<p style="font-size:0.82rem;color:#666;margin-bottom:12px;">Year-by-year travel routes. Click a year to focus on that route.</p>';
+        html += '<ul class="route-year-list">';
+        for (var y = 1867; y <= 1901; y++) {
+            var route = YEAR_ROUTES[y];
+            if (!route) continue;
+            var uniqueCount = [];
+            var seen = {};
+            route.places.forEach(function(p) { if (!seen[p]) { uniqueCount.push(p); seen[p] = true; } });
+            if (uniqueCount.length < 2) continue;
+            html += '<li onclick="window._goToYear(' + y + ')" title="' + route.label + '">';
+            html += '<span>' + y + ' &mdash; ' + route.places[0] + ' \u2192 ' + route.places[route.places.length-1] + '</span>';
+            html += '<span class="place-count">' + uniqueCount.length + ' places</span>';
+            html += '</li>';
+        }
+        html += '</ul>';
+
+        panelBody.innerHTML = html;
+    }
+
+    // Global helpers for onclick in panel HTML
+    window._focusPlace = function(name) {
+        var place = PLACES[name];
+        if (!place) return;
+        map.setView([place.lat, place.lng], 12);
+        if (allMarkers[name]) {
+            allMarkers[name].openPopup();
+        }
+        showPlacePanel(name);
+    };
+
+    window._goToYear = function(year) {
+        currentYear = year;
+        currentMode = 'year';
+        document.getElementById('year-slider').value = year;
+        document.getElementById('year-display').textContent = year;
+        updateViewBtns();
+        renderYear(year);
+    };
+
+    // ===================================================================
+    //  CONTROLS
+    // ===================================================================
+    var yearSlider = document.getElementById('year-slider');
+    var yearDisplay = document.getElementById('year-display');
+
+    yearSlider.addEventListener('input', function() {
+        var y = parseInt(this.value);
+        yearDisplay.textContent = y;
+        currentYear = y;
+        if (currentMode === 'year') {
+            renderYear(y);
+        }
+    });
+
+    yearSlider.addEventListener('change', function() {
+        var y = parseInt(this.value);
+        currentYear = y;
+        if (currentMode !== 'year') {
+            currentMode = 'year';
+            updateViewBtns();
+        }
+        renderYear(y);
+    });
+
+    // View mode buttons
+    var viewBtns = document.querySelectorAll('.ctrl-btn[data-mode]');
+
+    function updateViewBtns() {
+        viewBtns.forEach(function(btn) {
+            btn.classList.toggle('active', btn.dataset.mode === currentMode);
+        });
+    }
+
+    viewBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            currentMode = this.dataset.mode;
+            updateViewBtns();
+            if (currentMode === 'year') renderYear(currentYear);
+            else if (currentMode === 'all') renderAllPlaces();
+            else if (currentMode === 'routes') renderAllRoutes();
+        });
+    });
+
+    // ===================================================================
+    //  PULSE ANIMATION (add CSS dynamically)
+    // ===================================================================
+    var style = document.createElement('style');
+    style.textContent = '@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(198,106,17,0.4); } 50% { box-shadow: 0 0 0 8px rgba(198,106,17,0); } }';
+    document.head.appendChild(style);
+
+    // ===================================================================
+    //  INITIAL RENDER
+    // ===================================================================
+    renderYear(1867);
+});
+</script>
+
 </body>
 </html>

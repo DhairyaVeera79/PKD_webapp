@@ -3,351 +3,712 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar</title>
+    <title>Calendar &mdash; Life of Param Krupalu Dev</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- In the head section -->
     <script src="./js/search.js"></script>
     <script src="./js/navbar.js"></script>
-    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
-<style>
-    body {
-        padding-left: 75px;
-        padding-right: 75px;
-    }
-    
-    .container {
-        padding-left: 0;
-        padding-right: 0;
-        max-width: 100%;
-    }
-    
-    main {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    
-    .year-view {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
-    .month {
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        cursor: pointer;
-    }
-    .month h3 {
-        text-align: center;
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    .days {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        text-align: center;
-        font-size: 0.9rem;
-    }
-    .day {
-        padding: 2px;
-        position: relative;
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 2px auto;
-    }
-    .day-header {
-        font-weight: bold;
-        padding: 2px;
-        text-align: center;
-    }
-    .day.empty {
-        visibility: hidden;
-    }
-    .day.event-day {
-        color: #ff6200;
-        font-weight: bold;
-    }
-    .day.event-day::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 24px;
-        height: 24px;
-        background-color: #ff6200; 
-        border-radius: 100%;
-        z-index: -1;
-    }
-    .year-navigation {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .year-title {
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-    .gujarati-tooltip {
-        font-size: 0.7em;
-        color: #666;
-        display: none;
-        position: absolute;
-        bottom: -18px;
-        left: 0;
-        right: 0;
-        text-align: center;
-    }
-    .day:hover .gujarati-tooltip {
-        display: block;
-    }
-</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <style>
+        /* ===== CALENDAR PAGE STYLES ===== */
+        .calendar-page { max-width: 1200px; margin: 0 auto; padding: 100px 20px 40px; }
+        .calendar-page h1 { color: #333; font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; }
+        .calendar-page .subtitle { color: #777; font-size: 0.95rem; margin-bottom: 25px; }
 
+        /* --- Legend --- */
+        .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding: 12px 16px; background: #EFEDE7; border-radius: 8px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #555; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+        /* --- Year navigation --- */
+        .year-nav { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 20px; }
+        .year-nav button { background: #C66A11; color: #fff; border: none; padding: 6px 18px; border-radius: 6px; font-size: 0.9rem; cursor: pointer; transition: background 0.2s; }
+        .year-nav button:hover { background: #a85500; }
+        .year-nav button:disabled { background: #ccc; cursor: not-allowed; }
+        .year-nav .year-label { font-size: 1.3rem; font-weight: 700; color: #333; min-width: 200px; text-align: center; }
+        .year-nav .vs-label { font-size: 0.85rem; color: #888; font-weight: 400; }
+
+        /* --- Year grid (12-month overview) --- */
+        .year-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+        @media (max-width: 992px) { .year-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 576px) { .year-grid { grid-template-columns: repeat(2, 1fr); }
+            .year-nav { gap: 10px; }
+            .year-nav .year-label { min-width: auto; font-size: 1rem; }
+            .year-nav button { padding: 5px 12px; font-size: 0.8rem; }
+            #fc-container .fc-toolbar { flex-wrap: wrap; gap: 8px; }
+            #fc-container .fc-toolbar h2 { font-size: 1rem; }
+            #fc-container .fc-button { padding: 3px 8px; font-size: 0.75rem; }
+            .event-card { flex-direction: column; gap: 4px; }
+            .event-date { min-width: auto; }
+        }
+        .month-card { background: #fff; border: 1px solid #e0ddd6; border-radius: 8px; padding: 10px; cursor: pointer; transition: box-shadow 0.2s, transform 0.15s; }
+        .month-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .month-card h4 { text-align: center; font-size: 0.95rem; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .mini-days { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 0.7rem; }
+        .mini-day-header { font-weight: 700; color: #999; padding: 2px 0; }
+        .mini-day { padding: 2px 0; color: #666; position: relative; }
+        .mini-day.empty { visibility: hidden; }
+        .mini-day.has-event { font-weight: 700; }
+        .mini-day .event-dot { position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; }
+
+        /* --- View toggle --- */
+        .view-toggle { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+        .view-btn { background: #EFEDE7; border: 1px solid #d5d0c8; color: #666; padding: 6px 16px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+        .view-btn.active { background: #C66A11; color: #fff; border-color: #C66A11; }
+        .view-btn:hover:not(.active) { background: #e5e0d8; }
+
+        /* --- FullCalendar overrides --- */
+        #fc-container { margin-bottom: 30px; }
+        #fc-container .fc-toolbar { margin-bottom: 12px; }
+        #fc-container .fc-toolbar h2 { font-size: 1.2rem; color: #333; }
+        #fc-container .fc-button { background: #C66A11; border-color: #C66A11; color: #fff; text-transform: capitalize; font-size: 0.85rem; padding: 4px 12px; }
+        #fc-container .fc-button:hover { background: #a85500; border-color: #a85500; }
+        #fc-container .fc-state-active { background: #8a4e0a !important; border-color: #8a4e0a !important; }
+        #fc-container .fc-day-number { color: #333; }
+        #fc-container .fc-event { border: none; padding: 2px 4px; font-size: 0.75rem; border-radius: 3px; cursor: pointer; margin-bottom: 1px; }
+        #fc-container .fc-event .fc-title { font-weight: 500; }
+        #fc-container .fc-today { background: #FFF8F0 !important; }
+
+        /* --- Events list view --- */
+        .events-list { margin-bottom: 30px; }
+        .events-list .event-year-group { margin-bottom: 24px; }
+        .events-list .event-year-header { font-size: 1.1rem; font-weight: 700; color: #C66A11; border-bottom: 2px solid #EFEDE7; padding-bottom: 6px; margin-bottom: 12px; }
+        .event-card { display: flex; gap: 12px; padding: 10px 12px; border-left: 4px solid #ccc; margin-bottom: 8px; background: #fafaf8; border-radius: 0 6px 6px 0; transition: background 0.15s; }
+        .event-card:hover { background: #f0ede6; }
+        .event-date { min-width: 80px; font-size: 0.8rem; color: #888; font-weight: 600; flex-shrink: 0; }
+        .event-date .approx { font-size: 0.65rem; color: #bbb; display: block; }
+        .event-content { flex: 1; }
+        .event-content .event-title { font-weight: 600; font-size: 0.9rem; color: #333; margin-bottom: 3px; }
+        .event-content .event-title a { color: #C66A11; text-decoration: none; }
+        .event-content .event-title a:hover { text-decoration: underline; }
+        .event-content .event-desc { font-size: 0.8rem; color: #666; line-height: 1.4; }
+        .event-content .event-location { font-size: 0.75rem; color: #999; margin-top: 3px; }
+        .event-content .event-location::before { content: '\1F4CD '; }
+
+        /* --- Modal / popup --- */
+        .event-modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.45); z-index: 9998; }
+        .event-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border-radius: 12px; padding: 24px 28px; max-width: 480px; width: 90%; z-index: 9999; box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+        .event-modal .modal-cat { display: inline-block; font-size: 0.7rem; font-weight: 600; color: #fff; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 8px; }
+        .event-modal .modal-title { font-size: 1.15rem; font-weight: 700; color: #333; margin-bottom: 6px; }
+        .event-modal .modal-date { font-size: 0.85rem; color: #888; margin-bottom: 10px; }
+        .event-modal .modal-desc { font-size: 0.9rem; color: #555; line-height: 1.5; margin-bottom: 12px; }
+        .event-modal .modal-location { font-size: 0.8rem; color: #999; margin-bottom: 12px; }
+        .event-modal .modal-link { display: inline-block; background: #C66A11; color: #fff; padding: 6px 16px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; }
+        .event-modal .modal-link:hover { background: #a85500; color: #fff; text-decoration: none; }
+        .event-modal .modal-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.4rem; color: #999; cursor: pointer; }
+        .event-modal .modal-close:hover { color: #333; }
+
+        /* --- Back to year button --- */
+        .back-to-year { display: none; margin-bottom: 12px; }
+        .back-to-year button { background: none; border: 1px solid #C66A11; color: #C66A11; padding: 4px 14px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; }
+        .back-to-year button:hover { background: #C66A11; color: #fff; }
+    </style>
 </head>
 <body>
-    
 
-    <main class="container my-5 pt-5" style="padding-top: 160px;">
-        
-<section>
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <input type="number" id="year" class="form-control" placeholder="Year" min="1867" max="1901">
-        </div>
-        <div class="col-md-4">
-            <select id="month" class="form-control">
-                <option value="">Month</option>
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <button id="search-btn" class="btn btn-primary w-100">Search</button>
-        </div>
+<main class="calendar-page">
+    <h1>Life of Param Krupalu Dev</h1>
+    <p class="subtitle">Kartik Purnima, V.S. 1924 (November 10, 1867) &mdash; Chaitra Vad 5, V.S. 1957 (April 9, 1901)</p>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#C66A11;"></div> Milestone</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#8B5E3C;"></div> Spiritual</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#2E7D32;"></div> Composition</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1565C0;"></div> Avdhan</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6A1B9A;"></div> Personal</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#00695C;"></div> Retreat</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#0277BD;"></div> Education</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#B71C1C;"></div> Passing</div>
     </div>
-    <div id="year-navigation" class="year-navigation" style="display: none;">
-        <button id="prev-year" class="btn btn-secondary">Previous</button>
-        <div id="year-title" class="year-title">1867</div>
-        <button id="next-year" class="btn btn-secondary">Next</button>
+
+    <!-- View Toggle -->
+    <div class="view-toggle">
+        <button class="view-btn active" data-view="year">Year Grid</button>
+        <button class="view-btn" data-view="month">Month View</button>
+        <button class="view-btn" data-view="list">Events List</button>
     </div>
-    <div id="calendar"></div>
-    <div id="year-view" class="year-view" style="display: none;"></div>
-</section>
 
-    </main>
-
-    <footer class="bg-light py-3">
-        <div class="text-center mt-4">
-            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+    <!-- Year Navigation -->
+    <div class="year-nav">
+        <button id="prev-year">&larr; Previous</button>
+        <div class="year-label">
+            <span id="year-ad">1867</span>
+            <div class="vs-label">V.S. <span id="year-vs">1924</span></div>
         </div>
-    </footer>
+        <button id="next-year">Next &rarr;</button>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="./js/scripts.js"></script>
-    
+    <!-- Year Grid View -->
+    <div id="year-grid-view" class="year-grid"></div>
+
+    <!-- Back to year button (shown in month view) -->
+    <div class="back-to-year" id="back-to-year">
+        <button>&larr; Back to Year View</button>
+    </div>
+
+    <!-- Month View (FullCalendar) -->
+    <div id="fc-container" style="display:none;">
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Events List View -->
+    <div id="events-list-view" class="events-list" style="display:none;"></div>
+</main>
+
+<!-- Event Detail Modal -->
+<div class="event-modal-overlay" id="modal-overlay"></div>
+<div class="event-modal" id="event-modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <span class="modal-cat" id="modal-cat"></span>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-date" id="modal-date"></div>
+    <div class="modal-desc" id="modal-desc"></div>
+    <div class="modal-location" id="modal-location"></div>
+    <a class="modal-link" id="modal-link" style="display:none;">Read more &rarr;</a>
+</div>
+
+<footer class="bg-light py-3" style="margin-top: 40px;">
+    <div class="text-center mt-4">
+        <p>&copy; Copyright 2026. Shrimad Rajchandra Mission Dharampur. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
 <script>
-    $(document).ready(function() {
-        // Add Gujarati calendar data
-        const gujaratiMonths = [
-            'કારતક', 'માગશર', 'પોષ', 'મહા', 'ફાગણ', 'ચૈત્ર',
-            'વૈશાખ', 'જેઠ', 'અષાઢ', 'શ્રાવણ', 'ભાદરવો', 'આસો'
-        ];
-        const gujaratiDayNames = ['ર', 'સો', 'મં', 'બુ', 'ગુ', 'શુ', 'શ'];
+document.addEventListener('DOMContentLoaded', function() {
+    loadNavbar();
 
-        // Simple conversion to Vikram Samvat
-        function toVikramSamvat(year, month, day) {
-            // Gujarati new year starts around Diwali (Oct-Nov)
-            const isAfterNewYear = month > 9 || (month === 9 && day >= 20);
-            return year + (isAfterNewYear ? 57 : 56);
-        }
+    // ===== CATEGORY COLOURS =====
+    const CAT_COLORS = {
+        milestone:   '#C66A11',
+        spiritual:   '#8B5E3C',
+        composition: '#2E7D32',
+        avdhan:      '#1565C0',
+        personal:    '#6A1B9A',
+        retreat:     '#00695C',
+        education:   '#0277BD',
+        passing:     '#B71C1C'
+    };
 
-        // Your original constants and functions remain unchanged
-        const months = [
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'
-        ];
-        const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    const CAT_LABELS = {
+        milestone: 'Milestone', spiritual: 'Spiritual', composition: 'Composition',
+        avdhan: 'Avdhan', personal: 'Personal', retreat: 'Retreat',
+        education: 'Education', passing: 'Passing'
+    };
 
-        const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
-        let currentYear = 1867;
+    // ===== COMPREHENSIVE EVENT DATABASE =====
+    const ALL_EVENTS = [
+        // === 1867 ===
+        { start:'1867-11-10', title:'Birth of Shrimad Rajchandra', cat:'milestone', desc:'Born as Laxminandan on Kartik Purnima (V.S. 1924), Sunday, at 2:00 AM in Vavaniya, Saurashtra. Second of six children of Shri Ravjibhai and Smt. Devbai.', url:'./places/vavaniya.html', loc:'Vavaniya' },
 
-        function dateHasEvent(year, month, day) {
-            const date = moment(`${year}-${month+1}-${day}`, 'YYYY-M-D');
-            const events = $('#calendar').fullCalendar('clientEvents');
-            return events.some(event => moment(event.start).isSame(date, 'day'));
-        }
+        // === ~1872 ===
+        { start:'1872-06-15', title:'Name changed to Raichand', cat:'personal', desc:'Name changed from Laxminandan to Raichand.', loc:'Vavaniya', approx:true },
 
-        // Modified renderYearView to add Gujarati dates
-        const renderYearView = (year) => {
-            currentYear = year;
-            const yearView = $('#year-view');
-            yearView.empty();
+        // === ~1875 ===
+        { start:'1875-01-15', title:'Jatismaranjnan \u2014 Recollection of Past Lives', cat:'milestone', desc:'At age 7, recollected past lives after witnessing the cremation of Shri Amichandbhai (died of snakebite) in Vavaniya. This extremely rare spiritual attainment became the foundation of His unshakeable conviction.', url:'./places/vavaniya.html', loc:'Vavaniya', approx:true },
+        { start:'1875-03-01', title:'Started formal education', cat:'education', desc:'Enrolled in school in Vavaniya. Teacher Shri Lavjibhai was astonished by His instant mastery of lessons.', loc:'Vavaniya', approx:true },
 
-            // Add Vikram Samvat year to title
-            const vikramYear = toVikramSamvat(year, 0, 1);
-            $('#year-title').text(`${year} (Vikram ${vikramYear - 1} - ${vikramYear})`);
+        // === ~1876 ===
+        { start:'1876-06-15', title:'Written ~5,000 couplets at age 8', cat:'composition', desc:'By age 8, had written approximately 5,000 couplets (not currently available).', loc:'Vavaniya', approx:true },
 
-            for (let i = 0; i < 12; i++) {
-                const monthDiv = $('<div>').addClass('month').data('month', i + 1);
-                monthDiv.append($('<h3>').text(months[i])); // Keep original month names
+        // === ~1877 ===
+        { start:'1877-06-15', title:'Studied Ramayana & Mahabharata at age 9', cat:'education', desc:'At age 9, studied the Ramayana and Mahabharata and wove them into verse.', loc:'Vavaniya', approx:true },
 
-                const daysDiv = $('<div>').addClass('days');
-                
-                // Keep original day headers
-                dayNames.forEach(day => {
-                    daysDiv.append($('<div>').addClass('day-header').text(day));
-                });
+        // === ~1878 ===
+        { start:'1878-06-15', title:'Delivered speeches on many subjects at age 10', cat:'education', desc:'At age 10, could deliver interesting speeches on many subjects.', loc:'Vavaniya', approx:true },
 
-                // Empty days for alignment
-                const firstDay = new Date(year, i, 1).getDay();
-                for (let j = 0; j < firstDay; j++) {
-                    daysDiv.append($('<div>').addClass('day empty'));
-                }
+        // === ~1879 ===
+        { start:'1879-06-15', title:'Articles published in Buddhiprakash', cat:'education', desc:'At age 11, wrote mature articles published in "Buddhiprakash" magazine; won prizes for essays.', loc:'Vavaniya', approx:true },
 
-                // Add days of month
-                const daysInCurrentMonth = daysInMonth(i, year);
-                for (let d = 1; d <= daysInCurrentMonth; d++) {
-                    const dayContainer = $('<div>').addClass('day-container');
-                    const dayDiv = $('<div>').addClass('day').text(d);
-                    
-                    // Add Gujarati date as subtle tooltip
-                    const vikramDate = toVikramSamvat(year, i, d);
-                    const gujDate = $('<div>').addClass('gujarati-tooltip').text(d);
-                    
-                    dayContainer.append(dayDiv);
-                    dayContainer.append(gujDate);
-                    
-                    if (dateHasEvent(year, i, d)) {
-                        dayDiv.addClass('event-day');
-                    }
-                    daysDiv.append(dayContainer);
-                }
+        // === ~1880 ===
+        { start:'1880-06-15', title:'300 couplets on a clock in 3 days', cat:'composition', desc:'At age 12, composed 300 couplets on a clock in just 3 days.', loc:'Vavaniya', approx:true },
 
-                monthDiv.append(daysDiv);
-                yearView.append(monthDiv);
+        // === ~1881 ===
+        { start:'1881-01-15', title:'Left for Morbi for English studies', cat:'education', desc:'At age 13, left Vavaniya for Morbi to study at the Anglo-Vernacular school (V.S. 1937\u20131940).', url:'./places/morbi.html', loc:'Morbi', approx:true },
+        { start:'1881-05-01', title:'Read all Jain Agams in 15 months', cat:'spiritual', desc:'Became fully coloured by Jainism at age 13. Read all the Agams (Jain canons) in 15 months. Kanthi broke and was not worn again.', loc:'Morbi', approx:true },
+
+        // === ~1884 (V.S. 1940) ===
+        { start:'1884-04-15', title:'Authored Mokshmala (108 lessons)', cat:'composition', desc:'Authored Mokshmala at age 16 years and 5 months, completed in just 3 days. 108 lessons of spiritual living.', url:'./compositions/mokshmala.html', loc:'Vavaniya', approx:true },
+        { start:'1884-05-15', title:'First 8 Avdhans in Morbi', cat:'avdhan', desc:'Performed first 8 avdhans after watching Shastri Shankarlal Maheshwar Bhatt in Morbi; repeated the feat the next day.', url:'./events/avdhan.html', loc:'Morbi', approx:true },
+        { start:'1884-06-01', title:'12 Avdhans in Morbi', cat:'avdhan', desc:'Performed 12 avdhans in Morbi\u2019s sacred Jain shelter to an audience of 2,000.', url:'./places/morbi.html', loc:'Morbi', approx:true },
+        { start:'1884-07-01', title:'12 & 16 Avdhans in Jamnagar', cat:'avdhan', desc:'Performed 12 and 16 avdhans in Jamnagar; honoured with the title \u201CThe Jewel of Hind\u201D (Hind na Heera).', url:'./places/jamnagar.html', loc:'Jamnagar', approx:true },
+        { start:'1884-08-01', title:'16 Avdhans in Wadhwan', cat:'avdhan', desc:'Performed 16 avdhans before 2,000 people including Colonel H. L. Natsaheb; covered by Gujarati, Mumbai Samachar, Lokmitra, Nyayadarshak.', url:'./places/wadhwan.html', loc:'Wadhwan', approx:true },
+        { start:'1884-09-01', title:'52 Avdhans in Botad', cat:'avdhan', desc:'Performed 52 avdhans in presence of Sheth Shri Harilal Shivlal.', url:'./places/botad.html', loc:'Botad', approx:true },
+
+        // === 1886 (V.S. 1942) ===
+        { start:'1886-03-15', title:'Authored Bhavnabodh', cat:'composition', desc:'Authored \u201CBhavnabodh\u201D \u2014 a treatise on the 12 bhavnas (spiritual sentiments) at age 18.', url:'./compositions/bhavnabodh.html', loc:'Vavaniya', approx:true },
+        { start:'1886-09-01', title:'First visit to Mumbai for avdhans', cat:'avdhan', desc:'Travelled to Mumbai for avdhan programme and financial prospects (Bhadarva V.S. 1942).', url:'./places/mumbai.html', loc:'Mumbai', approx:true },
+        { start:'1886-10-01', title:'Stopped in Jetpar; horoscope made', cat:'personal', desc:'On way to Mumbai, stopped at brother-in-law Shri Chatrabhuj Bechar\u2019s home in Jetpar. Astrologer Shankar Pancholi made horoscope.', url:'./places/jetpar.html', loc:'Jetpar', approx:true },
+
+        // === 1887 (V.S. 1943) ===
+        { start:'1887-01-22', title:'Shatavdhan (100 Avdhans)', cat:'milestone', desc:'Performed Shatavdhan at Framjee Cawasjee Institute, Dhobi Talao, Mumbai. Presided by Dr. Peterson. Awarded gold medal and title \u201CSakshat Saraswati.\u201D', url:'./events/avdhan.html', loc:'Mumbai' },
+        { start:'1887-02-15', title:'Avdhans at Theosophical Society', cat:'avdhan', desc:'Performed avdhans at Theosophical Society, Girgaum, Mumbai. Demonstrated mastery over 9 languages.', url:'./events/avdhan.html', loc:'Mumbai', approx:true },
+        { start:'1887-10-01', title:'Nashtavidya demonstration in Jetpar', cat:'avdhan', desc:'Demonstrated lost art of nashtavidya (predicting hidden items) in Jetpar. Shri Shankar Pancholi was spellbound.', url:'./places/jetpar.html', loc:'Jetpar', approx:true },
+
+        // === 1888 (V.S. 1944) ===
+        { start:'1888-01-15', title:'Departed Mumbai for marriage', cat:'personal', desc:'Left Mumbai for Vavaniya for His marriage (Posh V.S. 1944).', loc:'Mumbai \u2192 Vavaniya', approx:true },
+        { start:'1888-02-15', title:'Married Jhabakbai in Morbi', cat:'milestone', desc:'Married Jhabakbai, daughter of Shri Popatlalbhai Mehta, in Morbi (Maha Sud 12, V.S. 1944). Despite profound spiritual inclinations, accepted worldly responsibilities.', url:'./places/morbi.html', loc:'Morbi' },
+        { start:'1888-02-20', title:'Title \u201CYugpradhan\u201D bestowed', cat:'personal', desc:'While returning from wedding in Morbi, saffron water drizzled on His vehicle \u2014 bestowed the title \u201CYugpradhan.\u201D', loc:'Morbi', approx:true },
+        { start:'1888-03-15', title:'Mokshmala published in Ahmedabad', cat:'composition', desc:'Stayed 2\u20132.5 months in Ahmedabad for publishing Mokshmala. Letter of recommendation from Vinaychand Popatbhai Daftary for Sheth Jesangbhai.', url:'./compositions/mokshmala.html', loc:'Ahmedabad' },
+        { start:'1888-04-01', title:'First meeting with Pujyashree Juthabhai', cat:'spiritual', desc:'Met Juthabhai during publication of Mokshmala in Ahmedabad \u2014 a transformative spiritual connection.', url:'./people/juthabhai.html', loc:'Ahmedabad', approx:true },
+        { start:'1888-04-15', title:'52 Avdhans in Ahmedabad', cat:'avdhan', desc:'Avdhan demonstrations in Sheth Dalpatbhai Bhagubhai\u2019s compound in Ahmedabad.', url:'./events/avdhan.html', loc:'Ahmedabad', approx:true },
+        { start:'1888-06-01', title:'Total stop of public Avdhans', cat:'spiritual', desc:'Recognised these extraordinary powers were obstacles to self-realisation. Called them \u201Ctinsel\u201D compared to \u201Cgold\u201D of spiritual attainment. Deliberately stopped all public avdhans.', url:'./events/avdhan.html', loc:'Mumbai', approx:true },
+
+        // === 1889 (V.S. 1945) ===
+        { start:'1889-05-01', title:'Ambalalbhai met Juthabhai in Ahmedabad', cat:'spiritual', desc:'Shri Ambalalbhai and Shri Chhotalalbhai went to Ahmedabad for a wedding; met Juthabhai. Ambalalbhai became deeply inspired.', url:'./people/ambalalbhai.html', loc:'Ahmedabad', approx:true },
+        { start:'1889-06-15', title:'Studied Bhadrabahusanhita in Bharuch', cat:'education', desc:'Stayed in Bharuch at home of Sheth Anupchand Malukchandbhai; mastered the dense astrological text \u201CBhadrabahusanhita.\u201D', loc:'Bharuch', approx:true },
+        { start:'1889-07-01', title:'Revashankarbhai moved to Mumbai', cat:'personal', desc:'Shri Revashankarbhai Jagjivan moved from Morbi to Mumbai (Ashadh V.S. 1945).', url:'./people/revashankarJagjivan.html', loc:'Mumbai', approx:true },
+        { start:'1889-09-01', title:'Joined jewellery business in Mumbai', cat:'personal', desc:'Joined Shri Revashankarbhai as partner in the jewellery business (Bhadarva V.S. 1945).', url:'./places/mumbai.html', loc:'Mumbai', approx:true },
+        { start:'1889-11-01', title:'Visited Juthabhai in Ahmedabad (15 days)', cat:'spiritual', desc:'Visited Ahmedabad and stayed at Pujyashree Juthabhai\u2019s residence in Cheepa Pol for 15 days (Kartik V.S. 1945).', url:'./people/juthabhai.html', loc:'Ahmedabad' },
+
+        // === 1890 (V.S. 1946) ===
+        { start:'1890-03-01', title:'Revashankar Jagjivan Co. established', cat:'personal', desc:'Firm formally established (Fagan Vad 11, V.S. 1946). Partners: Param Krupalu Dev, Revashankarbhai, Maneklalbhai.', url:'./people/revashankarJagjivan.html', loc:'Mumbai' },
+        { start:'1890-06-01', title:'First son Chaganbhai born', cat:'personal', desc:'First son Chaganbhai born.', loc:'Mumbai', approx:true },
+        { start:'1890-07-15', title:'Pujyashree Juthabhai passed away', cat:'passing', desc:'Shri Juthabhai passed away at age 23 (Ashadh Sud 9, V.S. 1946). Param Krupalu Dev had predicted his passing ~2 months before. His attainment of samyaktva was confirmed.', url:'./people/juthabhai.html', loc:'Ahmedabad' },
+        { start:'1890-09-01', title:'First meeting with Saubhagyabhai', cat:'milestone', desc:'First meeting of Pujyashree Saubhagyabhai with Param Krupalu Dev at Jetpar, at Shri Chatrabhuj Bechar\u2019s home (1st Bhadarva, V.S. 1946).', url:'./people/saubhagyabhai.html', loc:'Jetpar' },
+        { start:'1890-10-28', title:'First meeting with Lalluji Muni', cat:'milestone', desc:'Visited Khambhat at Ambalalbhai\u2019s request. First meeting with Shri Lalluji Muni at Sthanakvasi Upashray (Aso Vad 12 / Dhanteras, V.S. 1946).', url:'./people/lallujiMuni.html', loc:'Khambhat' },
+
+        // === 1891 (V.S. 1947) ===
+        { start:'1891-01-15', title:'Attained Self-Realisation (Samyagdarshan)', cat:'milestone', desc:'Param Krupalu Dev attained Shuddh Samyagdarshan \u2014 right perception and self-realisation. The pivotal spiritual event of His life.', loc:'Mumbai', approx:true },
+        { start:'1891-06-01', title:'First meeting with Mahatma Gandhi', cat:'milestone', desc:'Met Gandhiji at home of Dr. Pranjivandas Mehta in Mumbai (Jeth V.S. 1947). Gandhiji had just returned from England as a barrister. Called Param Krupalu Dev His foremost guide.', url:'./people/gandhiji.html', loc:'Mumbai' },
+        { start:'1891-08-15', title:'Paryushan in Ralaj', cat:'spiritual', desc:'Spent Paryushan in village of Ralaj, near Khambhat; composed 4 poems.', loc:'Ralaj', approx:true },
+        { start:'1891-11-01', title:'\u201CThe knot has been severed\u201D', cat:'spiritual', desc:'Wrote to Saubhagyabhai confirming self-realisation: \u201CThe knot has been severed\u201D (Kartik Sud 14, V.S. 1947).', url:'./people/saubhagyabhai.html', loc:'Mumbai' },
+
+        // === 1892 (V.S. 1948) ===
+        { start:'1892-06-15', title:'Daughter Javalben born', cat:'personal', desc:'First daughter Javalben born (V.S. 1948).', url:'./people/javalben.html', loc:'Mumbai', approx:true },
+
+        // === 1893 (V.S. 1949) ===
+        { start:'1893-06-01', title:'Gandhiji left for South Africa', cat:'personal', desc:'Mahatma Gandhi departed for South Africa (summer V.S. 1949). Continued correspondence with Param Krupalu Dev, including the famous 27 questions.', url:'./people/gandhiji.html', loc:'Mumbai', approx:true },
+        { start:'1893-07-01', title:'Lalluji Muni in Mumbai (4 months)', cat:'spiritual', desc:'Lalluji Muni spent 4 monsoon months at upashray in Chinchpokli, Mumbai; visited Param Krupalu Dev daily.', url:'./people/lallujiMuni.html', loc:'Mumbai', approx:true },
+
+        // === 1894 (V.S. 1950) ===
+        { start:'1894-06-15', title:'Daughter Kashiben born', cat:'personal', desc:'Second daughter Kashiben born (V.S. 1950).', loc:'Mumbai', approx:true },
+
+        // === 1895 (V.S. 1950\u20131951) ===
+        { start:'1895-07-01', title:'Sent \u201CChha Padno Patra\u201D to Lalluji Muni', cat:'spiritual', desc:'Lalluji Muni in Surat requested guidance on self-realisation. Param Krupalu Dev sent the important \u201CChha Padno Patra\u201D (Patrank-493) \u2014 the Letter of Six Pads.', url:'./people/lallujiMuni.html', loc:'Mumbai', approx:true },
+        { start:'1895-10-01', title:'Commenced preparations to retire', cat:'spiritual', desc:'Began preparations to retire from the jewellery business to focus entirely on spiritual pursuits (V.S. 1951).', loc:'Mumbai', approx:true },
+
+        // === 1896 (V.S. 1952) ===
+        { start:'1896-01-15', title:'Son Ratilalbhai born', cat:'personal', desc:'Second son Ratilalbhai born (V.S. 1952).', loc:'Mumbai', approx:true },
+        { start:'1896-03-01', title:'Mansukhbhai joined the firm', cat:'personal', desc:'Younger brother Shri Mansukhbhai joined the Revashankar Jagjivan Co.', loc:'Mumbai', approx:true },
+        { start:'1896-06-01', title:'Expressed desire to retire from business', cat:'spiritual', desc:'Formally expressed desire to retire from business; stayed on as advisor only (Jeth V.S. 1952).', loc:'Mumbai' },
+        { start:'1896-08-01', title:'Left Mumbai \u2014 beginning of retreats', cat:'milestone', desc:'Left Mumbai for Charotar district \u2014 marking the beginning of the intensive spiritual retreat period (Shravan V.S. 1952).', loc:'Mumbai \u2192 Charotar' },
+        { start:'1896-08-15', title:'Retreat in Kavitha', cat:'retreat', desc:'Stayed at Shri Jhaverchand Sheth\u2019s residence. Deep meditation by Vagadia lake at night. Counselled bandit Babardeva who reformed.', url:'./places/kavitha.html', loc:'Kavitha', end:'1896-09-15' },
+        { start:'1896-09-20', title:'Retreat in Ralaj \u2014 Paryushan', cat:'retreat', desc:'Stayed at Parsi\u2019s bungalow; spent Paryushan in Ralaj.', loc:'Ralaj', approx:true },
+        { start:'1896-10-01', title:'Retreat in Vadva (6 days)', cat:'retreat', desc:'Six days of spiritual communion with Lalluji Muni and other monks.', loc:'Vadva', end:'1896-10-06' },
+        { start:'1896-10-10', title:'In Khambhat', cat:'retreat', desc:'Stayed at home of Shri Chhotalal Manekchand in Khambhat.', url:'./places/khambhat.html', loc:'Khambhat', approx:true },
+        { start:'1896-10-15', title:'Composed \u201CMool Marg Sambhlo Jinno Re\u201D', cat:'composition', desc:'In Anand, composed the devotional poem \u201CMool Marg Sambhlo Jinno Re\u201D (Aso Sud Ekam, V.S. 1952).', loc:'Anand' },
+        { start:'1896-10-29', title:'Composed Shri Atmasiddhi Shastra', cat:'milestone', desc:'Composed the 142-verse Shri Atmasiddhi Shastra in a single sitting (~1.5\u20132 hours) at dusk in Nadiad, day after Sharad Purnima (Aso Vad 1, V.S. 1952). Ambalalbhai held lantern. Written for Saubhagyabhai.', url:'./compositions/atmasiddhi.html', loc:'Nadiad' },
+        { start:'1896-11-15', title:'Stayed in Nadiad after Diwali', cat:'retreat', desc:'Remained in Nadiad after Diwali.', loc:'Nadiad', approx:true },
+        { start:'1896-12-15', title:'Composed \u201CApurva Avsar\u201D in Vavaniya', cat:'composition', desc:'Went to Vavaniya for mother\u2019s illness; composed the poem \u201CApurva Avsar\u201D during this visit.', url:'./places/vavaniya.html', loc:'Vavaniya', approx:true },
+
+        // === 1897 (V.S. 1953) ===
+        { start:'1897-05-01', title:'Travelled to Idar with Saubhagyabhai', cat:'spiritual', desc:'Travelled with Saubhagyabhai to Idar for 10 days. King of Idar visited Param Krupalu Dev (Vaishakh V.S. 1953).', url:'./places/idar.html', loc:'Idar', end:'1897-05-10' },
+        { start:'1897-06-15', title:'Saubhagyabhai passed away in samadhi', cat:'passing', desc:'Pujyashree Saubhagyabhai passed away at 10:50 AM, Thursday (Jeth Vad 10, V.S. 1953). Param Krupalu Dev intuitively took a cold water bath at the same moment.', url:'./people/saubhagyabhai.html', loc:'Sayla' },
+        { start:'1897-07-01', title:'Returned to Mumbai from Idar', cat:'personal', desc:'Returned to Mumbai after Saubhagyabhai\u2019s passing.', url:'./places/mumbai.html', loc:'Mumbai', approx:true },
+
+        // === 1898 (V.S. 1954) ===
+        { start:'1898-02-01', title:'Resided in Morbi (3 months)', cat:'retreat', desc:'Resided in Morbi for 3 months (Maha\u2013Chaitra V.S. 1954). Sermons published as \u201CVyakhyansaar-1.\u201D', url:'./places/morbi.html', loc:'Morbi', end:'1898-04-30' },
+        { start:'1898-08-01', title:'Second retreat in Kavitha', cat:'retreat', desc:'Retreat in Kavitha (Shravan V.S. 1954). Discourses on Shri Thanang Sutra, Yoga Vasishtha, Vicharsagar.', url:'./places/kavitha.html', loc:'Kavitha', end:'1898-08-31' },
+        { start:'1898-09-01', title:'Retreat in Vaso', cat:'retreat', desc:'Spent 1 month with monks in Vaso (Bhadarva V.S. 1954). On the last day, Param Krupalu Dev spoke to Lalluji Muni for one hour, conferring self-realisation.', loc:'Vaso', end:'1898-09-30' },
+        { start:'1898-09-30', title:'Lalluji Muni attained self-realisation', cat:'milestone', desc:'On the last day in Vaso, Param Krupalu Dev spoke to Lalluji Muni for one hour, transforming his attachment into soul-focus. Lalluji Muni attained self-realisation.', url:'./people/lallujiMuni.html', loc:'Vaso' },
+        { start:'1898-10-01', title:'Retreat in Uttarsanda', cat:'retreat', desc:'Stayed at small bungalow near a pond, 2 miles from Nadiad. Extreme austerities. Extraordinary radiance emanated from Param Krupalu Dev. Told Navalben she would attain liberation in her 8th life.', url:'./places/uttarsanda.html', loc:'Uttarsanda', end:'1898-11-15' },
+        { start:'1898-11-20', title:'Retreat in Kheda (23 days)', cat:'retreat', desc:'Resided in bungalow outside the village for 23 days. Devkaranji Muni witnessed deeply emaciated yet spiritually radiant state.', loc:'Kheda', end:'1898-12-13' },
+
+        // === 1899 (V.S. 1955) ===
+        { start:'1899-01-15', title:'Returned briefly to Mumbai', cat:'personal', desc:'Returned for a brief stay in Mumbai.', url:'./places/mumbai.html', loc:'Mumbai', approx:true },
+        { start:'1899-04-01', title:'In Naroda \u2014 walked barefoot', cat:'spiritual', desc:'In Naroda, walked barefoot in scorching heat; blessed monks with darshan.', loc:'Naroda', approx:true },
+        { start:'1899-12-01', title:'Idar Retreat begins', cat:'retreat', desc:'Left for Idar retreat (Magsar Sud 5, V.S. 1955). Stayed at Dr. Pranjivandas Mehta\u2019s residence. Meditated in hills, caves, Chandan caves; spent 6 weeks in an ancient cave.', url:'./places/idar.html', loc:'Idar', end:'1900-03-15' },
+        { start:'1899-12-15', title:'Monks visited in Idar (5 days)', cat:'spiritual', desc:'Monks visited for 5 days. Taught \u201CBruhad Dravyasangrah\u201D seated on Pudhvishila and Siddhashila.', url:'./places/idar.html', loc:'Idar', approx:true },
+        { start:'1899-12-20', title:'Proclaimed renunciation of wealth', cat:'spiritual', desc:'At a gathering, proclaimed renunciation of wealth, wife, son etc.', loc:'Idar', approx:true },
+        { start:'1899-12-31', title:'Completely retired from business', cat:'personal', desc:'Completely retired from business; willed entire assets to brother Mansukhbhai. Told Ambalalbhai: predicted his future self-realisation.', loc:'Idar' },
+
+        // === 1900 (V.S. 1956) ===
+        { start:'1900-01-15', title:'Disease struck', cat:'personal', desc:'Body struck by incurable disease (Posh V.S. 1956). First appeared as weakness, later diagnosed as colitis/tuberculosis/consumption.', loc:'Idar', approx:true },
+        { start:'1900-04-01', title:'Retreat to Dharampur', cat:'retreat', desc:'Retreated to Dharampur for change of weather (Chaitra V.S. 1956). Treated by Dr. Pranjivandas Mehta.', url:'./places/dharampur.html', loc:'Dharampur', end:'1900-04-30' },
+        { start:'1900-05-01', title:'Visited Ahmedabad, Viramgam, Vavaniya, Morbi', cat:'personal', desc:'Visited Ahmedabad, Viramgam, Vavaniya (~2 months), and Morbi during this period.', loc:'Various', end:'1900-08-10', approx:true },
+        { start:'1900-08-15', title:'Wadhwan Camp', cat:'retreat', desc:'Left Morbi for Wadhwan Camp (Shravan Vad 10, V.S. 1956). Stayed at Limbdi State guest house.', url:'./places/wadhwan.html', loc:'Wadhwan Camp', end:'1900-11-10' },
+        { start:'1900-09-01', title:'Founded Paramshrut Prabhavak Mandal', cat:'milestone', desc:'Founded the Paramshrut Prabhavak Mandal in Wadhwan Camp \u2014 for the propagation of Param Krupalu Dev\u2019s spiritual message.', url:'./places/wadhwan.html', loc:'Wadhwan Camp', approx:true },
+        { start:'1900-09-15', title:'Dictated Pragnavbodh Mokshamala', cat:'composition', desc:'Dictated 108 lessons of \u201CPragnavbodh Mokshamala\u201D during His stay in Wadhwan Camp.', loc:'Wadhwan Camp', approx:true },
+        { start:'1900-10-01', title:'Two photographs taken', cat:'personal', desc:'Photographs taken at Mumukshu Sukhlalbhai\u2019s request \u2014 lotus posture and standing meditative pose. Among the most widely circulated images of Param Krupalu Dev.', url:'./events/chitrapat.html', loc:'Wadhwan Camp', approx:true },
+        { start:'1900-11-15', title:'Ahmedabad stay (27 days)', cat:'retreat', desc:'Left Wadhwan for Ahmedabad (Kartak Vad 7, V.S. 1957). Stayed 27 days at Aga Khan\u2019s bungalow on Sabarmati River.', url:'./places/ahmedabad.html', loc:'Ahmedabad', end:'1900-12-12' },
+        { start:'1900-11-20', title:'Wrote 12 vows for mother Devba', cat:'spiritual', desc:'Wrote 12 vows for mother Devba; sent her along with wife Jhabakba to take vows from monks.', url:'./people/devba.html', loc:'Ahmedabad', approx:true },
+        { start:'1900-12-01', title:'Ambalalbhai attained self-realisation', cat:'milestone', desc:'Shri Ambalalbhai attained Shuddh Samyagdarshan (self-realisation) through Param Krupalu Dev\u2019s \u201Cunprecedented showers of wisdom\u201D in Ahmedabad.', url:'./people/ambalalbhai.html', loc:'Ahmedabad', approx:true },
+        { start:'1900-12-05', title:'Last meeting with Lalluji & Devkaranji Muni', cat:'spiritual', desc:'Last meeting with Lalluji Muni and Devkaranji Muni. Told them: \u201CDo not differentiate between me and the Dispassionate Lord.\u201D', url:'./people/lallujiMuni.html', loc:'Ahmedabad', approx:true },
+
+        // === 1901 (V.S. 1957) ===
+        { start:'1901-01-01', title:'Arrived in Mumbai from Ahmedabad', cat:'personal', desc:'Arrived in Mumbai (Magsar Vad, V.S. 1957). Health deteriorating significantly.', url:'./places/mumbai.html', loc:'Mumbai', approx:true },
+        { start:'1901-01-15', title:'Taken to various places for recovery', cat:'personal', desc:'Taken to Matunga, Sion (Mumbai), and Tithal (near Valsad) for recovery. Health continued to worsen.', loc:'Mumbai / Tithal', end:'1901-02-10', approx:true },
+        { start:'1901-02-15', title:'Returned to Wadhwan Camp', cat:'personal', desc:'Returned to Wadhwan Camp (Maha Vad 6, V.S. 1957). Body reduced from 130\u2013140 lbs to 57 lbs.', url:'./places/wadhwan.html', loc:'Wadhwan Camp' },
+        { start:'1901-03-15', title:'Departed for Rajkot', cat:'personal', desc:'Left Wadhwan Camp for Rajkot where He would stay until the end (Fagan Sud 6, V.S. 1957).', url:'./places/rajkot.html', loc:'Rajkot' },
+        { start:'1901-04-01', title:'Composed final poem', cat:'composition', desc:'Composed His final poem \u2014 His last literary message to the world (Chaitra Sud 9, V.S. 1957).', loc:'Rajkot', approx:true },
+        { start:'1901-04-08', title:'Last words to devotees', cat:'passing', desc:'Last words (Chaitra Vad 4, evening) to Mansukhbhai, Revashankarbhai, Narbherambhai: \u201CDo not worry, this Soul is eternal.\u201D', url:'./places/rajkot.html', loc:'Rajkot' },
+        { start:'1901-04-09', title:'Dehvilay \u2014 Passing of Param Krupalu Dev', cat:'milestone', desc:'Param Krupalu Dev left His mortal body at 2:00 PM (Tuesday) in Rajkot in a state of absolute samadhi. Final words at 8:45 AM: \u201CMansukh, do not be sad. Take care of mother. I am now abiding in the Self.\u201D Age 33. Face glowed with extraordinary radiance.', url:'./places/rajkot.html', loc:'Rajkot' }
+    ];
+
+    // ===== STATE =====
+    const MIN_YEAR = 1867;
+    const MAX_YEAR = 1901;
+    let currentYear = MIN_YEAR;
+    let currentView = 'year'; // year | month | list
+    let fcInitialized = false;
+
+    // ===== HELPERS =====
+    function toVS(adYear, month) {
+        // Approximate V.S. = AD + 56 or 57
+        return (month >= 10) ? adYear + 57 : adYear + 56;
+    }
+
+    function formatDate(dateStr) {
+        const d = new Date(dateStr + 'T12:00:00');
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    }
+
+    function getEventsForYear(year) {
+        return ALL_EVENTS.filter(e => {
+            const y = parseInt(e.start.substring(0, 4));
+            if (y === year) return true;
+            // Include multi-day events that span into this year
+            if (e.end) {
+                const ey = parseInt(e.end.substring(0, 4));
+                if (y < year && ey >= year) return true;
             }
-        };
+            return false;
+        });
+    }
 
-        // Rest of your original JavaScript remains EXACTLY THE SAME
-        const openMonthView = (year, month) => {
-            const paddedMonth = month.toString().padStart(2, '0');
-            $('#calendar').fullCalendar('gotoDate', `${year}-${paddedMonth}-01`);
-            $('#calendar').show();
-            $('#year-view').hide();
-            $('#year-navigation').hide();
-        };
+    function getEventsForMonth(year, month) {
+        return ALL_EVENTS.filter(e => {
+            const d = new Date(e.start + 'T12:00:00');
+            if (d.getFullYear() === year && d.getMonth() === month) return true;
+            if (e.end) {
+                const ed = new Date(e.end + 'T12:00:00');
+                if (d <= new Date(year, month + 1, 0) && ed >= new Date(year, month, 1)) return true;
+            }
+            return false;
+        });
+    }
+
+    function getEventsForDay(year, month, day) {
+        const target = new Date(year, month, day);
+        return ALL_EVENTS.filter(e => {
+            const sd = new Date(e.start + 'T12:00:00');
+            if (sd.getFullYear() === year && sd.getMonth() === month && sd.getDate() === day) return true;
+            if (e.end) {
+                const ed = new Date(e.end + 'T12:00:00');
+                if (sd <= target && ed >= target) return true;
+            }
+            return false;
+        });
+    }
+
+    // ===== MODAL =====
+    const overlay = document.getElementById('modal-overlay');
+    const modal = document.getElementById('event-modal');
+    const closeBtn = document.getElementById('modal-close');
+
+    function showModal(ev) {
+        document.getElementById('modal-cat').textContent = CAT_LABELS[ev.cat] || ev.cat;
+        document.getElementById('modal-cat').style.background = CAT_COLORS[ev.cat] || '#666';
+        document.getElementById('modal-title').textContent = ev.title;
+        let dateText = formatDate(ev.start);
+        if (ev.end) dateText += ' \u2013 ' + formatDate(ev.end);
+        if (ev.approx) dateText += ' (approximate)';
+        document.getElementById('modal-date').textContent = dateText;
+        document.getElementById('modal-desc').textContent = ev.desc;
+        document.getElementById('modal-location').textContent = ev.loc || '';
+        const link = document.getElementById('modal-link');
+        if (ev.url) { link.href = ev.url; link.style.display = 'inline-block'; }
+        else { link.style.display = 'none'; }
+        overlay.style.display = 'block';
+        modal.style.display = 'block';
+    }
+
+    function hideModal() { overlay.style.display = 'none'; modal.style.display = 'none'; }
+    closeBtn.addEventListener('click', hideModal);
+    overlay.addEventListener('click', hideModal);
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hideModal(); });
+
+    // ===== YEAR GRID =====
+    function renderYearGrid(year) {
+        const container = document.getElementById('year-grid-view');
+        container.innerHTML = '';
+        const dayNames = ['S','M','T','W','T','F','S'];
+
+        for (let m = 0; m < 12; m++) {
+            const card = document.createElement('div');
+            card.className = 'month-card';
+            const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            card.innerHTML = '<h4>' + monthNames[m] + '</h4>';
+
+            const grid = document.createElement('div');
+            grid.className = 'mini-days';
+
+            // Day headers
+            dayNames.forEach(d => {
+                const hdr = document.createElement('div');
+                hdr.className = 'mini-day-header';
+                hdr.textContent = d;
+                grid.appendChild(hdr);
+            });
+
+            // Empty cells
+            const firstDay = new Date(year, m, 1).getDay();
+            for (let i = 0; i < firstDay; i++) {
+                const blank = document.createElement('div');
+                blank.className = 'mini-day empty';
+                grid.appendChild(blank);
+            }
+
+            // Day cells
+            const daysInMonth = new Date(year, m + 1, 0).getDate();
+            for (let d = 1; d <= daysInMonth; d++) {
+                const cell = document.createElement('div');
+                cell.className = 'mini-day';
+                cell.textContent = d;
+
+                const dayEvents = getEventsForDay(year, m, d);
+                if (dayEvents.length > 0) {
+                    cell.classList.add('has-event');
+                    // Show dot for highest-priority event (milestones first)
+                    const priorityOrder = ['milestone','passing','spiritual','retreat','composition','avdhan','personal','education'];
+                    let topCat = dayEvents[0].cat;
+                    for (const ev of dayEvents) {
+                        if (priorityOrder.indexOf(ev.cat) < priorityOrder.indexOf(topCat)) topCat = ev.cat;
+                    }
+                    const dot = document.createElement('div');
+                    dot.className = 'event-dot';
+                    dot.style.background = CAT_COLORS[topCat] || '#666';
+                    cell.appendChild(dot);
+
+                    cell.style.cursor = 'pointer';
+                    cell.title = dayEvents.map(e => e.title).join('; ');
+                    cell.addEventListener('click', function(e2) {
+                        e2.stopPropagation();
+                        if (dayEvents.length === 1) showModal(dayEvents[0]);
+                        else {
+                            // Switch to month view
+                            currentView = 'month';
+                            updateViewToggle();
+                            showMonthView(year, m);
+                        }
+                    });
+                }
+                grid.appendChild(cell);
+            }
+
+            card.appendChild(grid);
+
+            // Click month card to go to month view
+            card.addEventListener('click', function() {
+                currentView = 'month';
+                updateViewToggle();
+                showMonthView(year, m);
+            });
+
+            container.appendChild(card);
+        }
+    }
+
+    // ===== MONTH VIEW (FullCalendar) =====
+    function initFullCalendar() {
+        if (fcInitialized) return;
+        fcInitialized = true;
+
+        const fcEvents = ALL_EVENTS.map(e => ({
+            title: e.title,
+            start: e.start,
+            end: e.end || undefined,
+            color: CAT_COLORS[e.cat] || '#666',
+            textColor: '#fff',
+            _data: e
+        }));
 
         $('#calendar').fullCalendar({
-            defaultDate: '1867-11-01',
+            defaultDate: currentYear + '-01-01',
             header: {
                 left: 'prev,next',
                 center: 'title',
-                right: 'month,year'
+                right: ''
             },
-            customButtons: {
-                year: {
-                    text: 'year',
-                    click: function() {
-                        const currentDate = $('#calendar').fullCalendar('getDate');
-                        currentYear = currentDate.year();
-                        renderYearView(currentYear);
-                        $('#calendar').hide();
-                        $('#year-view').show();
-                        $('#year-navigation').show();
-                    }
-                }
+            events: fcEvents,
+            eventClick: function(calEvent) {
+                if (calEvent._data) showModal(calEvent._data);
             },
-            events: [
-                {
-                    title: 'Param Krupalu Dev Born',
-                    start: '1867-11-09',
-                    description: 'Place: Vavaniya'
-                }
-            ],
             eventRender: function(event, element) {
-                if (event.description) {
-                    const descriptionParts = event.description.split('Vavaniya');
-                    const descriptionWithLink = descriptionParts[0] +
-                        '<a href="' + "./places/vavaniya.html" + '" class="dynamic-link">Vavaniya</a>' +
-                        descriptionParts[1];
+                element.css('cursor', 'pointer');
+                element.attr('title', event.title);
+            },
+            viewRender: function(view) {
+                // Lock range
+                var start = view.start;
+                var end = view.end;
+                var minDate = moment('1867-11-01');
+                var maxDate = moment('1901-05-01');
 
-                    element.find('.fc-title').append('<br/><span class="fc-description">' + descriptionWithLink + '</span>');
+                if (start.isBefore(minDate)) {
+                    $('#calendar').fullCalendar('gotoDate', minDate);
+                }
+                if (end.isAfter(maxDate)) {
+                    $('#calendar').fullCalendar('gotoDate', moment('1901-04-01'));
                 }
 
-                element.css('background-color', '#E6E6E6');
-                element.css('color', 'black');
-                element.css('border-color', '#E6E6E6');
-                
-                // Add Gujarati date to event tooltip
-                const start = moment(event.start);
-                const vikramDate = toVikramSamvat(start.year(), start.month(), start.date());
-                element.attr('title', 
-                    `${event.title}\n` +
-                    `English: ${start.format('YYYY-MM-DD')}\n` +
-                    `Vikram Samvat: ${vikramDate}`
-                );
+                // Disable prev/next buttons at boundaries
+                if (start.isSameOrBefore(minDate)) {
+                    $('.fc-prev-button').prop('disabled', true).addClass('fc-state-disabled');
+                } else {
+                    $('.fc-prev-button').prop('disabled', false).removeClass('fc-state-disabled');
+                }
+                if (end.isSameOrAfter(maxDate)) {
+                    $('.fc-next-button').prop('disabled', true).addClass('fc-state-disabled');
+                } else {
+                    $('.fc-next-button').prop('disabled', false).removeClass('fc-state-disabled');
+                }
             }
         });
+    }
 
-        // Initialize the view
-        renderYearView(currentYear);
-        $('#year-navigation').show();
-        $('#year-view').show();
-        $('#calendar').hide();
+    function showMonthView(year, month) {
+        document.getElementById('year-grid-view').style.display = 'none';
+        document.getElementById('events-list-view').style.display = 'none';
+        document.getElementById('fc-container').style.display = 'block';
+        document.getElementById('back-to-year').style.display = 'block';
 
-        // Rest of your original event handlers remain unchanged
-        $('#year-view').on('click', '.month', function() {
-            const month = parseInt($(this).data('month'), 10);
-            openMonthView(currentYear, month);
+        initFullCalendar();
+        var paddedMonth = String(month + 1).padStart(2, '0');
+        $('#calendar').fullCalendar('gotoDate', year + '-' + paddedMonth + '-01');
+    }
+
+    // ===== LIST VIEW =====
+    function renderListView() {
+        const container = document.getElementById('events-list-view');
+        container.innerHTML = '';
+
+        for (let year = MIN_YEAR; year <= MAX_YEAR; year++) {
+            const events = getEventsForYear(year).filter(e => parseInt(e.start.substring(0,4)) === year);
+            if (events.length === 0) continue;
+
+            const group = document.createElement('div');
+            group.className = 'event-year-group';
+
+            const vs = toVS(year, 6);
+            const header = document.createElement('h3');
+            header.className = 'event-year-header';
+            header.textContent = year + ' AD (V.S. ' + (vs - 1) + '\u2013' + vs + ')';
+            group.appendChild(header);
+
+            // Sort by start date
+            events.sort((a,b) => a.start.localeCompare(b.start));
+
+            events.forEach(ev => {
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.style.borderLeftColor = CAT_COLORS[ev.cat] || '#ccc';
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', () => showModal(ev));
+
+                const dateDiv = document.createElement('div');
+                dateDiv.className = 'event-date';
+                const d = new Date(ev.start + 'T12:00:00');
+                const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                dateDiv.innerHTML = months[d.getMonth()] + ' ' + d.getDate();
+                if (ev.approx) dateDiv.innerHTML += '<span class="approx">~approx</span>';
+                card.appendChild(dateDiv);
+
+                const content = document.createElement('div');
+                content.className = 'event-content';
+                let titleHTML = '<div class="event-title">';
+                if (ev.url) titleHTML += '<a href="' + ev.url + '">' + ev.title + '</a>';
+                else titleHTML += ev.title;
+                titleHTML += '</div>';
+                content.innerHTML = titleHTML + '<div class="event-desc">' + ev.desc + '</div>' +
+                    (ev.loc ? '<div class="event-location">' + ev.loc + '</div>' : '');
+                card.appendChild(content);
+
+                group.appendChild(card);
+            });
+
+            container.appendChild(group);
+        }
+    }
+
+    // ===== VIEW SWITCHING =====
+    function updateViewToggle() {
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.view === currentView);
         });
+    }
 
-        $('#search-btn').on('click', function() {
-            const year = $('#year').val();
-            const month = $('#month').val();
-            
-            if (year && month) {
-                $('#calendar').fullCalendar('gotoDate', `${year}-${month.padStart(2, '0')}-01`);
-                $('#year-view').hide();
-                $('#year-navigation').hide();
-                $('#calendar').show();
-            } else if (year) {
-                renderYearView(year);
-                $('#calendar').hide();
-                $('#year-view').show();
-                $('#year-navigation').show();
-            }
-        });
+    function switchView(view) {
+        currentView = view;
+        updateViewToggle();
 
-        $('#prev-year').on('click', function() {
-            renderYearView(currentYear - 1);
-        });
+        document.getElementById('year-grid-view').style.display = view === 'year' ? 'grid' : 'none';
+        document.getElementById('fc-container').style.display = view === 'month' ? 'block' : 'none';
+        document.getElementById('events-list-view').style.display = view === 'list' ? 'block' : 'none';
+        document.getElementById('back-to-year').style.display = view === 'month' ? 'block' : 'none';
 
-        $('#next-year').on('click', function() {
-            renderYearView(currentYear + 1);
-        });
+        // Year nav visible in year & month views
+        document.querySelector('.year-nav').style.display = view === 'list' ? 'none' : 'flex';
+
+        if (view === 'year') renderYearGrid(currentYear);
+        if (view === 'month') showMonthView(currentYear, 0);
+        if (view === 'list') renderListView();
+    }
+
+    document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', function() { switchView(this.dataset.view); });
     });
+
+    // ===== YEAR NAVIGATION =====
+    function updateYearDisplay() {
+        document.getElementById('year-ad').textContent = currentYear;
+        const vs = toVS(currentYear, 6);
+        document.getElementById('year-vs').textContent = (vs - 1) + '\u2013' + vs;
+        document.getElementById('prev-year').disabled = currentYear <= MIN_YEAR;
+        document.getElementById('next-year').disabled = currentYear >= MAX_YEAR;
+    }
+
+    document.getElementById('prev-year').addEventListener('click', function() {
+        if (currentYear > MIN_YEAR) {
+            currentYear--;
+            updateYearDisplay();
+            if (currentView === 'year') renderYearGrid(currentYear);
+            if (currentView === 'month') {
+                initFullCalendar();
+                $('#calendar').fullCalendar('gotoDate', currentYear + '-01-01');
+            }
+        }
+    });
+
+    document.getElementById('next-year').addEventListener('click', function() {
+        if (currentYear < MAX_YEAR) {
+            currentYear++;
+            updateYearDisplay();
+            if (currentView === 'year') renderYearGrid(currentYear);
+            if (currentView === 'month') {
+                initFullCalendar();
+                $('#calendar').fullCalendar('gotoDate', currentYear + '-01-01');
+            }
+        }
+    });
+
+    // Back to year view button
+    document.getElementById('back-to-year').querySelector('button').addEventListener('click', function() {
+        switchView('year');
+    });
+
+    // ===== INITIAL RENDER =====
+    updateYearDisplay();
+    renderYearGrid(currentYear);
+});
 </script>
 
 </body>

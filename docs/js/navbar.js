@@ -293,46 +293,8 @@ function initializeAutocomplete() {
     
     if (!searchInput || !navbarSearch) return;
     
-    // Search data
-    const searchData = [
-        { title: "Juthabhai", url: "./people/juthabhai.html", type: "person", keywords: ["juthabhai", "father", "parent", "family"] },
-        { title: "Devba", url: "./people/devba.html", type: "person", keywords: ["devba", "mother", "parent", "family"] },
-        { title: "Saubhagyabhai", url: "./people/saubhagyabhai.html", type: "person", keywords: ["saubhagyabhai", "brother", "family"] },
-        { title: "Ravjibhai", url: "./people/ravjibhai.html", type: "person", keywords: ["ravjibhai", "brother", "family"] },
-        { title: "Javalben", url: "./people/javalben.html", type: "person", keywords: ["javalben", "sister", "family"] },
-        { title: "Bhagvanbhai Modi", url: "./people/bhagvanbhaiModi.html", type: "person", keywords: ["bhagvanbhai", "modi", "disciple"] },
-        { title: "Ranchodbhai", url: "./people/ranchodbhai.html", type: "person", keywords: ["ranchodbhai", "devotee"] },
-        { title: "Brahmachariji", url: "./people/brahmachariji.html", type: "person", keywords: ["brahmachariji", "monk", "disciple"] },
-        { title: "Chanchalben", url: "./people/chanchalben.html", type: "person", keywords: ["chanchalben", "devotee"] },
-        { title: "Pranjivandas", url: "./people/pranjivandas.html", type: "person", keywords: ["pranjivandas", "devotee"] },
-        { title: "Janbai", url: "./people/janbai.html", type: "person", keywords: ["janbai", "devotee"] },
-        { title: "Shivkunvarben", url: "./people/shivkunvarben.html", type: "person", keywords: ["shivkunvarben", "devotee"] },
-        { title: "Jhabakben", url: "./people/jhabakben.html", type: "person", keywords: ["jhabakben", "devotee"] },
-        { title: "Vinaychandra Popatbhai Daftary", url: "./people/vinaychandrabhaiPopatbhaiDaftary.html", type: "person", keywords: ["vinaychandra", "popatbhai", "daftary", "devotee"] },
-        { title: "Maneklal Ghelabhai", url: "./people/maneklalGhelabhai.html", type: "person", keywords: ["maneklal", "ghelabhai", "jeweller", "business", "partner"] },
-        { title: "Revashankar Jagjivan", url: "./people/revashankarJagjivan.html", type: "person", keywords: ["revashankar", "jagjivan", "business", "partner", "company"] },
-        { title: "Tribhuvan Bhanji", url: "./people/tribhuvanBhanji.html", type: "person", keywords: ["tribhuvan", "bhanji", "devotee"] },
-        { title: "Mahatma Gandhi", url: "./people/gandhiji.html", type: "person", keywords: ["gandhi", "gandhiji", "mahatma", "disciple", "spiritual", "guide"] },
-        { title: "Shankarlal Bhatt", url: "./people/shankarlalBhatt.html", type: "person", keywords: ["shankarlal", "bhatt", "devotee"] },
-        { title: "Popatbhai Jagjivan", url: "./people/popatbhaiJagjivan.html", type: "person", keywords: ["popatbhai", "jagjivan", "business"] },
-        { title: "Chatrabhujbhai Bechar", url: "./people/chatrabhujbhaiBechar.html", type: "person", keywords: ["chatrabhujbhai", "bechar", "devotee"] },
-        { title: "Vavaniya", url: "./places/vavaniya.html", type: "place", keywords: ["vavaniya", "birthplace", "birth", "village", "home"] },
-        { title: "Morbi", url: "./places/morbi.html", type: "place", keywords: ["morbi", "city", "residence"] },
-        { title: "Jamnagar", url: "./places/jamnagar.html", type: "place", keywords: ["jamnagar", "city"] },
-        { title: "Wadhwan", url: "./places/wadhwan.html", type: "place", keywords: ["wadhwan", "city"] },
-        { title: "Limbdi", url: "./places/limbdi.html", type: "place", keywords: ["limbdi", "city"] },
-        { title: "Botad", url: "./places/botad.html", type: "place", keywords: ["botad", "city"] },
-        { title: "Jetpar", url: "./places/jetpar.html", type: "place", keywords: ["jetpar", "city"] },
-        { title: "Ahmedabad", url: "./places/ahmedabad.html", type: "place", keywords: ["ahmedabad", "city"] },
-        { title: "Rajkot", url: "./places/rajkot.html", type: "place", keywords: ["rajkot", "city"] },
-        { title: "Mumbai", url: "./places/mumbai.html", type: "place", keywords: ["mumbai", "bombay", "business", "shatavdhan", "avdhan"] },
-        { title: "Idar", url: "./places/idar.html", type: "place", keywords: ["idar", "city"] },
-        { title: "Dharampur", url: "./places/dharampur.html", type: "place", keywords: ["dharampur", "ashram", "mission"] },
-        { title: "Avdhan", url: "./events/avdhan.html", type: "event", keywords: ["avdhan", "shatavdhan", "performance", "memory", "concentration"] },
-        { title: "Chitrapat", url: "./events/chitrapat.html", type: "event", keywords: ["chitrapat", "photo", "photograph", "image"] },
-        { title: "Mokshmala", url: "./compositions/mokshmala.html", type: "composition", keywords: ["mokshmala", "moksha", "liberation", "composition", "writing"] },
-        { title: "Bhavnabodh", url: "./compositions/bhavnabodh.html", type: "composition", keywords: ["bhavnabodh", "bhavna", "bodh", "composition", "writing", "spiritual"] }
-    ];
+    // Search data — uses centralized data from search.js
+    const searchData = window.SEARCH_DATA || [];
     
     // Create autocomplete container for desktop
     const autocompleteContainer = document.createElement('div');

@@ -278,7 +278,7 @@
 
     <footer class="bg-light py-3 mt-5">
         <div class="text-center">
-            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+            <p>&copy; Copyright 2026. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
         </div>
     </footer>
 
@@ -291,192 +291,282 @@
     <script>
         // Glossary terms data
         const glossaryTerms = [
-            // People
+            // ===== PEOPLE (27) =====
             {
                 name: "Param Krupalu Dev",
-                definition: "Another name for Shrimad Rajchandraji, meaning 'One who is supremely compassionate'",
+                definition: "Another name for Shrimad Rajchandraji, meaning 'One who is supremely compassionate.' Used reverentially by devotees.",
                 category: "person",
                 letter: "P"
             },
             {
                 name: "Shrimad Rajchandraji",
-                definition: "A self-realised saint, reformer of Jainism, and remarkable poet-philosopher of the late 19th century. Spiritual guide of Mahatma Gandhi.",
+                definition: "A self-realised saint, reformer of Jainism, and remarkable poet-philosopher (V.S. 1924\u20131957 / 1867\u20131901). Born in Vavaniya, attained dehvilay in Rajkot at age 33. Spiritual guide of Mahatma Gandhi.",
                 category: "person",
                 letter: "S"
             },
             {
                 name: "Juthabhai",
-                definition: "Pujyashri Juthabhai (pet name: Satya Parayan). One of the 2 wives of Param Krupalu Dev in previous birth. First samarpit shishya of Param Krupalu Dev.",
+                definition: "Full name: Shri Juthabhai Ujamshibhai. Given the pet name 'Satyaparayan' (devoted to truth). First samarpit shishya of Param Krupalu Dev. Born Kartik Sud 2, V.S. 1923. Attained samyaktva. Passed away at age 23, V.S. 1946.",
                 category: "person",
                 letter: "J"
             },
             {
-                name: "Brahmachariji",
-                definition: "A monk and disciple who performed pratishta (consecration) ceremonies at various temples.",
+                name: "Saubhagyabhai",
+                definition: "Full name: Shri Saubhagyabhai Lallubhai, from Sayla. Given titles 'Hridayroop' and 'Param Vishraam'. Param Krupalu Dev's divine soulmate and foremost devotee. Received ~244 letters. Instrumental in the composition of Shri Atmasiddhi Shastra. Passed away in samadhi, V.S. 1953.",
                 category: "person",
-                letter: "B"
+                letter: "S"
+            },
+            {
+                name: "Ambalalbhai",
+                definition: "Full name: Shri Ambalalbhai Lalchandbhai, native of Khambhat. Served Param Krupalu Dev tirelessly; held lantern during composition of Atmasiddhi Shastra. Attained self-realisation in Ahmedabad (V.S. 1957). Co-published first edition of 'Shrimad Rajchandra'. Passed away V.S. 1963 at age 37.",
+                category: "person",
+                letter: "A"
+            },
+            {
+                name: "Lalluji Muni",
+                definition: "Also known as Prabhushri / Shri Laghuraj Swami. Born V.S. 1910 in Vataman. Initiated as Sthanakvasi monk in Khambhat. First met Param Krupalu Dev on Dhanteras, V.S. 1946. Attained self-realisation in Vaso (V.S. 1954). Founded Shrimad Rajchandra Ashram, Agas. Called 'Muni of the fourth era'.",
+                category: "person",
+                letter: "L"
             },
             {
                 name: "Gandhiji",
-                definition: "Mahatma Gandhi, who considered Shrimad Rajchandraji as his spiritual guide. Param Krupalu Dev answered his 27 questions.",
+                definition: "Mahatma Gandhi, who considered Shrimad Rajchandraji as his foremost spiritual guide. First met Him in V.S. 1947 at Dr. Pranjivandas's home in Mumbai. Sent 27 questions from Africa which Param Krupalu Dev answered with lucid logic.",
                 category: "person",
                 letter: "G"
             },
             {
+                name: "Pujya Gurudevshree Rakeshji",
+                definition: "Founder of Shrimad Rajchandra Mission Dharampur. Born September 26, 1966 in Mumbai. Ph.D. on 'Atmasiddhi Shastra' from Mumbai University. Author of 'Shrimad Rajchandra \u2013 Jeevan ane Kavan' (2001). Established ashram at Dharampur on 223 acres, hillock of Mohangadh.",
+                category: "person",
+                letter: "P"
+            },
+            {
                 name: "Devba",
-                definition: "Mother of Param Krupalu Dev, from a Sthanakvasi Jain family.",
+                definition: "Mother of Param Krupalu Dev. Daughter of Shri Raghavjibhai of Maliya. Born in a Jain family; followed the Jain way of life even after marrying Ravjibhai. Simple, cultured, and soft-hearted.",
                 category: "person",
                 letter: "D"
             },
             {
                 name: "Ravjibhai",
-                definition: "Father of Param Krupalu Dev, from a Vaishnav family.",
+                definition: "Father of Param Krupalu Dev. Born V.S. 1902. Moneylender in Vavaniya and nearby Chamanpar. Followed Vaishnav religion. Kind-hearted and charitable; served monks, saints and fakirs.",
                 category: "person",
                 letter: "R"
             },
             {
                 name: "Jhabakben",
-                definition: "Wife of Param Krupalu Dev, married at age 20 in Morbi. Belonged to pratishthit Sthanakvasii family.",
+                definition: "Wife of Param Krupalu Dev. Daughter of Shri Popatlalbhai Mehta, from a Sthanakvasi Jain family. Married in Morbi on Maha Sud 12, V.S. 1944. After Param Krupalu Dev's passing, spent time in solitude. Passed away V.S. 1969.",
                 category: "person",
                 letter: "J"
             },
             {
-                name: "Vinaychandrabhai Popatbhai Daftary",
-                definition: "At whose house Param Krupalu Dev composed Mokshmala at age 16 years 5 months in 3 days.",
+                name: "Shivkunvarben",
+                definition: "Eldest sister of Param Krupalu Dev, first child of Ravjibhai and Devba. Married Shri Chatrabhujbhai Bechar of Jetpar.",
                 category: "person",
-                letter: "V"
+                letter: "S"
+            },
+            {
+                name: "Brahmachariji",
+                definition: "Brahmachariji Shri Govardhandasji, key disciple of Pujyashree Lalluji Muni at Agas Ashram. Acquired a very high spiritual state. Wrote 'Shrimad Rajchandra Jeevankala'. Performed pratishta of Param Krupalu Dev's images and temples.",
+                category: "person",
+                letter: "B"
+            },
+            {
+                name: "Chatrabhujbhai Bechar",
+                definition: "Brother-in-law of Param Krupalu Dev (Shivkunvarben's husband), from Jetpar. Param Krupalu Dev frequently stayed at his home. Saubhagyabhai's first meeting with Param Krupalu Dev took place at his residence (V.S. 1946).",
+                category: "person",
+                letter: "C"
+            },
+            {
+                name: "Popatbhai Jagjivan",
+                definition: "Father-in-law of Param Krupalu Dev (Shri Popatlalbhai Mehta). Elder brother of Shri Revashankarbhai Jagjivan and Dr. Pranjivandas. Father of Jhabakben.",
+                category: "person",
+                letter: "P"
+            },
+            {
+                name: "Dr. Pranjivandas Jagjivan",
+                definition: "Chief Medical Officer of Idar State. Brother of Shri Revashankarbhai Jagjivan and Shri Popatlalbhai Mehta. Param Krupalu Dev stayed at his residence during the Idar retreat. Introduced Param Krupalu Dev and Gandhiji in Mumbai.",
+                category: "person",
+                letter: "D"
             },
             {
                 name: "Maneklal Ghelabhai",
-                definition: "Business partner of Param Krupalu Dev who taught him jewellery trade (Zaverat). Impressed by His avdhan performance.",
+                definition: "Of Vadodara. Drawn to Param Krupalu Dev at the shatavdhan in Mumbai. Father was an expert in precious stone valuation. Taught Param Krupalu Dev the jewellery trade (zaverat). Business partner in Revashankar Jagjivan Co.",
                 category: "person",
                 letter: "M"
             },
             {
                 name: "Revashankar Jagjivan",
-                definition: "Business partner after whom 'Revashankar Jagjivan ni Pedhi' jewellery business was named. Provided funds for the company.",
+                definition: "Param Krupalu Dev's wife's uncle (Jhabakben's father's brother). Previously a lawyer in Morbi. Co-founded Revashankar Jagjivan Co. jewellery business in Mumbai. Chief executive of Paramshrut Prabhavak Mandal.",
                 category: "person",
                 letter: "R"
             },
             {
                 name: "Shankarlal Bhatt",
-                definition: "Performer who demonstrated Ashtavdhan, which inspired Param Krupalu Dev to perform His first avdhan.",
+                definition: "Also known as Shankar Pancholi. Performed 8 avdhans in Morbi that inspired Param Krupalu Dev to perform His first avdhan. Also a renowned astrologer. Was spellbound by Param Krupalu Dev's nashtavidya demonstration.",
                 category: "person",
                 letter: "S"
             },
             {
                 name: "Chanchalben",
-                definition: "Second wife of Param Krupalu Dev in His previous birth as Nepal's Rajkuvar.",
+                definition: "Second wife of Param Krupalu Dev in His previous birth as a prince (Rajkuvar) of Nepal/Tibet, before He became a Digamber Sadhu in Idar.",
                 category: "person",
                 letter: "C"
             },
             {
-                name: "Dr. Pranjivandas Jagjivan",
-                definition: "Doctor who went abroad for medical studies. Param Krupalu Dev observed how foreign education changed his mannerisms and attitudes.",
-                category: "person",
-                letter: "P"
-            },
-            {
                 name: "Javalben",
-                definition: "Daughter of Param Krupalu Dev who, along with her husband Bhagvanbhai Modi, constructed a temple in Vavaniya in 1946 AD.",
+                definition: "First daughter of Param Krupalu Dev, born V.S. 1948. Together with her husband Bhagvanbhai Modi, constructed a temple in Vavaniya in 1946 AD. Passed away V.S. 2034.",
                 category: "person",
                 letter: "J"
             },
             {
                 name: "Bhagvanbhai Modi",
-                definition: "Son-in-law of Param Krupalu Dev, son of Ranchodbhai of Dharampur. Constructed temple in Vavaniya with his wife Javalben.",
+                definition: "Son-in-law of Param Krupalu Dev, son of Ranchodbhai of Dharampur. Together with his wife Javalben, constructed a temple in Vavaniya in 1946 AD.",
                 category: "person",
                 letter: "B"
             },
             {
                 name: "Ranchodbhai",
-                definition: "Father of Bhagvanbhai Modi, from Dharampur. Grandfather of those who built the Vavaniya temple.",
+                definition: "Father of Bhagvanbhai Modi, from Dharampur.",
                 category: "person",
                 letter: "R"
             },
             {
+                name: "Janbai",
+                definition: "Paternal aunt (Foiba) of Param Krupalu Dev. Resided in Morbi.",
+                category: "person",
+                letter: "J"
+            },
+            {
+                name: "Tribhuvan Bhanji",
+                definition: "Full name: Shri Tribhuvanbhai Manekchand. Friend of Ambalalbhai from Khambhat. Son of Shri Manekchandbhai. Accompanied Ambalalbhai to meet Param Krupalu Dev in Mumbai.",
+                category: "person",
+                letter: "T"
+            },
+            {
+                name: "Vinaychandrabhai Popatbhai Daftary",
+                definition: "Contemporary and companion of Param Krupalu Dev from Morbi. Wrote the book 'Sakshat Saraswati' recording Param Krupalu Dev's avdhan demonstrations. Gave letter of recommendation for Sheth Jesangbhai for the publication of Mokshmala.",
+                category: "person",
+                letter: "V"
+            },
+            {
                 name: "Lord Mahavir",
-                definition: "The 24th Jain Tirthankara who attained nirvana over 2500 years ago. Param Krupalu Dev followed His path and teachings.",
+                definition: "The 24th and last Jain Tirthankara who attained nirvana over 2,500 years ago. Param Krupalu Dev followed His path and teachings.",
                 category: "person",
                 letter: "L"
             },
-            {
-                name: "Pujya Gurudevshri",
-                definition: "Modern spiritual teacher who explains Shrimad Rajchandraji's teachings and philosophy to contemporary seekers.",
-                category: "person",
-                letter: "P"
-            },
 
-            // Places
+            // ===== PLACES (22) =====
             {
                 name: "Vavaniya",
-                definition: "Birthplace of Param Krupalu Dev. A small village that was once a 'Bandar' (port) with cargo ships. Temple constructed by His daughter and son-in-law in 1946 AD.",
+                definition: "Birthplace of Param Krupalu Dev, in Morbi district, Saurashtra. Once a 'bandar' (port) with cargo ships. Shri Panchanbhai moved here from Manekwada in V.S. 1892. A temple was constructed here by Javalben and Bhagvanbhai Modi in 1946 AD.",
                 category: "place",
                 letter: "V"
             },
             {
                 name: "Morbi",
-                definition: "City where Param Krupalu Dev married Jhabakben and performed His first Ashtavdhan. Known for its hanging bridge built in 1887.",
+                definition: "City in Saurashtra where Param Krupalu Dev studied at the Anglo-Vernacular school (V.S. 1937\u20131940), married Jhabakben (V.S. 1944), and performed His first avdhans after watching Shastri Shankarlal Bhatt.",
                 category: "place",
                 letter: "M"
             },
             {
                 name: "Mumbai",
-                definition: "Where Param Krupalu Dev performed Shatavdhan at Framjee Cawasjee Institute on 22nd January. Went there for business due to family's financial situation.",
+                definition: "Where Param Krupalu Dev conducted the Revashankar Jagjivan Co. jewellery business from V.S. 1945. Site of the famous shatavdhan at Framjee Cawasjee Institute (January 22, 1887). Where He met Gandhiji (V.S. 1947).",
                 category: "place",
                 letter: "M"
             },
             {
                 name: "Ahmedabad",
-                definition: "Where Param Krupalu Dev went to print Mokshmala as it was cheaper than Bombay. Met Juthabhai's elder brother Jaisinghbhai Ujamsingh there.",
+                definition: "Where Param Krupalu Dev published Mokshmala (V.S. 1944) and first met Juthabhai. Ambalalbhai attained self-realisation here (V.S. 1957). 52 avdhans performed in Sheth Dalpatbhai Bhagubhai's compound.",
                 category: "place",
                 letter: "A"
             },
             {
-                name: "Dharampur",
-                definition: "Location of Shrimad Rajchandra Mission ashram. Bhagvanbhai Modi was from Dharampur.",
-                category: "place",
-                letter: "D"
-            },
-            {
                 name: "Rajkot",
-                definition: "Where Param Krupalu Dev's mamas lived and recommended Him to study law and get English education at Alfred High School. Also where His dehvilay occurred.",
+                definition: "Where Param Krupalu Dev's maternal relatives lived and He studied briefly. Site of His dehvilay on Chaitra Vad 5, V.S. 1957 (April 9, 1901). Samadhi Sthal (memorial) built here. Gandhiji went directly to the memorial upon his first visit.",
                 category: "place",
                 letter: "R"
             },
             {
+                name: "Khambhat",
+                definition: "Native place of Ambalalbhai. Where Lalluji Muni was initiated as a monk (V.S. 1940) and first met Param Krupalu Dev on Dhanteras, V.S. 1946. Also where Ambalalbhai passed away (V.S. 1963).",
+                category: "place",
+                letter: "K"
+            },
+            {
+                name: "Kavitha",
+                definition: "Site of Param Krupalu Dev's first major spiritual retreat (V.S. 1952) during Paryushan. He stayed at Shri Jhaverchand Sheth's residence, meditated at Vagadia lake, and counselled the bandit Babardeva who then reformed.",
+                category: "place",
+                letter: "K"
+            },
+            {
+                name: "Uttarsanda",
+                definition: "Site of Param Krupalu Dev's intense spiritual retreat (V.S. 1953). He was in an elevated spiritual state manifesting extraordinary radiance. Told Shri Motilal Bhavsar's wife Navalben she would attain liberation in her 8th life.",
+                category: "place",
+                letter: "U"
+            },
+            {
                 name: "Idar",
-                definition: "Place where Param Krupalu Dev was a Digamber Sadhu in His previous birth and left His body after being poisoned.",
+                definition: "In north Gujarat. Site of Param Krupalu Dev's final spiritual retreat (V.S. 1955\u20131956), staying at Dr. Pranjivandas's residence. He explored hills and caves. In His previous birth, He was a Digamber Sadhu here.",
                 category: "place",
                 letter: "I"
             },
             {
+                name: "Dharampur",
+                definition: "In south Gujarat. Location of Shrimad Rajchandra Ashram (est. 2001), founded by Pujya Gurudevshree Rakeshji on 223 acres on hillock of Mohangadh. Bhagvanbhai Modi was originally from Dharampur.",
+                category: "place",
+                letter: "D"
+            },
+            {
+                name: "Jetpar",
+                definition: "In Saurashtra. Home of Shri Chatrabhujbhai Bechar (Shivkunvarben's husband). Param Krupalu Dev frequently stayed here. First meeting between Saubhagyabhai and Param Krupalu Dev took place here (V.S. 1946).",
+                category: "place",
+                letter: "J"
+            },
+            {
                 name: "Jamnagar",
-                definition: "Where Param Krupalu Dev performed 16 Avdhan and received the title 'Hind na Heera' (The Jewel of Hind). First photograph taken here at age 16.",
+                definition: "Where Param Krupalu Dev performed 16 avdhans and received the title 'Hind na Heera' (The Jewel of Hind). His first photograph (chitrapat) was taken here at age 16.",
                 category: "place",
                 letter: "J"
             },
             {
                 name: "Wadhwan",
-                definition: "Present day Surendranagar. Where Param Krupalu Dev performed 16 Avdhan.",
+                definition: "Present-day Surendranagar. Where 16 avdhans were performed before Colonel H. L. Natsaheb and 2,000 attendees. The famous photographs of Param Krupalu Dev were taken at Wadhwan Camp during a state of extreme dispassion.",
                 category: "place",
                 letter: "W"
             },
             {
                 name: "Limbdi",
-                definition: "Where Param Krupalu Dev performed 36 Avdhan and was awarded the title 'Sakshat Saraswati'.",
+                definition: "Where Param Krupalu Dev performed 36 avdhans. Saubhagyabhai's father Shri Lallubhai was state administrator here before settling in Sayla.",
                 category: "place",
                 letter: "L"
             },
             {
                 name: "Botad",
-                definition: "Where Param Krupalu Dev performed 52 Avdhan. The place still exists.",
+                definition: "Where Param Krupalu Dev performed 52 avdhans in the presence of Sheth Shri Harilal Shivlal.",
                 category: "place",
                 letter: "B"
             },
             {
+                name: "Agas",
+                definition: "Site of Shrimad Rajchandra Ashram, established Jeth Sud 5, V.S. 1976, by Lalluji Muni on 7.5 acres donated by Shri Jijibhai Kuberdas of Sandesar. Lalluji Muni spent 14 monsoons here and passed away here in V.S. 1992.",
+                category: "place",
+                letter: "A"
+            },
+            {
+                name: "Vaso",
+                definition: "Key spiritual site where Lalluji Muni stationed during monsoons. On the last day in Vaso (V.S. 1954), Param Krupalu Dev spoke to Lalluji Muni for one hour, conferring self-realisation upon him.",
+                category: "place",
+                letter: "V"
+            },
+            {
+                name: "Sayla",
+                definition: "Called 'the village of the devotees.' Home of Saubhagyabhai Lallubhai and Shri Dungarshibhai Gosalia.",
+                category: "place",
+                letter: "S"
+            },
+            {
                 name: "Nepal",
-                definition: "Region where Param Krupalu Dev was a Rajkuvar (prince) in His previous birth before being a Digamber Sadhu in Idar.",
+                definition: "Region where Param Krupalu Dev was a Rajkuvar (prince) in His previous birth, before becoming a Digamber Sadhu in Idar.",
                 category: "place",
                 letter: "N"
             },
@@ -488,81 +578,93 @@
             },
             {
                 name: "Alfred High School",
-                definition: "English education institution in Rajkot where Param Krupalu Dev's relatives suggested He study, but He declined to focus on spiritual pursuits.",
+                definition: "English education institution in Rajkot where Param Krupalu Dev's relatives suggested He study, but He chose to focus on spiritual pursuits instead.",
                 category: "place",
                 letter: "A"
             },
+            {
+                name: "Framjee Cawasjee Institute",
+                definition: "Institution in Mumbai (at Dhobi Talao) where Param Krupalu Dev performed His famous shatavdhan on January 22, 1887, presided by Dr. Peterson.",
+                category: "place",
+                letter: "F"
+            },
 
-            // Philosophical/Spiritual Concepts
+            // ===== CONCEPTS (38) =====
             {
                 name: "Samyag Darshan",
-                definition: "Right faith or right belief. One of the three jewels (ratnatraya) of Jainism. First section of Mokshmala.",
+                definition: "Right faith or right belief. First of the three jewels (ratnatraya) of Jainism. Also the first section of Mokshmala.",
                 category: "concept",
                 letter: "S"
             },
             {
                 name: "Samyag Jnan",
-                definition: "Right knowledge. Second of the three jewels (ratnatraya) of Jainism. Second section of Mokshmala.",
+                definition: "Right knowledge. Second of the three jewels (ratnatraya) of Jainism. Also the second section of Mokshmala.",
                 category: "concept",
                 letter: "S"
             },
             {
                 name: "Samyag Charitra",
-                definition: "Right conduct. Third of the three jewels (ratnatraya) of Jainism. Third section of Mokshmala.",
+                definition: "Right conduct. Third of the three jewels (ratnatraya) of Jainism. Also the third section of Mokshmala.",
+                category: "concept",
+                letter: "S"
+            },
+            {
+                name: "Samyaktva",
+                definition: "The state of right perception or self-realisation. Param Krupalu Dev attained Shuddh Samyagdarshan (pure self-realisation) in V.S. 1947. He also conferred samyaktva upon His key devotees including Juthabhai, Saubhagyabhai, Ambalalbhai, and Lalluji Muni.",
                 category: "concept",
                 letter: "S"
             },
             {
                 name: "Jatismaran Jnan",
-                definition: "Knowledge of past lives. Param Krupalu Dev recalled 900 past lives on witnessing the burning chitta at age 7 in 1931 V.S. (1875 AD).",
+                definition: "Knowledge of past lives. Param Krupalu Dev recalled past lives at age 7 (V.S. 1931) upon witnessing the cremation of Shri Amichandbhai in Vavaniya. He later said He could recall over 800 previous births.",
                 category: "concept",
                 letter: "J"
             },
             {
                 name: "Avdhan",
-                definition: "A genre of performance where a performer (avadhāni) answers challenging questions from several questioners in parallel. Literally meaning 'concentration'.",
+                definition: "A genre of performance demonstrating extraordinary concentration, where a performer answers challenging questions from several questioners simultaneously while completing multiple parallel tasks.",
                 category: "concept",
                 letter: "A"
             },
             {
                 name: "Shatavdhan",
-                definition: "Performance of 100 avdhans simultaneously. Param Krupalu Dev performed this at Framjee Cawasjee Institute in Mumbai.",
+                definition: "Performance of 100 simultaneous tasks. Param Krupalu Dev performed this at Framjee Cawasjee Institute in Mumbai on January 22, 1887, presided by Dr. Peterson. Awarded gold medal.",
                 category: "concept",
                 letter: "S"
             },
             {
                 name: "Ashtavdhan",
-                definition: "Performance of 8 avdhans simultaneously. Param Krupalu Dev's first avdhan performance in Morbi.",
+                definition: "Performance of 8 simultaneous tasks. Param Krupalu Dev's first avdhan performance, in Morbi, after watching Shri Shankarlal Bhatt perform the same feat.",
                 category: "concept",
                 letter: "A"
             },
             {
                 name: "Dehvilay",
-                definition: "Physical departure from the body. Param Krupalu Dev's dehvilay occurred in Rajkot.",
+                definition: "Physical departure from the mortal body. Param Krupalu Dev's dehvilay occurred in Rajkot on Chaitra Vad 5, V.S. 1957 (April 9, 1901), in a state of absolute samadhi.",
                 category: "concept",
                 letter: "D"
             },
             {
                 name: "Pratishta",
-                definition: "Consecration ceremony. Brahmachariji performed pratishta of Param Krupalu Dev's temples and images.",
+                definition: "Consecration ceremony for a temple or image. Brahmachariji performed pratishta of Param Krupalu Dev's images and temples.",
                 category: "concept",
                 letter: "P"
             },
             {
                 name: "Kayotsarg",
-                definition: "A meditative posture of abandoning the body. Param Krupalu Dev left His previous body in this posture when poisoned as a Digamber Sadhu.",
+                definition: "A meditative posture of complete bodily stillness and abandonment. Param Krupalu Dev left His previous body (as a Digamber Sadhu in Idar) in this posture when poisoned.",
                 category: "concept",
                 letter: "K"
             },
             {
                 name: "Vairagya",
-                definition: "Detachment or dispassion. Tremendous vairagya came to Param Krupalu Dev after the Shatavdhan performance.",
+                definition: "Detachment or dispassion from worldly things. Tremendous vairagya arose in Param Krupalu Dev after the shatavdhan, leading Him to abandon such powers entirely as obstacles to self-realisation.",
                 category: "concept",
                 letter: "V"
             },
             {
                 name: "Sthanakvasi",
-                definition: "A sect of Jainism. Param Krupalu Dev's mother Devba and wife Jhabakben belonged to Sthanakvasi families.",
+                definition: "A sect of Jainism. Param Krupalu Dev's mother Devba and wife Jhabakben belonged to Sthanakvasi families. Lalluji Muni was also initiated in this tradition.",
                 category: "concept",
                 letter: "S"
             },
@@ -574,49 +676,37 @@
             },
             {
                 name: "Zaverat",
-                definition: "Jewellery trade/business. Maneklal Ghelabhai taught this to Param Krupalu Dev.",
+                definition: "Jewellery trade and valuation. Shri Maneklal Ghelabhai taught this to Param Krupalu Dev. Revashankar Jagjivan Co. was a zaverat firm in Mumbai.",
                 category: "concept",
                 letter: "Z"
             },
             {
                 name: "Tirthankara",
-                definition: "In Jainism, a spiritual teacher who has attained liberation and guides others on the path. Lord Mahavir was the 24th Tirthankara.",
+                definition: "In Jainism, a spiritual teacher who has conquered the cycle of birth and death and guides others to liberation. Bhagwan Mahavir was the 24th and last Tirthankara.",
                 category: "concept",
                 letter: "T"
             },
             {
                 name: "Nirvana",
-                definition: "State of liberation from the cycle of birth and death. Lord Mahavir attained nirvana over 2500 years ago.",
+                definition: "State of complete liberation from the cycle of birth and death. Bhagwan Mahavir attained nirvana over 2,500 years ago.",
                 category: "concept",
                 letter: "N"
             },
             {
-                name: "Soul Consciousness",
-                definition: "The supreme state of spiritual awareness. Param Krupalu Dev lived in this enlightened state continuously.",
-                category: "concept",
-                letter: "S"
-            },
-            {
-                name: "Self-realisation",
-                definition: "Direct experiential knowledge of one's true spiritual nature. Param Krupalu Dev was a self-realised saint.",
-                category: "concept",
-                letter: "S"
-            },
-            {
                 name: "Atma Kalyan",
-                definition: "Welfare or liberation of the soul. Param Krupalu Dev prioritized this over worldly education and pursuits.",
+                definition: "Welfare or liberation of the soul. Param Krupalu Dev prioritised this supreme goal over worldly education and pursuits.",
                 category: "concept",
                 letter: "A"
             },
             {
                 name: "Bahirmukh",
-                definition: "Outward-oriented consciousness, focused on external world rather than inner spiritual development.",
+                definition: "Outward-oriented consciousness, focused on the external world rather than inner spiritual development.",
                 category: "concept",
                 letter: "B"
             },
             {
                 name: "Chitta",
-                definition: "Mind-stuff or consciousness. Param Krupalu Dev recalled past lives upon witnessing a burning chitta (funeral pyre).",
+                definition: "Mind-stuff or consciousness. Also refers to a funeral pyre. Param Krupalu Dev recalled past lives upon witnessing a burning chitta (funeral pyre) at age 7.",
                 category: "concept",
                 letter: "C"
             },
@@ -628,169 +718,233 @@
             },
             {
                 name: "Rajkuvar",
-                definition: "Prince. Param Krupalu Dev was a Rajkuvar in Nepal/Tibet in His previous birth before becoming a Digamber Sadhu.",
+                definition: "Prince. Param Krupalu Dev was a Rajkuvar in Nepal in His previous birth before becoming a Digamber Sadhu.",
                 category: "concept",
                 letter: "R"
             },
             {
                 name: "Sadhu",
-                definition: "Ascetic or monk who has renounced worldly life for spiritual pursuits. Param Krupalu Dev was a Digamber Sadhu in previous birth.",
+                definition: "An ascetic or monk who has renounced worldly life for spiritual pursuits.",
                 category: "concept",
                 letter: "S"
             },
             {
                 name: "V.S. (Vikram Samvat)",
-                definition: "Traditional Hindu calendar system used to date events in Param Krupalu Dev's life. 57 years ahead of the Common Era.",
+                definition: "Traditional Indian calendar system used to date events in Param Krupalu Dev's life. Approximately 57 years ahead of the Common Era (A.D.).",
                 category: "concept",
                 letter: "V"
             },
-
-            // Compositions
-            {
-                name: "Mokshmala",
-                definition: "108-chapter composition by Param Krupalu Dev at age 16 years 5 months in 3 days. Contains stories from Jin Agams, philosophical talks. Three sections: Samyag darshan, Samyag Jnan, Samyag Charitra.",
-                category: "composition",
-                letter: "M"
-            },
-            {
-                name: "Bhavnabodh",
-                definition: "Small booklet consisting of 12 Bhavnas with examples and illustrations composed by Param Krupalu Dev at age 18 in 1942 V.S. (1886 AD).",
-                category: "composition",
-                letter: "B"
-            },
-            {
-                name: "Shri Atmasiddhi Shastra",
-                definition: "142-verse poetic masterpiece composed by Param Krupalu Dev in 1952 V.S. (1896 AD). Considered the crown jewel of His philosophical literature.",
-                category: "composition",
-                letter: "S"
-            },
-            {
-                name: "Uttaradhyayana",
-                definition: "Jain sutra from which most stories in Mokshmala are taken.",
-                category: "composition",
-                letter: "U"
-            },
-            {
-                name: "Patrank 123",
-                definition: "Letter number 123 from Param Krupalu Dev's correspondence, containing teachings about religious practices and the path of Mahavir.",
-                category: "composition",
-                letter: "P"
-            },
-            {
-                name: "Vedanta",
-                definition: "Philosophical texts that Param Krupalu Dev studied before deciding to follow the Jain way of life at age 16.",
-                category: "composition",
-                letter: "V"
-            },
-
-            // Events and Terms
-            {
-                name: "Chitrapat",
-                definition: "Photograph. First chitrapat of Param Krupalu Dev was taken at age 16, wearing Jamnagar style turban.",
-                category: "event",
-                letter: "C"
-            },
             {
                 name: "Yugpurush",
-                definition: "Title meaning 'Man of the Era'. Param Krupalu Dev is honored as Yugpurush who gave the world rich heritage in just 34 years.",
+                definition: "Title meaning 'Man of the Era.' Param Krupalu Dev is honoured as Yugpurush who gave the world rich spiritual heritage in just 33 years of life.",
                 category: "concept",
                 letter: "Y"
             },
             {
-                name: "Framjee Cawasjee Institute",
-                definition: "Institution in Mumbai where Param Krupalu Dev performed His famous Shatavdhan on 22nd January, Saturday.",
-                category: "place",
-                letter: "F"
-            },
-            {
                 name: "Jin Agams",
-                definition: "Jain scriptures. Stories from Jin Agams, particularly Uttaradhyayana sutra, are included in Mokshmala.",
+                definition: "Jain canonical scriptures. Param Krupalu Dev read all the Agams in just 15 months. Stories from them, particularly the Uttaradhyayana Sutra, are included in Mokshmala.",
                 category: "concept",
                 letter: "J"
             },
             {
                 name: "Ratnatraya",
-                definition: "The three jewels of Jainism: Samyag Darshan (right faith), Samyag Jnan (right knowledge), and Samyag Charitra (right conduct).",
+                definition: "The three jewels of Jainism: Samyag Darshan (right faith), Samyag Jnan (right knowledge), and Samyag Charitra (right conduct). The three sections of Mokshmala correspond to these.",
                 category: "concept",
                 letter: "R"
             },
             {
                 name: "Hind na Heera",
-                definition: "Title meaning 'The Jewel of Hind (India)' awarded to Param Krupalu Dev after His Avdhan performance in Jamnagar.",
+                definition: "Title meaning 'The Jewel of Hind (India).' Awarded to Param Krupalu Dev after His avdhan performances in Jamnagar.",
                 category: "concept",
                 letter: "H"
             },
             {
                 name: "Sakshat Saraswati",
-                definition: "Title meaning 'Goddess Saraswati in person' awarded to Param Krupalu Dev after His 36 Avdhan performance in Limbdi.",
+                definition: "Title meaning 'Goddess Saraswati in person.' Bestowed upon Param Krupalu Dev in recognition of His extraordinary avdhan performances and prodigious intellect.",
                 category: "concept",
                 letter: "S"
             },
             {
                 name: "Bandar",
-                definition: "Port. Vavaniya was once a bandar (port) with cargo ships before it became a small inland village.",
+                definition: "Port. Vavaniya was once a bandar (port) with cargo ships and active trade before it became a small inland village.",
                 category: "concept",
                 letter: "B"
             },
             {
-                name: "Yugpurush – Mahatma na Mahatma",
-                definition: "Theatrical representation of the special bond between Shrimad Rajchandraji and Mahatma Gandhi. Had 1000+ shows in seven languages.",
-                category: "event",
-                letter: "Y"
+                name: "Samadhi",
+                definition: "A deep meditative state of consciousness. Param Krupalu Dev left His mortal body in a state of absolute samadhi. Saubhagyabhai and Lalluji Muni also passed away in samadhi.",
+                category: "concept",
+                letter: "S"
+            },
+            {
+                name: "Samadhimaran",
+                definition: "Death while in a state of meditative equanimity, considered the highest form of death in Jain tradition. Saubhagyabhai attained samadhimaran.",
+                category: "concept",
+                letter: "S"
+            },
+            {
+                name: "Mumukshu",
+                definition: "A spiritual seeker earnestly desiring liberation (moksha). Many of Param Krupalu Dev's letters and compositions are addressed to mumukshus.",
+                category: "concept",
+                letter: "M"
+            },
+            {
+                name: "Paryushan",
+                definition: "An important Jain festival of spiritual reflection and austerity. Param Krupalu Dev spent Paryushan in retreat at Kavitha (V.S. 1952) and Uttarsanda (V.S. 1953).",
+                category: "concept",
+                letter: "P"
+            },
+            {
+                name: "Nashtavidya",
+                definition: "A lost art of predicting items hidden in a closed fist or making extraordinary astrological predictions. Param Krupalu Dev demonstrated this in Jetpar, spellbinding even the astrologer Shri Shankarlal Bhatt.",
+                category: "concept",
+                letter: "N"
+            },
+            {
+                name: "Kanthi",
+                definition: "A Vaishnav beaded necklace. Param Krupalu Dev wore one given by Shri Ramdasji but it broke at age 13 when He became fully immersed in Jainism \u2013 He never wore it again.",
+                category: "concept",
+                letter: "K"
+            },
+            {
+                name: "Patrank",
+                definition: "Letter number, referring to the numbered letters in the compilation 'Shrimad Rajchandra.' Around 920 letters survive, addressed to devotees including Saubhagyabhai (~244), Ambalalbhai (~127), and Lalluji Muni (92).",
+                category: "concept",
+                letter: "P"
+            },
+            {
+                name: "Paramshrut Prabhavak Mandal",
+                definition: "Organisation founded by Param Krupalu Dev in Wadhwan Camp (V.S. 1956) to disseminate and preserve His literary works. Headed by Shri Revashankarbhai Jagjivan.",
+                category: "concept",
+                letter: "P"
+            },
+
+            // ===== COMPOSITIONS (9) =====
+            {
+                name: "Mokshmala",
+                definition: "108-chapter prose composition by Param Krupalu Dev, authored at age 16 in just 3 days (V.S. 1940). Contains stories from Jin Agams. Three sections correspond to the ratnatraya. First published work (V.S. 1944, Ahmedabad).",
+                category: "composition",
+                letter: "M"
+            },
+            {
+                name: "Bhavnabodh",
+                definition: "Prose treatise on the 12 bhavnas (reflections/contemplations) essential for spiritual progress. Composed by Param Krupalu Dev in V.S. 1942 (1886 AD) at age 18.",
+                category: "composition",
+                letter: "B"
+            },
+            {
+                name: "Shri Atmasiddhi Shastra",
+                definition: "142-verse poetic masterpiece composed by Param Krupalu Dev on Aso Vad 1, V.S. 1952 (1896 AD), in approximately 1.5\u20132 hours. Dialogue between Guru and Shishya establishing six fundamental truths about the soul. Crown jewel of His philosophical literature.",
+                category: "composition",
+                letter: "S"
+            },
+            {
+                name: "Apurva Avsar",
+                definition: "Devotional poem by Param Krupalu Dev, expressing deep spiritual aspiration and the unprecedented spiritual opportunity of the present birth. Composed in Vavaniya during the period of intense spiritual retreat.",
+                category: "composition",
+                letter: "A"
+            },
+            {
+                name: "Nirkhine Navyauvana",
+                definition: "Poem on renunciation and the transience of youth by Param Krupalu Dev. Gandhiji regularly read this composition; it influenced his vow of celibacy (V.S. 1962) in Phoenix, South Africa.",
+                category: "composition",
+                letter: "N"
+            },
+            {
+                name: "Mool Marg Sambhlo Jinno Re",
+                definition: "Devotional poem by Param Krupalu Dev emphasising the fundamental path of the Jinas (enlightened beings). Composed in Anand on Aso Sud Ekam, V.S. 1952.",
+                category: "composition",
+                letter: "M"
+            },
+            {
+                name: "Uttaradhyayana",
+                definition: "Jain canonical sutra from which most stories in Mokshmala are drawn.",
+                category: "composition",
+                letter: "U"
+            },
+            {
+                name: "Patrank 123",
+                definition: "Important letter from Param Krupalu Dev's correspondence, containing teachings about the path of religion in the exact form practised by Bhagwan Mahavir.",
+                category: "composition",
+                letter: "P"
             },
             {
                 name: "Modern Review, June 1930",
-                definition: "Publication where Mahatma Gandhi wrote about Shrimad Rajchandraji: 'Such was the man who captivated my heart in religious matters as no other man has till now.'",
+                definition: "Publication where Mahatma Gandhi wrote about Param Krupalu Dev: 'Such was the man who captivated my heart in religious matters as no other man ever has till now.'",
                 category: "composition",
                 letter: "M"
+            },
+
+            // ===== EVENTS (2) =====
+            {
+                name: "Chitrapat",
+                definition: "Photograph. The first chitrapat of Param Krupalu Dev was taken at age 16 in Jamnagar, wearing a Jamnagar-style turban. Famous photographs were later taken at Wadhwan Camp during a state of extreme dispassion.",
+                category: "event",
+                letter: "C"
+            },
+            {
+                name: "Yugpurush \u2013 Mahatma na Mahatma",
+                definition: "Theatrical representation of the special bond between Shrimad Rajchandraji and Mahatma Gandhi. Over 1,000 shows performed in seven languages.",
+                category: "event",
+                letter: "Y"
             }
         ];
 
         // Map of terms to their corresponding page URLs
         const termPageMap = {
-            // People pages
+            // People pages (24)
             "Juthabhai": "./people/juthabhai.html",
+            "Saubhagyabhai": "./people/saubhagyabhai.html",
+            "Ambalalbhai": "./people/ambalalbhai.html",
+            "Lalluji Muni": "./people/lallujiMuni.html",
             "Gandhiji": "./people/gandhiji.html",
+            "Pujya Gurudevshree Rakeshji": "./people/pujyaGurudevshri.html",
             "Devba": "./people/devba.html",
             "Ravjibhai": "./people/ravjibhai.html",
             "Jhabakben": "./people/jhabakben.html",
-            "Vinaychandrabhai Popatbhai Daftary": "./people/vinaychandrabhaiPopatbhaiDaftary.html",
+            "Shivkunvarben": "./people/shivkunvarben.html",
+            "Brahmachariji": "./people/brahmachariji.html",
+            "Chatrabhujbhai Bechar": "./people/chatrabhujbhaiBechar.html",
+            "Popatbhai Jagjivan": "./people/popatbhaiJagjivan.html",
+            "Dr. Pranjivandas Jagjivan": "./people/pranjivandas.html",
+            "Maneklal Ghelabhai": "./people/maneklalGhelabhai.html",
             "Revashankar Jagjivan": "./people/revashankarJagjivan.html",
             "Shankarlal Bhatt": "./people/shankarlalBhatt.html",
             "Chanchalben": "./people/chanchalben.html",
-            "Dr. Pranjivandas Jagjivan": "./people/pranjivandas.html",
             "Javalben": "./people/javalben.html",
             "Bhagvanbhai Modi": "./people/bhagvanbhaiModi.html",
             "Ranchodbhai": "./people/ranchodbhai.html",
-            "Brahmachariji": "./people/brahmachariji.html",
             "Janbai": "./people/janbai.html",
-            "Maneklal Ghelabhai": "./people/maneklalGhelabhai.html",
-            "Popatbhai Jagjivan": "./people/popatbhaiJagjivan.html",
-            "Saubhagyabhai": "./people/saubhagyabhai.html",
-            "Shivkunvarben": "./people/shivkunvarben.html",
             "Tribhuvan Bhanji": "./people/tribhuvanBhanji.html",
-            "Chatrabhujbhai Bechar": "./people/chatrabhujbhaiBechar.html",
-            
-            // Places pages
+            "Vinaychandrabhai Popatbhai Daftary": "./people/vinaychandrabhaiPopatbhaiDaftary.html",
+
+            // Places pages (16)
             "Vavaniya": "./places/vavaniya.html",
             "Morbi": "./places/morbi.html",
             "Mumbai": "./places/mumbai.html",
             "Ahmedabad": "./places/ahmedabad.html",
-            "Dharampur": "./places/dharampur.html",
             "Rajkot": "./places/rajkot.html",
+            "Khambhat": "./places/khambhat.html",
+            "Kavitha": "./places/kavitha.html",
+            "Uttarsanda": "./places/uttarsanda.html",
             "Idar": "./places/idar.html",
+            "Dharampur": "./places/dharampur.html",
+            "Jetpar": "./places/jetpar.html",
             "Jamnagar": "./places/jamnagar.html",
             "Wadhwan": "./places/wadhwan.html",
             "Limbdi": "./places/limbdi.html",
             "Botad": "./places/botad.html",
-            "Jetpar": "./places/jetpar.html",
-            
-            // Compositions pages
+            "Agas": "./places/agas.html",
+
+            // Compositions pages (3)
             "Mokshmala": "./compositions/mokshmala.html",
             "Bhavnabodh": "./compositions/bhavnabodh.html",
-            
-            // Events pages
+            "Shri Atmasiddhi Shastra": "./compositions/atmasiddhi.html",
+
+            // Events/concepts with pages (4)
             "Avdhan": "./events/avdhan.html",
+            "Shatavdhan": "./events/avdhan.html",
+            "Ashtavdhan": "./events/avdhan.html",
             "Chitrapat": "./events/chitrapat.html"
         };
 

@@ -11,14 +11,27 @@
     <script src="./js/navbar.js"></script>
     
 <style>
-    /* Override link color for places list */
-    #placesList a {
-        color: black;
+    .content-area section h3 {
+        font-family: 'Linux Libertine', Georgia, 'Times New Roman', Times, serif;
     }
-    
-    #placesList a:hover {
-        color: blue; /* Orange color on hover instead of blue */
+    .content-area section ul {
+        list-style: disc;
+        padding-left: 1.5rem;
+    }
+    .content-area section ul li {
+        margin-bottom: 0.5rem;
+    }
+    .content-area section ul li a {
+        color: black;
+        text-decoration: none;
+    }
+    .content-area section ul li a:hover {
+        color: #C66A11;
         text-decoration: underline;
+    }
+    .place-detail {
+        color: #666;
+        font-size: 0.92em;
     }
 </style>
 
@@ -28,55 +41,89 @@
 
     <main class="container my-5 pt-5" style="padding-top: 160px;">
         
-<section>
-    <div class="d-flex justify-content-between align-items-center">
-        <h3>Places</h3>
-        <!-- Toggle Switch -->
-        <div class="toggle-switch">
-            <button id="chronologicalBtn" class="toggle-option active">Chronological</button>
-            <button id="alphabeticalBtn" class="toggle-option">Alphabetical</button>
-        </div>
-    </div>
-    <hr>
-    <ul id="placesList">
-        <li><a href="./places/vavaniya.html">Vavaniya</a></li>
-        <li><a href="./places/morbi.html">Morbi</a></li>
-        <li><a href="./places/jamnagar.html">Jamnagar</a></li>
-        <li><a href="./places/wadhwan.html">Wadhwan Camp (present: Surendranagar)</a></li>
-        <li><a href="./places/limbdi.html">Limbdi</a></li>
-        <li><a href="./places/botad.html">Botad</a></li>
-        <li><a href="./places/jetpar.html">Jetpar</a></li>
-        <li><a href="./places/ahmedabad.html">Ahmedabad</a></li>
-        <li><a href="./places/rajkot.html">Rajkot</a></li>
-        <li><a href="./places/mumbai.html">Mumbai</a></li>
-        <li>Surat</li>
-        <li>Bharuch</li>
-        <li>Sayla</li>
-        <li>Khambhat</li>
-        <li>Ralaj</li>
-        <li>Vadodara</li>
-        <li>Hadamtala</li>
-        <li>Ranpur</li>
-        <li>Kavitha</li>
-        <li>Vadva</li>
-        <li>Anand</li>
-        <li>Nadiad</li>
-        <li><a href="./places/idar.html">Idar</a></li>
-        <li>Vaso</li>
-        <li>Uttarsanda</li>
-        <li>Kheda</li>
-        <li>Naroda</li>
-        <li>Chennai</li>
-        <li><a href="./places/dharampur.html">Dharampur</a></li>
-        <li>Tithal</li>
-    </ul>
-</section>
+<div class="content-area">
+
+    <!-- ===== PLACES OF MAJOR SIGNIFICANCE ===== -->
+    <section>
+        <h3>Places of Major Significance</h3>
+        <p style="color:#666; font-size:0.92em; margin-bottom:1rem;">In roughly chronological order of Param Krupalu Dev's association with each place.</p>
+        <ul>
+            <li><a href="./places/vavaniya.html">Vavania (Vavania-mota)</a> <span class="place-detail">— Birthplace and childhood home. Morbi district, Saurashtra. Ravjibhai's family settled here from V.S. 1892. Param Krupalu Dev born Kartik Purnima V.S. 1924. Jatismaranjnan at age 7.</span></li>
+            <li><a href="./places/morbi.html">Morbi</a> <span class="place-detail">— Schooling (V.S. 1937–1940). Avdhan experiments began here. Place of marriage (V.S. 1944). Anglo-Vernacular school; Darbar Saheb's office.</span></li>
+            <li><a href="./places/jamnagar.html">Jamnagar</a> <span class="place-detail">— Regional avdhan demonstrations.</span></li>
+            <li><a href="./places/wadhwan.html">Wadhwan Camp (Surendranagar)</a> <span class="place-detail">— 16 avdhans performed (Colonel H. L. Natsaheb present). Famous photographs of Param Krupalu Dev taken here during a state of extreme dispassion.</span></li>
+            <li><a href="./places/limbdi.html">Limbdi</a> <span class="place-detail">— Saubhagyabhai's father Lallubhai was state administrator here before settling in Sayla.</span></li>
+            <li><a href="./places/botad.html">Botad</a> <span class="place-detail">— 52 avdhans performed in presence of Sheth Harilal Shivlal. Manilal Gandhi's residence.</span></li>
+            <li><a href="./places/jetpar.html">Jetpar</a> <span class="place-detail">— Home of Chatrabhuj Bechar (Shivkunvarben's husband). First meeting of Saubhagyabhai with Param Krupalu Dev (Bhadarva V.S. 1946). Param Krupalu Dev frequently stayed here.</span></li>
+            <li><a href="./places/ahmedabad.html">Ahmedabad</a> <span class="place-detail">— Juthabhai's home (Cheepa Pol). Sheth Dalpatbhai Bhagubhai's compound (52 avdhans). Ambalalbhai attained self-realisation here (V.S. 1957). Mokshmala published (V.S. 1944).</span></li>
+            <li><a href="./places/mumbai.html">Mumbai (Bombay)</a> <span class="place-detail">— Where Param Krupalu Dev lived and conducted business from ~V.S. 1945. Shatavdhan at Framjee Cawasjee Institute (Jan 22, 1887). Met Gandhiji (V.S. 1947). Revashankar Jagjivan Co. headquarters.</span></li>
+            <li><a href="./places/khambhat.html">Khambhat (Cambay)</a> <span class="place-detail">— Ambalalbhai's native place. Lalluji Muni initiated as monk (V.S. 1940) and first met Param Krupalu Dev here (Dhanteras V.S. 1946). Ambalalbhai's death (V.S. 1963).</span></li>
+            <li><a href="./places/kavitha.html">Kavitha (Kawitha)</a> <span class="place-detail">— Near Nadiad. Param Krupalu Dev's first major spiritual retreat (V.S. 1952). Spent Paryushan here. Nightly meditations by Vagadia lake. Incident with bandit Babardeva.</span></li>
+            <li><a href="./places/uttarsanda.html">Uttarsanda (Untarsanda)</a> <span class="place-detail">— Charotar region, near Anand. Param Krupalu Dev's intense 2nd retreat (V.S. 1953). Elevated spiritual state manifesting extraordinary radiance. Motilal Bhavsar's bungalow.</span></li>
+            <li><a href="#TODO-LINK">Vaso</a> <span class="place-detail">— Lalluji Muni spent monsoons here. Param Krupalu Dev imparted wisdom for one hour on His last day (V.S. 1954) — moment of Lalluji Muni's self-realisation.</span></li>
+            <li><a href="./places/idar.html">Idar</a> <span class="place-detail">— North Gujarat. Param Krupalu Dev's final spiritual retreat (V.S. 1955/1956). Dr. Pranjivandas was Chief Medical Officer of Idar State. Exploration of caves; intense meditation.</span></li>
+            <li><a href="./places/rajkot.html">Rajkot</a> <span class="place-detail">— Site of Param Krupalu Dev's passing — Chaitra Vad 5, V.S. 1957 (April 9, 1901) at 7:17 PM. Memorial (samadhi sthal) built here.</span></li>
+        </ul>
+    </section>
+
+    <!-- ===== SAYLA & DEVOTEE CENTRES ===== -->
+    <section>
+        <h3>Centres of Devotee Activity</h3>
+        <ul>
+            <li><a href="#TODO-LINK">Sayla (Shayla)</a> <span class="place-detail">— Saurashtra. 'The village of the devotees'. Home of Saubhagyabhai Lallubhai and Dungarshibhai Gosalia. Also Jijiben's marital home.</span></li>
+            <li><a href="./places/agas.html">Agas</a> <span class="place-detail">— Near Anand. Shrimad Rajchandra Ashram (est. Jeth Sud 5, V.S. 1976). Founded by Lalluji Muni on 7.5 acres donated by Jijibhai Kuberdas of Sandesar. Lalluji Muni passed away here V.S. 1992.</span></li>
+            <li><a href="./places/dharampur.html">Dharampur</a> <span class="place-detail">— South Gujarat (near Valsad). Shrimad Rajchandra Ashram (est. 2001). Founded by Pujya Gurudevshree Rakeshji. 223 acres on hillock of Mohangadh. Temple, meditation halls, hospital.</span></li>
+        </ul>
+    </section>
+
+    <!-- ===== OTHER PLACES IN GUJARAT ===== -->
+    <section>
+        <h3>Other Places in Gujarat &amp; Saurashtra</h3>
+        <ul>
+            <li><a href="#TODO-LINK">Surat</a> <span class="place-detail">— Home of Naginchand Kapurchand (jeweller), associate of Revashankar Jagjivan Co.</span></li>
+            <li><a href="#TODO-LINK">Bharuch (Broach)</a> <span class="place-detail">— Home of Anupchand Malukchandbhai. Param Krupalu Dev studied 'Bhadrabahusanhita' here.</span></li>
+            <li><a href="#TODO-LINK">Vadodara (Baroda)</a> <span class="place-detail">— Home of Maneklal Ghelabhai and his father, an expert gemstone valuator.</span></li>
+            <li><a href="#TODO-LINK">Nadiad</a> <span class="place-detail">— Charotar region. Near Kavitha; part of the area where Param Krupalu Dev's retreats occurred.</span></li>
+            <li><a href="#TODO-LINK">Anand</a> <span class="place-detail">— Near Uttarsanda. Part of Charotar region where retreats occurred.</span></li>
+            <li><a href="#TODO-LINK">Kheda</a> <span class="place-detail">— Devkaranji Muni saw Param Krupalu Dev here; struck by His deeply emaciated yet radiant state. Poojabhai Someshwar Bhatt visited here.</span></li>
+            <li><a href="#TODO-LINK">Ralaj</a> <span class="place-detail">— Near Jetpar. Connected to devotees' movement.</span></li>
+            <li><a href="#TODO-LINK">Vadva</a> <span class="place-detail">— Near Bhavnagar. Connected to Param Krupalu Dev's travels.</span></li>
+            <li><a href="#TODO-LINK">Viramgam</a> <span class="place-detail">— Hometown of Sukhlal Chaganlal.</span></li>
+            <li><a href="#TODO-LINK">Naroda</a> <span class="place-detail">— Near Ahmedabad. Connected to Param Krupalu Dev's activities.</span></li>
+            <li><a href="#TODO-LINK">Hadamtala</a> <span class="place-detail">— Where Manilal Gandhi met Param Krupalu Dev.</span></li>
+            <li><a href="#TODO-LINK">Ranpur</a> <span class="place-detail">— Connected to Param Krupalu Dev's travels in Saurashtra.</span></li>
+            <li><a href="#TODO-LINK">Tithal</a> <span class="place-detail">— Near Valsad. Connected to the mission's activities.</span></li>
+            <li><a href="#TODO-LINK">Vataman</a> <span class="place-detail">— In Bhal region. Birthplace of Lalluji Muni.</span></li>
+            <li><a href="#TODO-LINK">Sandesar</a> <span class="place-detail">— Home of Jijibhai Kuberdas, who donated 7.5 acres for Agas Ashram.</span></li>
+            <li><a href="#TODO-LINK">Fenav</a> <span class="place-detail">— Hometown of Chhotalal Kapurchand.</span></li>
+            <li><a href="#TODO-LINK">Chamanpar</a> <span class="place-detail">— Near Vavania. Where Ravjibhai conducted moneylending business.</span></li>
+            <li><a href="#TODO-LINK">Maliya</a> <span class="place-detail">— Maternal grandfather Raghavjibhai's home.</span></li>
+            <li><a href="#TODO-LINK">Manekwada</a> <span class="place-detail">— Original home of Panchanbhai before moving to Vavania (V.S. 1892).</span></li>
+            <li><a href="#TODO-LINK">Sihol</a> <span class="place-detail">— 12 miles from Kavitha. Home of Shamalbhai's daughter Heera.</span></li>
+            <li><a href="#TODO-LINK">Anjar (Kutch)</a> <span class="place-detail">— Meenaben's marital home (married Tokarshi Pitamber).</span></li>
+        </ul>
+    </section>
+
+    <!-- ===== PLACES OUTSIDE GUJARAT ===== -->
+    <section>
+        <h3>Places Outside Gujarat &amp; International</h3>
+        <ul>
+            <li><a href="#TODO-LINK">Pune</a> <span class="place-detail">— Param Krupalu Dev visited for business. Nanchandbhai's location.</span></li>
+            <li><a href="#TODO-LINK">Chennai</a> <span class="place-detail">— Connected to Param Krupalu Dev's travels.</span></li>
+            <li><a href="#TODO-LINK">Chicago</a> <span class="place-detail">— Parliament of World's Religions (September 1893). Virchand Raghavji Gandhi cited Param Krupalu Dev's capabilities.</span></li>
+            <li><a href="#TODO-LINK">Phoenix, Durban (South Africa)</a> <span class="place-detail">— Gandhiji's Phoenix Ashram (V.S. 1960). Gandhiji's celibacy vow taken here (V.S. 1962).</span></li>
+            <li><a href="#TODO-LINK">London</a> <span class="place-detail">— Gandhiji's bundle of Param Krupalu Dev's letters accidentally left in a bus here.</span></li>
+            <li><a href="#TODO-LINK">Yerwada Jail, Pune</a> <span class="place-detail">— Gandhiji began writing memoirs about Param Krupalu Dev here.</span></li>
+        </ul>
+    </section>
+
+</div>
 
     </main>
 
     <footer class="bg-light py-3">
         <div class="text-center mt-4">
-            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+            <p>&copy; Copyright 2026. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
         </div>
     </footer>
 
@@ -84,45 +131,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./js/scripts.js"></script>
-    
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const chronologicalBtn = document.getElementById('chronologicalBtn');
-        const alphabeticalBtn = document.getElementById('alphabeticalBtn');
-        const placesList = document.getElementById('placesList');
-
-        // Store the original chronological order
-        const chronologicalOrder = Array.from(placesList.children);
-
-        // Function to sort the list alphabetically
-        const sortAlphabetically = () => {
-            const sorted = Array.from(placesList.children).sort((a, b) => {
-                return a.textContent.trim().localeCompare(b.textContent.trim());
-            });
-            placesList.innerHTML = '';
-            sorted.forEach(item => placesList.appendChild(item));
-        };
-
-        // Function to restore chronological order
-        const restoreChronologicalOrder = () => {
-            placesList.innerHTML = '';
-            chronologicalOrder.forEach(item => placesList.appendChild(item));
-        };
-
-        // Event listeners for toggle buttons
-        chronologicalBtn.addEventListener('click', () => {
-            restoreChronologicalOrder();
-            chronologicalBtn.classList.add('active');
-            alphabeticalBtn.classList.remove('active');
-        });
-
-        alphabeticalBtn.addEventListener('click', () => {
-            sortAlphabetically();
-            alphabeticalBtn.classList.add('active');
-            chronologicalBtn.classList.remove('active');
-        });
-    });
-</script>
 
 </body>
 </html>

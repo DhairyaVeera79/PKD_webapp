@@ -285,6 +285,7 @@
     line-height: 1.6;
     font-family: 'Helvetica', 'Arial', sans-serif;
     text-align: left;
+    display: flow-root; /* Creates BFC so content sits beside info card without gap */
 }
 
 /* Link styling */
@@ -470,11 +471,20 @@
         margin: 1em 0;
     }
     
+    .wiki-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-header {
+        font-size: 1.2em;
+    }
+    
     .image-card {
         float: none !important;
         margin-left: auto !important;
         margin-right: auto !important;
         max-width: 100%;
+        width: 100%; /* Reset from 350px */
     }
     
     .close-fullscreen {
@@ -492,7 +502,32 @@
     }
     
     .fullscreen-image-overlay {
-        top: 60px; /* You may want a smaller offset on mobile */
+        top: 60px;
         height: calc(100% - 60px);
+    }
+}
+
+@media (max-width: 480px) {
+    .wiki-container {
+        padding: 10px;
+    }
+    
+    .info-table th, .info-table td {
+        padding: 4px 6px;
+        font-size: 0.8rem;
+    }
+    
+    .info-label {
+        width: 35%;
+    }
+    
+    .fullscreen-image-overlay {
+        top: 0;
+        height: 100%;
+    }
+    
+    .fullscreen-image-content {
+        max-width: 100%;
+        max-height: 90%;
     }
 }

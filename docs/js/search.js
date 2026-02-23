@@ -1,3 +1,59 @@
+// Centralized search data — single source of truth for autocomplete, search results, and navbar
+window.SEARCH_DATA = [
+    // === PEOPLE (24) ===
+    { title: "Pujyashree Juthabhai", url: "./people/juthabhai.html", type: "person", image: "./images/people_images/juthabhai.jpg", keywords: ["juthabhai", "bhakt ratna", "devotee", "ahmedabad", "mokshmala", "samyaktva"] },
+    { title: "Smt. Devba", url: "./people/devba.html", type: "person", image: "./images/people_images/devba.jpg", keywords: ["devba", "mother", "parent", "family", "vavaniya"] },
+    { title: "Pujyashree Saubhagyabhai", url: "./people/saubhagyabhai.html", type: "person", image: "./images/people_images/saubhagyabhai.jpg", keywords: ["saubhagyabhai", "bhakt ratna", "hridayroop", "devotee", "sayla", "atmasiddhi"] },
+    { title: "Shri Ravjibhai", url: "./people/ravjibhai.html", type: "person", image: "./images/people_images/ravjibhai.jpg", keywords: ["ravjibhai", "father", "parent", "family", "vavaniya", "moneylender"] },
+    { title: "Pujyashree Ambalalbhai", url: "./people/ambalalbhai.html", type: "person", image: "./images/people_images/ambalalbhai.jpg", keywords: ["ambalalbhai", "bhakt ratna", "devotee", "khambhat", "self-realisation", "atmasiddhi"] },
+    { title: "Pujyashree Lalluji Muni", url: "./people/lallujiMuni.html", type: "person", image: "./images/people_images/lallujiMuni.jpg", keywords: ["lalluji", "muni", "prabhushri", "bhakt ratna", "monk", "agas", "khambhat"] },
+    { title: "Mahatma Gandhi", url: "./people/gandhiji.html", type: "person", image: "./images/people_images/gandhiji.jpg", keywords: ["gandhi", "gandhiji", "mahatma", "spiritual guide", "south africa", "27 questions"] },
+    { title: "Pujya Gurudevshree Rakeshji", url: "./people/pujyaGurudevshri.html", type: "person", image: "./images/people_images/pujyaGurudevshri.jpg", keywords: ["gurudevshri", "rakeshji", "mission", "dharampur", "satsang", "founder"] },
+    { title: "Smt. Jhabakben", url: "./people/jhabakben.html", type: "person", image: "./images/people_images/jhabakben.jpg", keywords: ["jhabakben", "wife", "marriage", "morbi", "popatlalbhai"] },
+    { title: "Smt. Javalben", url: "./people/javalben.html", type: "person", image: "./images/people_images/javalben.jpg", keywords: ["javalben", "daughter", "child", "family", "temple", "vavaniya"] },
+    { title: "Smt. Shivkunvarben", url: "./people/shivkunvarben.html", type: "person", image: "./images/people_images/shivkunvarben.jpg", keywords: ["shivkunvarben", "sister", "eldest", "jetpar", "chatrabhujbhai"] },
+    { title: "Shri Bhagvanbhai Modi", url: "./people/bhagvanbhaiModi.html", type: "person", image: "./images/people_images/bhagvanbhaiModi.jpg", keywords: ["bhagvanbhai", "modi", "son-in-law", "dharampur", "temple"] },
+    { title: "Shri Ranchodbhai", url: "./people/ranchodbhai.html", type: "person", image: "./images/people_images/ranchodbhai.jpg", keywords: ["ranchodbhai", "dharampur", "bhagvanbhai"] },
+    { title: "Brahmachariji Govardhandasji", url: "./people/brahmachariji.html", type: "person", image: "./images/people_images/brahmachariji.jpg", keywords: ["brahmachariji", "govardhandasji", "monk", "agas", "ashram", "disciple"] },
+    { title: "Smt. Chanchalben", url: "./people/chanchalben.html", type: "person", image: "./images/people_images/chanchalben.jpg", keywords: ["chanchalben", "previous birth", "nepal", "tibet"] },
+    { title: "Dr. Pranjivandas", url: "./people/pranjivandas.html", type: "person", image: "./images/people_images/pranjivandas.jpg", keywords: ["pranjivandas", "doctor", "idar", "gandhiji", "introduction"] },
+    { title: "Smt. Janbai", url: "./people/janbai.html", type: "person", image: "./images/people_images/janbai.jpg", keywords: ["janbai", "foiba", "aunt", "morbi"] },
+    { title: "Shri Vinaychandrabhai Daftary", url: "./people/vinaychandrabhaiPopatbhaiDaftary.html", type: "person", image: "./images/people_images/vinaychandrabhaiPopatbhaiDaftary.jpg", keywords: ["vinaychandra", "daftary", "morbi", "sakshat saraswati", "avdhan", "mokshmala"] },
+    { title: "Shri Maneklal Ghelabhai", url: "./people/maneklalGhelabhai.html", type: "person", image: "./images/people_images/maneklalGhelabhai.jpg", keywords: ["maneklal", "ghelabhai", "vadodara", "jeweller", "business", "shatavdhan"] },
+    { title: "Shri Revashankarbhai Jagjivan", url: "./people/revashankarJagjivan.html", type: "person", image: "./images/people_images/revashankarJagjivan.jpg", keywords: ["revashankar", "jagjivan", "company", "business", "lawyer", "paramshrut prabhavak mandal"] },
+    { title: "Shri Tribhuvanbhai", url: "./people/tribhuvanBhanji.html", type: "person", image: "./images/people_images/tribhuvanBhanji.jpg", keywords: ["tribhuvan", "bhanji", "khambhat", "ambalalbhai"] },
+    { title: "Shastri Shankarlal Bhatt", url: "./people/shankarlalBhatt.html", type: "person", image: "./images/people_images/shankarlalBhatt.jpg", keywords: ["shankarlal", "bhatt", "shankar pancholi", "avdhan", "astrologer", "morbi"] },
+    { title: "Shri Popatlalbhai Mehta", url: "./people/popatbhaiJagjivan.html", type: "person", image: "./images/people_images/popatbhaiJagjivan.jpg", keywords: ["popatbhai", "popatlalbhai", "father-in-law", "jagjivan", "morbi"] },
+    { title: "Shri Chatrabhujbhai Bechar", url: "./people/chatrabhujbhaiBechar.html", type: "person", image: "./images/people_images/chatrabhujbhaiBechar.jpg", keywords: ["chatrabhujbhai", "bechar", "brother-in-law", "jetpar", "shivkunvarben"] },
+
+    // === PLACES (16) ===
+    { title: "Vavaniya", url: "./places/vavaniya.html", type: "place", image: "./images/places_images/vavaniya/vavaniya.jpg", keywords: ["vavaniya", "birthplace", "birth", "village", "home", "saurashtra"] },
+    { title: "Morbi", url: "./places/morbi.html", type: "place", image: "./images/places_images/morbi/morbi.jpg", keywords: ["morbi", "school", "education", "marriage", "avdhan", "saurashtra"] },
+    { title: "Mumbai", url: "./places/mumbai.html", type: "place", image: "./images/places_images/mumbai/mumbai-1893.jpg", keywords: ["mumbai", "bombay", "business", "shatavdhan", "gandhiji", "jewellery"] },
+    { title: "Ahmedabad", url: "./places/ahmedabad.html", type: "place", image: "./images/places_images/ahmedabad/ahmedabad.jpg", keywords: ["ahmedabad", "mokshmala", "juthabhai", "ambalalbhai", "avdhan"] },
+    { title: "Rajkot", url: "./places/rajkot.html", type: "place", image: "./images/places_images/rajkot/rajkot.jpg", keywords: ["rajkot", "dehvilay", "passing", "memorial", "samadhi sthal"] },
+    { title: "Khambhat", url: "./places/khambhat.html", type: "place", image: "./images/places_images/khambhat/khambhat.jpg", keywords: ["khambhat", "cambay", "ambalalbhai", "lalluji muni"] },
+    { title: "Kavitha", url: "./places/kavitha.html", type: "place", image: "./images/places_images/kavitha/kavitha.jpg", keywords: ["kavitha", "retreat", "meditation", "paryushan", "vagadia lake"] },
+    { title: "Uttarsanda", url: "./places/uttarsanda.html", type: "place", image: "./images/places_images/uttarsanda/uttarsanda.jpg", keywords: ["uttarsanda", "retreat", "meditation", "nadiad", "radiance"] },
+    { title: "Idar", url: "./places/idar.html", type: "place", image: "./images/places_images/idar/idar.jpg", keywords: ["idar", "retreat", "cave", "meditation", "past life"] },
+    { title: "Dharampur", url: "./places/dharampur.html", type: "place", image: "./images/places_images/dharampur/dharampur.jpg", keywords: ["dharampur", "ashram", "mission", "health", "retreat"] },
+    { title: "Jetpar", url: "./places/jetpar.html", type: "place", image: "./images/places_images/jetpar/jetpar.jpg", keywords: ["jetpar", "chatrabhujbhai", "saubhagyabhai", "avdhan"] },
+    { title: "Jamnagar", url: "./places/jamnagar.html", type: "place", image: "./images/places_images/jamnagar/jamnagar.jpg", keywords: ["jamnagar", "avdhan", "jewel of hind", "hind na heera"] },
+    { title: "Wadhwan", url: "./places/wadhwan.html", type: "place", image: "./images/places_images/wadhwan/wadhwan.jpg", keywords: ["wadhwan", "avdhan", "photographs", "paramshrut prabhavak mandal"] },
+    { title: "Limbdi", url: "./places/limbdi.html", type: "place", image: "./images/places_images/limbdi/limbdi.jpg", keywords: ["limbdi", "state guest house", "wadhwan camp"] },
+    { title: "Botad", url: "./places/botad.html", type: "place", image: "./images/places_images/botad/botad.jpg", keywords: ["botad", "avdhan"] },
+    { title: "Agas", url: "./places/agas.html", type: "place", image: "./images/places_images/agas/agas.jpg", keywords: ["agas", "ashram", "lalluji muni", "publications"] },
+
+    // === EVENTS (2) ===
+    { title: "Avdhan", url: "./events/avdhan.html", type: "event", image: "./images/events_images/avdhan.jpg", keywords: ["avdhan", "shatavdhan", "ashtavdhan", "concentration", "memory", "performance"] },
+    { title: "Chitrapat", url: "./events/chitrapat.html", type: "event", image: "./images/events_images/firstChitrapat.JPG", keywords: ["chitrapat", "photograph", "photo", "image", "morbi", "wadhwan"] },
+
+    // === COMPOSITIONS (3) ===
+    { title: "Mokshmala", url: "./compositions/mokshmala.html", type: "composition", image: "./images/compositions_images/mokshmala.jpg", keywords: ["mokshmala", "moksha", "liberation", "108 lessons", "first published"] },
+    { title: "Bhavnabodh", url: "./compositions/bhavnabodh.html", type: "composition", image: "./images/compositions_images/bhavnabodh.jpg", keywords: ["bhavnabodh", "bhavna", "12 sentiments", "twelve bhavnas", "spiritual"] },
+    { title: "Shri Atmasiddhi Shastra", url: "./compositions/atmasiddhi.html", type: "composition", image: "./images/compositions_images/atmasiddhi.jpg", keywords: ["atmasiddhi", "atma siddhi", "142 verses", "six fundamentals", "saubhagyabhai"] }
+];
+
 // Global search handler function
 function handleSearch(event) {
     event.preventDefault();
@@ -64,43 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
     searchBar.style.position = 'relative';
     searchBar.appendChild(autocompleteContainer);
     
-    // Enhanced search data with images
-    const searchData = [
-        { title: "Juthabhai", url: "./people/juthabhai.html", type: "person", image: "./images/people_images/juthabhai.jpg", keywords: ["juthabhai", "father", "parent", "family"] },
-        { title: "Devba", url: "./people/devba.html", type: "person", image: "./images/people_images/devba.jpg", keywords: ["devba", "mother", "parent", "family"] },
-        { title: "Saubhagyabhai", url: "./people/saubhagyabhai.html", type: "person", image: "./images/people_images/saubhagyabhai.jpg", keywords: ["saubhagyabhai", "brother", "family"] },
-        { title: "Ravjibhai", url: "./people/ravjibhai.html", type: "person", image: "./images/people_images/ravjibhai.jpg", keywords: ["ravjibhai", "brother", "family"] },
-        { title: "Javalben", url: "./people/javalben.html", type: "person", image: "./images/people_images/javalben.jpg", keywords: ["javalben", "sister", "family"] },
-        { title: "Bhagvanbhai Modi", url: "./people/bhagvanbhaiModi.html", type: "person", image: "./images/people_images/bhagvanbhaiModi.jpg", keywords: ["bhagvanbhai", "modi", "disciple"] },
-        { title: "Ranchodbhai", url: "./people/ranchodbhai.html", type: "person", image: "./images/people_images/ranchodbhai.jpg", keywords: ["ranchodbhai", "devotee"] },
-        { title: "Brahmachariji", url: "./people/brahmachariji.html", type: "person", image: "./images/people_images/brahmachariji.jpg", keywords: ["brahmachariji", "monk", "disciple"] },
-        { title: "Chanchalben", url: "./people/chanchalben.html", type: "person", image: "./images/people_images/chanchalben.jpg", keywords: ["chanchalben", "devotee"] },
-        { title: "Pranjivandas", url: "./people/pranjivandas.html", type: "person", image: "./images/people_images/pranjivandas.jpg", keywords: ["pranjivandas", "devotee"] },
-        { title: "Janbai", url: "./people/janbai.html", type: "person", image: "./images/people_images/janbai.jpg", keywords: ["janbai", "devotee"] },
-        { title: "Shivkunvarben", url: "./people/shivkunvarben.html", type: "person", image: "./images/people_images/shivkunvarben.jpg", keywords: ["shivkunvarben", "devotee"] },
-        { title: "Jhabakben", url: "./people/jhabakben.html", type: "person", image: "./images/people_images/jhabakben.jpg", keywords: ["jhabakben", "devotee"] },
-        { title: "Vinaychandra Popatbhai Daftary", url: "./people/vinaychandrabhaiPopatbhaiDaftary.html", type: "person", image: "./images/people_images/vinaychandrabhaiPopatbhaiDaftary.jpg", keywords: ["vinaychandra", "popatbhai", "daftary", "devotee"] },
-        { title: "Maneklal Ghelabhai", url: "./people/maneklalGhelabhai.html", type: "person", image: "./images/people_images/maneklalGhelabhai.jpg", keywords: ["maneklal", "ghelabhai", "jeweller", "business", "partner"] },
-        { title: "Revashankar Jagjivan", url: "./people/revashankarJagjivan.html", type: "person", image: "./images/people_images/revashankarJagjivan.jpg", keywords: ["revashankar", "jagjivan", "business", "partner", "company"] },
-        { title: "Tribhuvan Bhanji", url: "./people/tribhuvanBhanji.html", type: "person", image: "./images/people_images/tribhuvanBhanji.jpg", keywords: ["tribhuvan", "bhanji", "devotee"] },
-        { title: "Mahatma Gandhi", url: "./people/gandhiji.html", type: "person", image: "./images/people_images/gandhiji.jpg", keywords: ["gandhi", "gandhiji", "mahatma", "disciple", "spiritual", "guide"] },
-        { title: "Vavaniya", url: "./places/vavaniya.html", type: "place", image: "./images/places_images/vavaniya/vavaniya.jpg", keywords: ["vavaniya", "birthplace", "birth", "village", "home"] },
-        { title: "Morbi", url: "./places/morbi.html", type: "place", image: "./images/places_images/morbi/morbi.jpg", keywords: ["morbi", "city", "residence"] },
-        { title: "Jamnagar", url: "./places/jamnagar.html", type: "place", image: "./images/places_images/jamnagar/jamnagar.jpg", keywords: ["jamnagar", "city"] },
-        { title: "Wadhwan", url: "./places/wadhwan.html", type: "place", image: "./images/places_images/wadhwan/wadhwan.jpg", keywords: ["wadhwan", "city"] },
-        { title: "Limbdi", url: "./places/limbdi.html", type: "place", image: "./images/places_images/limbdi/limbdi.jpg", keywords: ["limbdi", "city"] },
-        { title: "Botad", url: "./places/botad.html", type: "place", image: "./images/places_images/botad/botad.jpg", keywords: ["botad", "city"] },
-        { title: "Jetpar", url: "./places/jetpar.html", type: "place", image: "./images/places_images/jetpar/jetpar.jpg", keywords: ["jetpar", "city"] },
-        { title: "Ahmedabad", url: "./places/ahmedabad.html", type: "place", image: "./images/places_images/ahmedabad/ahmedabad.jpg", keywords: ["ahmedabad", "city"] },
-        { title: "Rajkot", url: "./places/rajkot.html", type: "place", image: "./images/places_images/rajkot/rajkot.jpg", keywords: ["rajkot", "city"] },
-        { title: "Mumbai", url: "./places/mumbai.html", type: "place", image: "./images/places_images/mumbai/mumbai-1893.jpg", keywords: ["mumbai", "bombay", "business", "shatavdhan", "avdhan"] },
-        { title: "Idar", url: "./places/idar.html", type: "place", image: "./images/places_images/idar/idar.jpg", keywords: ["idar", "city"] },
-        { title: "Dharampur", url: "./places/dharampur.html", type: "place", image: "./images/places_images/dharampur/dharampur.jpg", keywords: ["dharampur", "ashram", "mission"] },
-        { title: "Avdhan", url: "./events/avdhan.html", type: "event", image: "./images/events_images/avdhan.jpg", keywords: ["avdhan", "shatavdhan", "performance", "memory", "concentration"] },
-        { title: "Chitrapat", url: "./events/chitrapat.html", type: "event", image: "./images/events_images/firstChitrapat.JPG", keywords: ["chitrapat", "photo", "photograph", "image"] },
-        { title: "Mokshmala", url: "./compositions/mokshmala.html", type: "composition", image: "./images/compositions_images/mokshmala.jpg", keywords: ["mokshmala", "moksha", "liberation", "composition", "writing"] },
-        { title: "Bhavnabodh", url: "./compositions/bhavnabodh.html", type: "composition", image: "./images/compositions_images/bhavnabodh.jpg", keywords: ["bhavnabodh", "bhavna", "bodh", "composition", "writing", "spiritual"] }
-    ];
+    // Enhanced search data with images — uses centralized data
+    const searchData = window.SEARCH_DATA;
     
     // Handle form submission
     searchForm.addEventListener('submit', function(e) {
@@ -259,40 +280,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Export search data for use in search.html
 window.getSearchData = function() {
-    return [
-        { title: "Juthabhai", url: "./people/juthabhai.html", type: "person", image: "./images/people_images/juthabhai.jpg", keywords: ["juthabhai", "father", "parent", "family"] },
-        { title: "Devba", url: "./people/devba.html", type: "person", image: "./images/people_images/devba.jpg", keywords: ["devba", "mother", "parent", "family"] },
-        { title: "Saubhagyabhai", url: "./people/saubhagyabhai.html", type: "person", image: "./images/people_images/saubhagyabhai.jpg", keywords: ["saubhagyabhai", "brother", "family"] },
-        { title: "Ravjibhai", url: "./people/ravjibhai.html", type: "person", image: "./images/people_images/ravjibhai.jpg", keywords: ["ravjibhai", "brother", "family"] },
-        { title: "Javalben", url: "./people/javalben.html", type: "person", image: "./images/people_images/javalben.jpg", keywords: ["javalben", "sister", "family"] },
-        { title: "Bhagvanbhai Modi", url: "./people/bhagvanbhaiModi.html", type: "person", image: "./images/people_images/bhagvanbhaiModi.jpg", keywords: ["bhagvanbhai", "modi", "disciple"] },
-        { title: "Ranchodbhai", url: "./people/ranchodbhai.html", type: "person", image: "./images/people_images/ranchodbhai.jpg", keywords: ["ranchodbhai", "devotee"] },
-        { title: "Brahmachariji", url: "./people/brahmachariji.html", type: "person", image: "./images/people_images/brahmachariji.jpg", keywords: ["brahmachariji", "monk", "disciple"] },
-        { title: "Chanchalben", url: "./people/chanchalben.html", type: "person", image: "./images/people_images/chanchalben.jpg", keywords: ["chanchalben", "devotee"] },
-        { title: "Pranjivandas", url: "./people/pranjivandas.html", type: "person", image: "./images/people_images/pranjivandas.jpg", keywords: ["pranjivandas", "devotee"] },
-        { title: "Janbai", url: "./people/janbai.html", type: "person", image: "./images/people_images/janbai.jpg", keywords: ["janbai", "devotee"] },
-        { title: "Shivkunvarben", url: "./people/shivkunvarben.html", type: "person", image: "./images/people_images/shivkunvarben.jpg", keywords: ["shivkunvarben", "devotee"] },
-        { title: "Jhabakben", url: "./people/jhabakben.html", type: "person", image: "./images/people_images/jhabakben.jpg", keywords: ["jhabakben", "devotee"] },
-        { title: "Vinaychandra Popatbhai Daftary", url: "./people/vinaychandrabhaiPopatbhaiDaftary.html", type: "person", image: "./images/people_images/vinaychandrabhaiPopatbhaiDaftary.jpg", keywords: ["vinaychandra", "popatbhai", "daftary", "devotee"] },
-        { title: "Maneklal Ghelabhai", url: "./people/maneklalGhelabhai.html", type: "person", image: "./images/people_images/maneklalGhelabhai.jpg", keywords: ["maneklal", "ghelabhai", "jeweller", "business", "partner"] },
-        { title: "Revashankar Jagjivan", url: "./people/revashankarJagjivan.html", type: "person", image: "./images/people_images/revashankarJagjivan.jpg", keywords: ["revashankar", "jagjivan", "business", "partner", "company"] },
-        { title: "Tribhuvan Bhanji", url: "./people/tribhuvanBhanji.html", type: "person", image: "./images/people_images/tribhuvanBhanji.jpg", keywords: ["tribhuvan", "bhanji", "devotee"] },
-        { title: "Mahatma Gandhi", url: "./people/gandhiji.html", type: "person", image: "./images/people_images/gandhiji.jpg", keywords: ["gandhi", "gandhiji", "mahatma", "disciple", "spiritual", "guide"] },
-        { title: "Vavaniya", url: "./places/vavaniya.html", type: "place", image: "./images/places_images/vavaniya/vavaniya.jpg", keywords: ["vavaniya", "birthplace", "birth", "village", "home"] },
-        { title: "Morbi", url: "./places/morbi.html", type: "place", image: "./images/places_images/morbi/morbi.jpg", keywords: ["morbi", "city", "residence"] },
-        { title: "Jamnagar", url: "./places/jamnagar.html", type: "place", image: "./images/places_images/jamnagar/jamnagar.jpg", keywords: ["jamnagar", "city"] },
-        { title: "Wadhwan", url: "./places/wadhwan.html", type: "place", image: "./images/places_images/wadhwan/wadhwan.jpg", keywords: ["wadhwan", "city"] },
-        { title: "Limbdi", url: "./places/limbdi.html", type: "place", image: "./images/places_images/limbdi/limbdi.jpg", keywords: ["limbdi", "city"] },
-        { title: "Botad", url: "./places/botad.html", type: "place", image: "./images/places_images/botad/botad.jpg", keywords: ["botad", "city"] },
-        { title: "Jetpar", url: "./places/jetpar.html", type: "place", image: "./images/places_images/jetpar/jetpar.jpg", keywords: ["jetpar", "city"] },
-        { title: "Ahmedabad", url: "./places/ahmedabad.html", type: "place", image: "./images/places_images/ahmedabad/ahmedabad.jpg", keywords: ["ahmedabad", "city"] },
-        { title: "Rajkot", url: "./places/rajkot.html", type: "place", image: "./images/places_images/rajkot/rajkot.jpg", keywords: ["rajkot", "city"] },
-        { title: "Mumbai", url: "./places/mumbai.html", type: "place", image: "./images/places_images/mumbai/mumbai-1893.jpg", keywords: ["mumbai", "bombay", "business", "shatavdhan", "avdhan"] },
-        { title: "Idar", url: "./places/idar.html", type: "place", image: "./images/places_images/idar/idar.jpg", keywords: ["idar", "city"] },
-        { title: "Dharampur", url: "./places/dharampur.html", type: "place", image: "./images/places_images/dharampur/dharampur.jpg", keywords: ["dharampur", "ashram", "mission"] },
-        { title: "Avdhan", url: "./events/avdhan.html", type: "event", image: "./images/events_images/avdhan.jpg", keywords: ["avdhan", "shatavdhan", "performance", "memory", "concentration"] },
-        { title: "Chitrapat", url: "./events/chitrapat.html", type: "event", image: "./images/events_images/firstChitrapat.JPG", keywords: ["chitrapat", "photo", "photograph", "image"] },
-        { title: "Mokshmala", url: "./compositions/mokshmala.html", type: "composition", image: "./images/compositions_images/mokshmala.jpg", keywords: ["mokshmala", "moksha", "liberation", "composition", "writing"] },
-        { title: "Bhavnabodh", url: "./compositions/bhavnabodh.html", type: "composition", image: "./images/compositions_images/bhavnabodh.jpg", keywords: ["bhavnabodh", "bhavna", "bodh", "composition", "writing", "spiritual"] }
-    ];
+    return window.SEARCH_DATA;
 };

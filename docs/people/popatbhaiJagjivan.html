@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popatbhai Jagjivan</title>
+    <title>Shri Popatlalbhai Mehta</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- In the head section -->
@@ -16,17 +16,9 @@
 <body>
     
 
-    <main class="container my-5 pt-5" style="padding-top: 160px;">
+        <main class="container my-5 pt-5" style="padding-top: 160px;">
         
 <div class="wiki-container">
-    <!-- Table of Contents -->
-    <div class="wiki-toc">
-        <div class="wiki-toc-title">Contents <span class="wiki-toc-toggle">Hide</span></div>
-        <hr>
-        <ul class="wiki-toc-list">
-            <!-- <li class="wiki-toc-item"><a href="#first-meeting-section" class="wiki-toc-link">First meeting with Param Krupalu Dev</a></li> -->
-        </ul>
-    </div>
     <!-- Full screen image overlay -->
     <div class="fullscreen-image-overlay" style="display: none;">
         <span class="close-fullscreen">&times;</span>
@@ -35,46 +27,46 @@
     </div>
 
     <div class="wiki-main">
-        <button class="toc-collapse-button" style="display: none;" aria-label="Show table of contents"></button>
-        <h1 class="wiki-title">Popatbhai Jagjivan</h1>
+        <h1 class="wiki-title">Shri Popatlalbhai Mehta</h1>
         
         <div class="wiki-info-card">
             <div class="info-card">
                 <div class="card-image-container">
                     <img src="../images/people_images/popatbhaiJagjivan.jpg" 
-                         alt="Popatbhai Jagjivan City" 
+                         alt="Shri Popatlalbhai Mehta" 
                          class="card-image expandable-image">
-                    <div class="image-caption">Popatbhai Jagjivan</div>
+                    <div class="image-caption">Shri Popatlalbhai Mehta</div>
                 </div>
                 <table class="info-table">
                     <tr>
-                        <th colspan="2" class="info-card-header">Popatbhai Jagjivan</th>
+                        <th colspan="2" class="info-card-header">Shri Popatlalbhai Mehta</th>
                     </tr>
                     <tr>
-                        <td class="info-label">Country</td>
-                        <td class="info-value"><a href="/place/india">India</a></td>
+                        <td class="info-label">Relation</td>
+                        <td class="info-value">Father-in-law</td>
                     </tr>
                     <tr>
-                        <td class="info-label">State</td>
-                        <td class="info-value"><a href="/place/gujarat">Gujarat</a></td>
+                        <td class="info-label">Native place</td>
+                        <td class="info-value"><a href="../places/morbi.html">Morbi</a></td>
                     </tr>
                     <tr>
-                        <td class="info-label">Population</td>
-                        <td class="info-value">194,947 (2011)</td>
+                        <td class="info-label">Brothers</td>
+                        <td class="info-value"><a href="../people/revashankarJagjivan.html">Shri Revashankarbhai Jagjivan</a>, <a href="../people/pranjivandas.html">Dr. Pranjivandas Mehta</a></td>
                     </tr>
                     <tr>
-                        <td class="info-label">Known for</td>
-                        <td class="info-value"><a href="/topic/ceramics">Ceramics industry</a>, <a href="https://en.wikipedia.org/wiki/Shrimad_Rajchandra" target="_blank">Shrimad Rajchandra</a></td>
+                        <td class="info-label">Daughter</td>
+                        <td class="info-value"><a href="../people/jhabakben.html">Smt. Jhabakben</a></td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Significance</td>
+                        <td class="info-value">Eldest of the four Jagjivan brothers</td>
                     </tr>
                 </table>
             </div>
         </div>
         
         <div class="wiki-content">
-            <p class="wiki-lead">Eldest of the 4 Jagjivan brothers of <a href="../places/morbi.html">Morbi</a>. Father of <a href="../people/jhabakben.html">Jhabakben</a>, so Father-in-law of Param Krupalu Dev.</p>
-            
-            
-
+            <p class="wiki-lead"><strong>Shri Popatlalbhai Mehta</strong> was the eldest of the four Jagjivan brothers of <a href="../places/morbi.html">Morbi</a>, and the father of <a href="../people/jhabakben.html">Smt. Jhabakben</a> — Param Krupalu Dev's wife. He was thus Param Krupalu Dev's father-in-law. His younger brothers were <a href="../people/revashankarJagjivan.html">Shri Revashankarbhai Jagjivan</a> and <a href="../people/pranjivandas.html">Dr. Pranjivandas Mehta</a>.</p>
         </div>
     </div>
 </div>
@@ -83,7 +75,7 @@
 
     <footer class="bg-light py-3">
         <div class="text-center mt-4">
-            <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+            <p>&copy; Copyright 2026. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
         </div>
     </footer>
 
@@ -94,37 +86,7 @@
     
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Check if URL has hash and scroll to it
-        if (window.location.hash) {
-            const target = document.querySelector(window.location.hash);
-            if (target) {
-                setTimeout(() => {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                    // Add slight offset to account for fixed header
-                    window.scrollBy(0, -100);
-                }, 100);
-            }
-        }
 
-        // Collapsible sections functionality
-        const sections = document.querySelectorAll('.wiki-section.collapsible');
-        
-        sections.forEach(section => {
-            const header = section.querySelector('.section-header');
-            const content = section.querySelector('.section-content');
-            const icon = section.querySelector('.collapse-icon');
-            
-            header.addEventListener('click', () => {
-                section.classList.toggle('active');
-                
-                if (section.classList.contains('active')) {
-                    content.style.display = 'block';
-                } else {
-                    content.style.display = 'none';
-                }
-            });
-        }); 
-        
         // Fullscreen image functionality
         const expandableImages = document.querySelectorAll('.expandable-image');
         const fullscreenOverlay = document.querySelector('.fullscreen-image-overlay');
@@ -162,77 +124,6 @@
                 fullscreenOverlay.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
-        });
-
-        // Table of Contents highlighting
-        const tocLinks = document.querySelectorAll('.wiki-toc-link');
-        const allSections = document.querySelectorAll('.wiki-section');
-
-        function updateActiveTocLink() {
-            let currentSection = '';
-            
-            allSections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                if (window.scrollY >= (sectionTop - 200)) {
-                    currentSection = section.querySelector('.section-header').id;
-                }
-            });
-            
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSection}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Smooth scrolling for TOC links
-        tocLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                    // Update URL hash without jumping
-                    history.pushState(null, null, targetId);
-                }
-            });
-        });
-
-        // Initial call
-        updateActiveTocLink();
-
-        // Update on scroll
-        window.addEventListener('scroll', () => {
-            updateActiveTocLink();
-        });
-
-        // TOC Toggle Functionality
-        const tocToggle = document.querySelector('.wiki-toc-toggle');
-        const tocCollapseButton = document.querySelector('.toc-collapse-button');
-        const wikiToc = document.querySelector('.wiki-toc');
-        const wikiContainer = document.querySelector('.wiki-container');
-
-        // Toggle TOC visibility
-        tocToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            wikiContainer.classList.add('toc-collapsed');
-            tocCollapseButton.style.display = 'block';
-        });
-
-        tocCollapseButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            wikiContainer.classList.remove('toc-collapsed');
-            tocCollapseButton.style.display = 'none';
         });
     });
 </script>

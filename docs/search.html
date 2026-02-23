@@ -73,7 +73,7 @@
     <footer class="bg-light py-4">
         <div class="container">
             <div class="text-center mt-4">
-                <p>&copy; Copyright 2025. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+                <p>&copy; Copyright 2026. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
             </div>
         </div>
     </footer>
@@ -127,46 +127,8 @@
             noResults.style.display = 'none';
             
             try {
-                // Use the same search data as in navbar.js
-                const searchData = [
-                    { title: "Juthabhai", url: "./people/juthabhai.html", type: "person", image: "./images/people_images/juthabhai.jpg", keywords: ["juthabhai", "father", "parent", "family"] },
-                    { title: "Devba", url: "./people/devba.html", type: "person", image: "./images/people_images/devba.jpg", keywords: ["devba", "mother", "parent", "family"] },
-                    { title: "Saubhagyabhai", url: "./people/saubhagyabhai.html", type: "person", image: "./images/people_images/saubhagyabhai.jpg", keywords: ["saubhagyabhai", "brother", "family"] },
-                    { title: "Ravjibhai", url: "./people/ravjibhai.html", type: "person", image: "./images/people_images/ravjibhai.jpg", keywords: ["ravjibhai", "brother", "family"] },
-                    { title: "Javalben", url: "./people/javalben.html", type: "person", image: "./images/people_images/javalben.jpg", keywords: ["javalben", "sister", "family"] },
-                    { title: "Bhagvanbhai Modi", url: "./people/bhagvanbhaiModi.html", type: "person", image: "./images/people_images/bhagvanbhaiModi.jpg", keywords: ["bhagvanbhai", "modi", "disciple"] },
-                    { title: "Ranchodbhai", url: "./people/ranchodbhai.html", type: "person", image: "./images/people_images/ranchodbhai.jpg", keywords: ["ranchodbhai", "devotee"] },
-                    { title: "Brahmachariji", url: "./people/brahmachariji.html", type: "person", image: "./images/people_images/brahmachariji.jpg", keywords: ["brahmachariji", "monk", "disciple"] },
-                    { title: "Chanchalben", url: "./people/chanchalben.html", type: "person", image: "./images/people_images/chanchalben.jpg", keywords: ["chanchalben", "devotee"] },
-                    { title: "Pranjivandas", url: "./people/pranjivandas.html", type: "person", image: "./images/people_images/pranjivandas.jpg", keywords: ["pranjivandas", "devotee"] },
-                    { title: "Janbai", url: "./people/janbai.html", type: "person", image: "./images/people_images/janbai.jpg", keywords: ["janbai", "devotee"] },
-                    { title: "Shivkunvarben", url: "./people/shivkunvarben.html", type: "person", image: "./images/people_images/shivkunvarben.jpg", keywords: ["shivkunvarben", "devotee"] },
-                    { title: "Jhabakben", url: "./people/jhabakben.html", type: "person", image: "./images/people_images/jhabakben.jpg", keywords: ["jhabakben", "devotee"] },
-                    { title: "Vinaychandra Popatbhai Daftary", url: "./people/vinaychandrabhaiPopatbhaiDaftary.html", type: "person", image: "./images/people_images/vinaychandrabhaiPopatbhaiDaftary.jpg", keywords: ["vinaychandra", "popatbhai", "daftary", "devotee"] },
-                    { title: "Maneklal Ghelabhai", url: "./people/maneklalGhelabhai.html", type: "person", image: "./images/people_images/maneklalGhelabhai.jpg", keywords: ["maneklal", "ghelabhai", "jeweller", "business", "partner"] },
-                    { title: "Revashankar Jagjivan", url: "./people/revashankarJagjivan.html", type: "person", image: "./images/people_images/revashankarJagjivan.jpg", keywords: ["revashankar", "jagjivan", "business", "partner", "company"] },
-                    { title: "Tribhuvan Bhanji", url: "./people/tribhuvanBhanji.html", type: "person", image: "./images/people_images/tribhuvanBhanji.jpg", keywords: ["tribhuvan", "bhanji", "devotee"] },
-                    { title: "Mahatma Gandhi", url: "./people/gandhiji.html", type: "person", image: "./images/people_images/gandhiji.jpg", keywords: ["gandhi", "gandhiji", "mahatma", "disciple", "spiritual", "guide"] },
-                    { title: "Shankarlal Bhatt", url: "./people/shankarlalBhatt.html", type: "person", image: "./images/people_images/shankarlalBhatt.jpg", keywords: ["shankarlal", "bhatt", "devotee"] },
-                    { title: "Popatbhai Jagjivan", url: "./people/popatbhaiJagjivan.html", type: "person", image: "./images/people_images/popatbhaiJagjivan.jpg", keywords: ["popatbhai", "jagjivan", "business"] },
-                    { title: "Chatrabhujbhai Bechar", url: "./people/chatrabhujbhaiBechar.html", type: "person", image: "./images/people_images/chatrabhujbhaiBechar.jpg", keywords: ["chatrabhujbhai", "bechar", "devotee"] },
-                    { title: "Vavaniya", url: "./places/vavaniya.html", type: "place", image: "./images/places_images/vavaniya/vavaniya.jpg", keywords: ["vavaniya", "birthplace", "birth", "village", "home"] },
-                    { title: "Morbi", url: "./places/morbi.html", type: "place", image: "./images/places_images/morbi/morbi.jpg", keywords: ["morbi", "city", "residence"] },
-                    { title: "Jamnagar", url: "./places/jamnagar.html", type: "place", image: "./images/places_images/jamnagar/jamnagar.jpg", keywords: ["jamnagar", "city"] },
-                    { title: "Wadhwan", url: "./places/wadhwan.html", type: "place", image: "./images/places_images/wadhwan/wadhwan.jpg", keywords: ["wadhwan", "city"] },
-                    { title: "Limbdi", url: "./places/limbdi.html", type: "place", image: "./images/places_images/limbdi/limbdi.jpg", keywords: ["limbdi", "city"] },
-                    { title: "Botad", url: "./places/botad.html", type: "place", image: "./images/places_images/botad/botad.jpg", keywords: ["botad", "city"] },
-                    { title: "Jetpar", url: "./places/jetpar.html", type: "place", image: "./images/places_images/jetpar/jetpar.jpg", keywords: ["jetpar", "city"] },
-                    { title: "Ahmedabad", url: "./places/ahmedabad.html", type: "place", image: "./images/places_images/ahmedabad/ahmedabad.jpg", keywords: ["ahmedabad", "city"] },
-                    { title: "Rajkot", url: "./places/rajkot.html", type: "place", image: "./images/places_images/rajkot/rajkot.jpg", keywords: ["rajkot", "city"] },
-                    { title: "Mumbai", url: "./places/mumbai.html", type: "place", image: "./images/places_images/mumbai/mumbai-1893.jpg", keywords: ["mumbai", "bombay", "business", "shatavdhan", "avdhan"] },
-                    { title: "Idar", url: "./places/idar.html", type: "place", image: "./images/places_images/idar/idar.jpg", keywords: ["idar", "city"] },
-                    { title: "Dharampur", url: "./places/dharampur.html", type: "place", image: "./images/places_images/dharampur/dharampur.jpg", keywords: ["dharampur", "ashram", "mission"] },
-                    { title: "Avdhan", url: "./events/avdhan.html", type: "event", image: "./images/events_images/avdhan.jpg", keywords: ["avdhan", "shatavdhan", "performance", "memory", "concentration"] },
-                    { title: "Chitrapat", url: "./events/chitrapat.html", type: "event", image: "./images/events_images/firstChitrapat.JPG", keywords: ["chitrapat", "photo", "photograph", "image"] },
-                    { title: "Mokshmala", url: "./compositions/mokshmala.html", type: "composition", image: "./images/compositions_images/mokshmala.jpg", keywords: ["mokshmala", "moksha", "liberation", "composition", "writing"] },
-                    { title: "Bhavnabodh", url: "./compositions/bhavnabodh.html", type: "composition", image: "./images/compositions_images/bhavnabodh.jpg", keywords: ["bhavnabodh", "bhavna", "bodh", "composition", "writing", "spiritual"] }
-                ];
+                // Use centralized search data from search.js
+                const searchData = window.SEARCH_DATA || [];
                 
                 allResults = searchInData(searchData, query);
                 loading.style.display = 'none';
