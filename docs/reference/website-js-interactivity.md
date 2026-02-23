@@ -226,7 +226,7 @@ const CATEGORIES = {
 ### Data Structure
 ```javascript
 const PLACES = [
-    { name: "Vavaniya", lat: 21.95, lng: 71.28, category: "birth", desc: "..." },
+    { name: "Vavaniya", lat: 23.007, lng: 70.610, category: "birth", desc: "..." },
     // ... 28 places
 ];
 const ROUTES = {
