@@ -25,7 +25,7 @@
 
 ### index.html (Home Page) — ✅ COMPLETE
 - **Lines**: 694
-- **Content**: Hero section with Param Krupalu Dev portrait, stats bar (33 years / 1000s lives / 142 verses / 900+ letters), 6 life milestone cards, literary works feature section, Gandhiji feature section, Pujya Gurudevshree section, timeline preview (8 key dates), 8 explore category cards
+- **Content**: Hero section with Param Krupalu Dev portrait, stats bar (33 years / 1000s lives / 142 verses / 900+ letters), 6 life milestone cards, literary works feature section, Gandhiji feature section, Pujya Gurudevshri section, timeline preview (8 key dates), 8 explore category cards
 - **Status**: Fully written from book. Mobile responsive with breakpoints at 992px, 768px, 480px, 400px.
 
 ### people.html — ✅ COMPLETE

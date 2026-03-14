@@ -190,11 +190,11 @@ Full rewrites (7), moderate (5), brief (9+2). All Morbi placeholder info cards r
 | **Search centralization** | `window.SEARCH_DATA` (45 items) now in search.js as single source of truth. navbar.js and search.html consume it. |
 | **Calendar rewrite** | 714 lines, 95 events, 8 color-coded categories, year/month/list views, date range 1867–1901 |
 | **Maps rewrite** | 815 lines, Leaflet.js with OpenStreetMap, 28 places, 35 yearly routes, 90+ events, year/all/routes modes |
-| **Homepage rewrite** | 694 lines, hero with image, stats bar (33 years, 1000s lives, 142 verses, 900+ letters), 6 life cards, literary works feature, Gandhiji feature, Pujya Gurudevshree section, timeline preview, 8 explore cards |
+| **Homepage rewrite** | 694 lines, hero with image, stats bar (33 years, 1000s lives, 142 verses, 900+ letters), 6 life cards, literary works feature, Gandhiji feature, Pujya Gurudevshri section, timeline preview, 8 explore cards |
 | **Naming convention** | "Shrimadji" and standalone "Shrimad" → "Param Krupalu Dev" in all narrative text (599 replacements, 54 files). Formal names preserved. |
 | **Copyright update** | "Copyright 2025" → "Copyright 2026" (54 files) |
 | **Glossary expansion** | 98 → 108 terms (added terms for new compositions, events, concepts) |
-| **Pujya Gurudevshree image** | Added 11MB photo to info card on pujyaGurudevshri.html |
+| **Pujya Gurudevshri image** | Added 11MB photo to info card on pujyaGurudevshri.html |
 | **CSS: Whitespace fix** | `display: flow-root` on `.wiki-content` to fix info card float gap |
 | **CSS: TODO-LINK styling** | `a[href="#TODO-LINK"]` has no blue/underline/pointer — looks like plain text |
 | **CSS: Linked indicators** | `.content-area ul li > a:not([href="#TODO-LINK"])::after` shows subtle › arrow |
