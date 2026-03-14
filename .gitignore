@@ -199,6 +199,18 @@ webpack-stats.json
 .next/
 out/
 
+# ========================
+# Private source material
+# ========================
+
+# Private book/source files (do not commit)
+Shrimad Rajchandra - Saga of Spirituality - Pujya Gurudevshri Rakeshbhai.pdf
+_pdf_full_text.txt
+
+# Common local extraction artifacts
+*pdf_full_text*.txt
+*pdf_to_text*.txt
+
 # Vite
 .vite/
 
