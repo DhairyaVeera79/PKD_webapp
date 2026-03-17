@@ -53,8 +53,8 @@ function createNavbar() {
         <div class="navbar-container">
             <!-- Logo Section -->
             <div class="navbar-brand">
-                <a href="${basePath}index.html" class="brand-link">
-                    <img src="${basePath}images/mission_logo.svg" alt="SRMD Logo" class="brand-logo">
+                <a href="${basePath}index.html" class="brand-link" style="font-size:1.15rem; font-weight:700; color:inherit; letter-spacing:0.01em; text-decoration:none;">
+                    Shrimad Rajchandraji
                 </a>
             </div>
 
@@ -139,7 +139,7 @@ function createNavbar() {
             <!-- Mobile Navigation -->
             <nav class="navbar-nav-mobile">
                 <div class="mobile-nav-header">
-                    <img src="${basePath}images/mission_logo.svg" alt="SRMD Logo" class="mobile-logo">
+                    <span style="font-size:1rem; font-weight:700; color:#333;">Shrimad Rajchandraji</span>
                     <button class="mobile-close" aria-label="Close menu">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                             <line x1="18" y1="6" x2="6" y2="18"></line>

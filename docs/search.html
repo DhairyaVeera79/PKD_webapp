@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results - Shrimad Rajchandra Mission Dharampur</title>
+    <title>Search Results</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -73,7 +73,7 @@
     <footer class="bg-light py-4">
         <div class="container">
             <div class="text-center mt-4">
-                <p>&copy; Copyright 2026. Shrimad Rajchandra Mission Dharampur. All rights reserved. <a href="#">Terms of service</a> | <a href="#">Privacy Policy</a></p>
+                <p>&copy; An independent research website on the life and teachings of Shrimad Rajchandraji. Not affiliated with or endorsed by any organisation.</p>
             </div>
         </div>
     </footer>
@@ -251,7 +251,7 @@
             card.innerHTML = `
                 <img src="${imageUrl}" class="card-img-top" alt="${result.title}" 
                      style="height: 300px; object-fit: cover; object-position: top center;"
-                     onerror="this.src='./images/mission_logo.svg'; this.style.height='200px'; this.style.padding='20px';">
+                     onerror="this.style.display='none';">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">${highlightMatch(result.title, query)}</h5>
                     <span class="badge badge-${getTypeBadgeClass(result.type)} mb-2 align-self-start">${result.type}</span>
