@@ -94,7 +94,7 @@
 | lallujiMuni.html | Pujyashree Lalluji Muni | 6 | ❌ (missing) | Key monk devotee. Full TOC. |
 | pujyaGurudevshri.html | Pujya Gurudevshri Rakeshbhai | 5 | ✅ (11MB) | Modern spiritual leader. Full TOC. |
 | maneklalGhelabhai.html | Shri Maneklal Ghelabhai | 4 | ✅ (missing on disk) | Scholar. Moderate TOC. |
-| vinaychandrabhaiPopatbhaiDaftary.html | Shri Vanechand Daftary | 3 | ✅ | Devotee. Moderate TOC. |
+| vanechandDaftari.html | Shri Vanechand Popatbhai Daftari | 3 | ✅ | Devotee. Moderate TOC. |
 
 ### Lead-Only Pages (no TOC, info card + lead paragraph only)
 

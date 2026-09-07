@@ -175,7 +175,7 @@
 | **Shri Sundarlalbhai** | Son of Shri Manekchandbhai, friend of Ambalalbhai. |
 | **Shri Chhotalal Revashankar Anjaria** | From Morbi. Shrimad's childhood friend. Tested Shrimad's powers (salt test in food). Wrote memoirs. |
 | **Shri Chhotalal Manekchand** | Of Khambhat. Seeker at whose home Shrimad stayed and gave discourses. |
-| **Shri Vanechand Popatbhai Daftari** (Vinaychand Popatbhai Daftari) | Contemporary and companion. Wrote book 'Sakshat Saraswati' recording avdhan demonstrations. From Morbi. Gave Shrimad letter of recommendation for Sheth Jesangbhai. |
+| **Shri Vanechand Popatbhai Daftari** | Contemporary and companion. Wrote book 'Sakshat Saraswati' recording avdhan demonstrations. From Morbi. Gave Shrimad letter of recommendation for Sheth Jesangbhai. |
 | **Shri Nanchandbhai** | Of Pune. Noticed open chest of jewels at Shrimad's shop; led to dialogue about spiritual danger of valuables. |
 | **Shri Poojabhai Someshwar Bhatt** | Vedantin from village of Kheda. Visited Shrimad during Kheda retreat. Posed many questions which Shrimad answered with precision. |
 | **Shri Manilal Gandhi** | Of Botad. Wrote personal memoirs about Shrimad's intuitiveness. Met Shrimad at Hadamtala in V.S. 1951. |

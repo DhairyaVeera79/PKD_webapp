@@ -52,18 +52,18 @@ PKD_webapp/
 │   │   ├── janbai.html
 │   │   ├── javalben.html
 │   │   ├── jhabakben.html          # Param Krupalu Dev's wife
-│   │   ├── juthabhai.html          # Param Krupalu Dev's father
+│   │   ├── juthabhai.html          # First devotee (Bhakt Ratna)
 │   │   ├── maneklalGhelabhai.html
 │   │   ├── popatbhaiJagjivan.html
 │   │   ├── pranjivandas.html
 │   │   ├── ranchodbhai.html
-│   │   ├── ravjibhai.html          # Param Krupalu Dev's brother
+│   │   ├── ravjibhai.html          # Param Krupalu Dev's father
 │   │   ├── revashankarJagjivan.html
-│   │   ├── saubhagyabhai.html      # Param Krupalu Dev's brother
+│   │   ├── saubhagyabhai.html      # Devotee; His 'soulmate' (Bhakt Ratna)
 │   │   ├── shankarlalBhatt.html
 │   │   ├── shivkunvarben.html
 │   │   ├── tribhuvanBhanji.html
-│   │   └── vinaychandrabhaiPopatbhaiDaftary.html
+│   │   └── vanechandDaftari.html
 │   ├── places/                     # Individual location pages (12 places)
 │   │   ├── ahmedabad.html
 │   │   ├── botad.html

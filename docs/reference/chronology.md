@@ -88,7 +88,7 @@
 | 1944, Maha Sud 12 | 1888 | **Married Jhabakbai** (daughter of Shri Popatlalbhai Mehta, brother of Shri Revashankarbhai Jagjivan and Dr. Pranjivandas) in Morbi |
 | 1944 | 1888 | While returning from wedding in Morbi, saffron water drizzled on His vehicle – bestowed title **'Yugpradhan'** |
 | 1944 | 1888 | Shri Juthabhai's first meeting with Shrimad (during publication of Mokshmala in Ahmedabad) |
-| 1944 | 1888 | Stayed 2-2.5 months in Ahmedabad for publishing 'Mokshmala'; letter of recommendation from Shri Vinaychand Popatbhai Daftari for Sheth Jesangbhai |
+| 1944 | 1888 | Stayed 2-2.5 months in Ahmedabad for publishing 'Mokshmala'; letter of recommendation from Shri Vanechand Popatbhai Daftari for Sheth Jesangbhai |
 | 1944 | 1888 | Avdhan demonstration in Shri Dalpatbhai Bhagubhai's compound in Ahmedabad |
 
 ---

@@ -531,3 +531,25 @@
         max-height: 90%;
     }
 }
+
+/* Quotations within detail-page content */
+.wiki-quote {
+    margin: 1em 0 1em 0;
+    padding: 0.6em 1em;
+    border-left: 3px solid #C66A11;
+    background: #EFEDE7;
+}
+
+.wiki-quote p {
+    margin: 0;
+    font-style: italic;
+    color: #333;
+}
+
+.wiki-quote cite {
+    display: block;
+    margin-top: 0.4em;
+    font-size: 0.85em;
+    font-style: normal;
+    color: #72777d;
+}

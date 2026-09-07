@@ -75,7 +75,7 @@ docs/
 │   ├── shankarlalBhatt.html
 │   ├── shivkunvarben.html
 │   ├── tribhuvanBhanji.html
-│   └── vinaychandrabhaiPopatbhaiDaftary.html
+│   └── vanechandDaftari.html
 │
 ├── places/                 # 16 individual place pages
 │   ├── agas.html
@@ -318,7 +318,7 @@ images/people_images/juthabhai.jpg
 images/people_images/pujyaGurudevshri.jpg (11MB)
 images/people_images/ravjibhai.jpg
 images/people_images/saubhagyabhai.jpg
-images/people_images/vinaychandrabhaiPopatbhaiDaftary.jpg
+images/people_images/vanechandDaftari.jpg
 images/events_images/firstChitrapat.JPG
 images/compositions_images/Screenshot 2025-03-29 at 18.39.36 (2).JPG
 images/compositions_images/Screenshot 2025-03-29 at 18.39.48 (2).JPG
